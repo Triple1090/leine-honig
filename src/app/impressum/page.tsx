@@ -1,3 +1,5 @@
+"use client"; // <-- Das muss ganz oben stehen!
+
 import Badge from "@/src/components/Badge";
 import { Scale, Info, Mail, MapPin, UserCheck } from "lucide-react";
 
