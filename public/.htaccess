@@ -1,0 +1,32 @@
+ # ----------------------------------------------------------------------
+# 1. HTTPS ERZWINGEN
+# ----------------------------------------------------------------------
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ----------------------------------------------------------------------
+# 2. SICHERHEIT & STRUKTUR
+# ----------------------------------------------------------------------
+# Verhindert, dass man die Dateiliste sieht (dein "Index of" Problem)
+Options -Indexes
+
+# Eigene Fehlerseite (falls mal was schiefgeht)
+ErrorDocument 404 /404.html
+
+# ----------------------------------------------------------------------
+# 3. SAUBERE URLS (OHNE .HTML)
+# ----------------------------------------------------------------------
+RewriteBase /
+
+# Wenn eine echte Datei existiert (Bild, CSS), lade sie direkt
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Wenn ein Ordner existiert, lade die darin liegende index.html
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Verwandle /danke intern zu /danke.html (für den Nutzer unsichtbar)
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
