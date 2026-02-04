@@ -1,5 +1,3 @@
-"use client"; // <-- Das muss ganz oben stehen!
-
 import Badge from "@/src/components/Badge";
 import { Scale, Info, Mail, MapPin, UserCheck } from "lucide-react";
 
@@ -47,17 +45,7 @@ export default function Impressum() {
               <div className="space-y-3 border-t border-stone-50 pt-4">
                 <div className="flex items-center gap-3">
                   <Mail size={18} className="text-primary" />
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.location.href =
-                        "mailto:" + "info" + "@" + "lunsen-honig.de";
-                    }}
-                    className="hover:text-primary transition"
-                  >
-                    info@lunsen-honig.de
-                  </a>
+                  info( @ )lunsen-honig.de
                 </div>
                 <div className="flex items-center gap-3 text-sm italic">
                   <UserCheck size={18} className="text-primary" />
