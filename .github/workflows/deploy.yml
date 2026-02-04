@@ -24,7 +24,6 @@ jobs:
           
           # Ziel-Ordner
           server-dir: ./lunsen-honig-next/
-          
-          # Da der Servername jetzt stimmt, klappt auch 'strict'
+      
           security: strict
           
