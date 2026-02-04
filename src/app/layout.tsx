@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fraunces, Outfit } from "next/font/google"; // <--- Hier die neuen Fonts
 import "./globals.css";
-import Navbar from "../components/Navbar"; // WICHTIG: Hier muss der Import sein
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// 1. Die edle Überschrift (Serif, weich)
+const fontHeading = Fraunces({
   subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// 2. Der moderne Fließtext (Sans-Serif, sauber)
+const fontBody = Outfit({
   subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -26,8 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navbar /> {/* Die Navbar wohnt NUR hier */}
+      {/* Hier laden wir die Variablen in CSS */}
+      <body className={`${fontHeading.variable} ${fontBody.variable} font-sans antialiased`}>
+        <Navbar />
         <main className="pt-20">
           {children}
         </main>
