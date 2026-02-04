@@ -102,17 +102,17 @@ export default function AboutUs() {
             <p>
               Eigentlich wollten wir nur ein bisschen was für die Natur tun.
               Doch aus dem ersten Bienenvolk im Garten wurde schnell eine echte
-              Passion. Wir haben gelernt, gestaunt (und wurden auch mal
-              gestochen), aber vor allem haben wir verstanden:
-              <strong>Bienen sind der Motor unserer Natur.</strong>
+              Passion.
             </p>
             <p>
-              Heute imkern wir gemeinsam in Lunsen und Neustadt. Wir ergänzen
-              uns perfekt: Jürgen hat das Auge für die Bienen, Tjark sorgt
-              dafür, dass der Honig auch zu euch kommt. Unser Ziel ist nicht der
-              maximale Ertrag, sondern gesunde Völker und ein Honig, der seine
-              Herkunft nicht versteckt.
+              Wir haben gelernt, gestaunt (und wurden auch mal gestochen), aber
+              vor allem haben wir verstanden:
             </p>
+            <div className="border-primary my-8 border-l-4 py-2 pl-6">
+              <span className="block text-2xl font-bold text-stone-900">
+                „Bienen sind der Motor unserer Natur.“
+              </span>
+            </div>
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-6 border-t border-stone-100 pt-10 md:grid-cols-3">
@@ -147,19 +147,13 @@ export default function AboutUs() {
           Komm gerne mal vorbei oder schreib uns. Wir beißen nicht – und unsere
           Bienen stechen (fast) nie.
         </p>
-        <div className="flex justify-center gap-4">
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.href =
-                "mailto:" + "info" + "@" + "lunsen-honig.de";
-            }}
-            className="hover:text-primary transition"
-          >
-            Kontakt aufnehmen
-          </a>
-        </div>
+        {/* FIX: 'inline-flex' sorgt dafür, dass der Button nur so breit wie sein Inhalt ist */}
+        <Link
+          href="/contactForm"
+          className="group bg-primary hover:bg-primary-dark hover:shadow-primary/40 inline-flex items-center gap-2 rounded-full px-8 py-4 font-bold text-white shadow-lg transition-all"
+        >
+          Kontakt aufnehmen
+        </Link>
       </section>
     </div>
   );

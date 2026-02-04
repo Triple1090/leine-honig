@@ -74,7 +74,7 @@ export default function FAQ() {
         Deine Frage war nicht dabei?{" "}
         <a
           href="/contactForm"
-          className="text-primary font-bold hover:underline"
+          className="group bg-primary hover:bg-primary-dark hover:shadow-primary/40 flex items-center gap-2 rounded-full px-8 py-4 font-bold text-white shadow-lg transition-all"
         >
           Schreib uns einfach!
         </a>
