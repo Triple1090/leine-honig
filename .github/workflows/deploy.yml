@@ -10,20 +10,38 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
+      # 1. Code holen
       - name: 🚚 Get latest code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: 📂 Sync files to lima-city
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      # 2. Node.js installieren (damit wir 'npm' nutzen können)
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          # Server muss 'lunsen.lima-ftp.de' sein!
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Abhängigkeiten installieren
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      # 4. Seite bauen (erzeugt den 'out' Ordner)
+      - name: 🏗️ Build Project
+        run: npm run build
+
+      # 5. Den 'out' Ordner hochladen
+      - name: 📂 Sync files to lima-city
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           
-          # Ziel-Ordner
-          server-dir: ./lunsen-honig-next/
-      
-          security: strict
+          # WICHTIG: Hier sagen wir "Nimm den Inhalt aus dem out Ordner"
+          local-dir: ./out/
           
+          # Dein Zielordner auf dem Server
+          server-dir: ./lunsen-honig-next/
+          
+          security: strict
