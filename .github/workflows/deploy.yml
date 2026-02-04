@@ -1,0 +1,30 @@
+name: FTP Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: 📂 Sync files to lima-city
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          # Server muss 'lunsen.lima-ftp.de' sein!
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          
+          # Ziel-Ordner
+          server-dir: ./lunsen-honig-next/
+          
+          # Da der Servername jetzt stimmt, klappt auch 'strict'
+          security: strict
+          
