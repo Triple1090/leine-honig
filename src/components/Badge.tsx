@@ -1,18 +1,21 @@
 import { ReactNode } from "react";
+import { LucideIcon } from "lucide-react"; // Import für den Typen
 
-// Wir erlauben optional eine extra Klasse (className) für Abstände wie 'mb-4'
 interface BadgeProps {
   children: ReactNode;
+  icon?: LucideIcon; // Das optionale Icon als Komponente
   className?: string;
-  variant?: "primary" | "secondary"; // Optional: Verschiedene Stile
+  variant?: "primary" | "secondary";
 }
 
-export default function Badge({ children, className = "", variant = "primary" }: BadgeProps) {
+export default function Badge({ 
+  children, 
+  icon: Icon, // Wir benennen es groß "Icon", damit wir es als Komponente nutzen können
+  className = "", 
+  variant = "primary" 
+}: BadgeProps) {
   
-  // Stil 1: Dein klassisches Orange (bg-primary)
   const primaryStyle = "bg-primary text-white border-transparent";
-  
-  // Stil 2: Dezent (Weiß mit grauem Rand), hatten wir bei RentBees
   const secondaryStyle = "bg-white border-stone-200 text-stone-500 shadow-sm";
 
   const style = variant === "primary" ? primaryStyle : secondaryStyle;
@@ -21,6 +24,9 @@ export default function Badge({ children, className = "", variant = "primary" }:
     <span 
       className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs md:text-sm font-bold uppercase tracking-wider shadow-sm ${style} ${className}`}
     >
+      {/* Wenn ein Icon übergeben wurde, wird es hier mit Größe 16 angezeigt */}
+      {Icon && <Icon size={16} className="flex-shrink-0" />}
+      
       {children}
     </span>
   );

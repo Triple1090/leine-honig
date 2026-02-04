@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -27,50 +27,50 @@ export default function Navbar() {
   const navLinks = [
     { name: "Startseite", href: "/" },
     { name: "Über uns", href: "/ueber-uns" },
+    { name: "Kontakt", href: "/contactForm" },
     { name: "Unser Honig", href: "/#sorten" },
     { name: "Bienen mieten", href: "/#bienen-mieten" },
   ];
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-md py-2" // Etwas weniger Padding beim Scrollen
+          ? "bg-white/90 py-2 shadow-md backdrop-blur-md" // Etwas weniger Padding beim Scrollen
           : "bg-transparent py-4"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
         {/* 2. LOGO BILD */}
-        <Link href="/" className="relative z-50 group">
-          <Image 
+        <Link href="/" className="group relative z-50">
+          <Image
             src="/images/lunsen-honig-ohne.png" // Pfad zum Bild (public wird weggelassen)
-            alt="Lunsen Honig Logo"
+            alt="Lunsen-Honig Logo"
             width={180} // Originalbreite (wird durch CSS skaliert)
             height={60} // Originalhöhe
-            className="h-10 w-auto md:h-12 object-contain transition-transform hover:scale-105" 
+            className="h-10 w-auto object-contain transition-transform hover:scale-105 md:h-12"
             priority // Lädt das Logo sofort
           />
         </Link>
 
         {/* DESKTOP MENU */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className={`text-sm font-semibold transition-colors hover:text-primary ${
+              className={`hover:text-primary text-sm font-semibold transition-colors ${
                 scrolled ? "text-stone-600" : "text-stone-700"
               }`}
             >
               {link.name}
             </Link>
           ))}
-          
+
           {/* Shop Button */}
           <Link
             href="/shop"
-            className="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg font-bold text-sm transform hover:scale-105"
+            className="bg-primary hover:bg-primary-dark flex transform items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:scale-105 hover:shadow-lg"
           >
             <ShoppingBasket size={18} />
             Zum Shop
@@ -80,7 +80,7 @@ export default function Navbar() {
         {/* MOBILE HAMBURGER BUTTON */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden relative z-50 p-2 text-stone-800 focus:outline-none"
+          className="relative z-50 p-2 text-stone-800 focus:outline-none md:hidden"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -93,23 +93,23 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-8 md:hidden"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center space-y-8 bg-white md:hidden"
           >
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-2xl font-bold text-stone-800 hover:text-primary transition-colors"
+                className="hover:text-primary text-2xl font-bold text-stone-800 transition-colors"
               >
                 {link.name}
               </Link>
             ))}
-            
+
             <Link
               href="/shop"
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full font-bold text-xl shadow-lg"
+              className="bg-primary flex items-center gap-2 rounded-full px-8 py-4 text-xl font-bold text-white shadow-lg"
             >
               <ShoppingBasket size={24} />
               Zum Shop

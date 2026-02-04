@@ -19,8 +19,12 @@ const fontBody = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Lunsen Honig",
+  title: "Lunsen-Honig",
   description: "Bester Honig aus Neustadt",
+  // HIER DAS EMOJI EINFÜGEN:
+  icons: {
+    icon: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍯</text></svg>`,
+  },
 };
 
 export default function RootLayout({
@@ -31,11 +35,11 @@ export default function RootLayout({
   return (
     <html lang="de">
       {/* Hier laden wir die Variablen in CSS */}
-      <body className={`${fontHeading.variable} ${fontBody.variable} font-sans antialiased`}>
+      <body
+        className={`${fontHeading.variable} ${fontBody.variable} font-sans antialiased`}
+      >
         <Navbar />
-        <main className="pt-20">
-          {children}
-        </main>
+        <main className="pt-20">{children}</main>
         <Footer />
       </body>
     </html>

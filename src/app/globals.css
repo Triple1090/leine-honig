@@ -2,10 +2,10 @@
 
 @theme {
   /* Hier verknüpfen wir die Tailwind-Klassen mit deinen Honig-Farben */
-  --color-primary: #f59e0b;       /* Nutzt du mit bg-primary oder text-primary */
-  --color-primary-dark: #b45309;  /* Nutzt du mit bg-primary-dark */
-  --color-creme: #fffdf9;         /* Ein Name für dein Hintergrund-Weiß */
-  
+  --color-primary: #f59e0b; /* Nutzt du mit bg-primary oder text-primary */
+  --color-primary-dark: #b45309; /* Nutzt du mit bg-primary-dark */
+  --color-creme: #fffdf9; /* Ein Name für dein Hintergrund-Weiß */
+
   /* Standard-Fonts von Next.js einbinden */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -37,9 +37,25 @@ body {
 html {
   /* 1. Das macht das Scrollen weich */
   scroll-behavior: smooth;
-  
+
   /* 2. WICHTIG: Das sorgt dafür, dass der Browser nicht zu weit scrollt.
      Da deine Navbar 80px hoch ist (h-20), sagen wir dem Browser:
      "Stoppe immer 90px (etwas Luft) über dem Ziel". */
-  scroll-padding-top: 3rem; 
+  scroll-padding-top: 3rem;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }

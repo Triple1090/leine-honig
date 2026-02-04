@@ -1,6 +1,6 @@
 "use client"; // Sagt Next.js: Das hier ist interaktiv!
 import { motion } from "framer-motion";
-import { Bug, ShoppingBasket, Handshake } from "lucide-react";
+import { Bug, ShoppingBasket, Handshake, MapPin } from "lucide-react";
 import Link from "next/link"; // <--- WICHTIG: Import für die Buttons
 import Badge from "./Badge";
 
@@ -22,8 +22,8 @@ export default function Hero() {
         <div className="mb-6">
           {" "}
           {/* Margin macht man besser am Container, nicht im Badge selbst */}
-          <Badge>
-            <Bug size={16} /> Region Hannover
+          <Badge icon={MapPin}>
+            Region Hannover
           </Badge>
         </div>
 
