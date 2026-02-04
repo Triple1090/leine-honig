@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  /* Hier verknüpfen wir die Tailwind-Klassen mit deinen Honig-Farben */
+  --color-primary: #f59e0b;       /* Nutzt du mit bg-primary oder text-primary */
+  --color-primary-dark: #b45309;  /* Nutzt du mit bg-primary-dark */
+  --color-creme: #fffdf9;         /* Ein Name für dein Hintergrund-Weiß */
+  
+  /* Standard-Fonts von Next.js einbinden */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: var(--color-creme);
+  --foreground: #1c1917;
+}
+
+/* Dark Mode für Honig-Seiten ist oft schwierig. 
+   Hier lassen wir ihn hell oder passen ihn nur dezent an, 
+   damit das "Honig-Gefühl" nicht verloren geht. 
+*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #fffdf9; /* Wir bleiben bei hell, da Honig Licht braucht */
+    --foreground: #1c1917;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  /* 1. Das macht das Scrollen weich */
+  scroll-behavior: smooth;
+  
+  /* 2. WICHTIG: Das sorgt dafür, dass der Browser nicht zu weit scrollt.
+     Da deine Navbar 80px hoch ist (h-20), sagen wir dem Browser:
+     "Stoppe immer 90px (etwas Luft) über dem Ziel". */
+  scroll-padding-top: 3rem; 
+}
