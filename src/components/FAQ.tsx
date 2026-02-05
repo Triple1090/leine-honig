@@ -1,6 +1,7 @@
 "use client";
 
-import { HelpCircle, Plus } from "lucide-react";
+import { HelpCircle, Plus, Mail } from "lucide-react";
+import Button from "./Button";
 
 const faqData = [
   {
@@ -70,14 +71,10 @@ export default function FAQ() {
       </div>
 
       {/* Kontakt Link */}
-      <div className="mt-10 text-center text-sm text-stone-400">
-        Deine Frage war nicht dabei?{" "}
-        <a
-          href="/contactForm"
-          className="group bg-primary hover:bg-primary-dark hover:shadow-primary/40 flex items-center gap-2 rounded-full px-8 py-4 font-bold text-white shadow-lg transition-all"
-        >
-          Schreib uns einfach!
-        </a>
+      <div className="flex items-center justify-center pt-10">
+        <Button href="/contactForm" icon={Mail}>
+          Kontaktieren Sie uns!
+        </Button>
       </div>
     </div>
   );
