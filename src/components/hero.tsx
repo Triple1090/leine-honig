@@ -44,7 +44,7 @@ export default function Hero() {
 
         {/* Buttons (Jetzt mit Funktion!) */}
         <div className="flex flex-col justify-center gap-4 md:flex-row">
-          <Button href="/shop" icon={ShoppingBasket} variant="primary">
+          <Button href="/#preise" icon={ShoppingBasket} variant="primary">
             Honig Online-Shop
           </Button>
 

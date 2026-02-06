@@ -107,7 +107,7 @@ export default function Navbar() {
             ))}
 
             <Link
-              href="/shop"
+              href="/#preise"
               onClick={() => setIsOpen(false)}
               className="bg-primary flex items-center gap-2 rounded-full px-8 py-4 text-xl font-bold text-white shadow-lg"
             >
