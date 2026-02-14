@@ -1,21 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  /* --- PRIMARY: Das Honig-Gold --- */
-  --color-primary: #d97706;
-  --color-primary-dark: #b45309;
-  --color-primary-light: #fef3c7;
+  /* --- MARKENFARBEN: Wald & Wabe --- */
 
-  /* --- SECONDARY: Bienen-Braun & Stein --- */
-  --color-secondary: #44403c;
+  /* PRIMARY: Lunsen Olive (Das Fundament) */
+  /* Nutzung: bg-primary (Navbar/Footer), text-primary (Überschriften) */
+  --color-primary: #556b2f;
+  --color-primary-dark: #3f5220; /* Für Hover-Effekte */
+  --color-primary-light: #84a98c; /* Helles Salbei-Grün (für Hintergründe/Trennelemente) */
 
-  /* --- NEUTRALS: Natur-Töne --- */
-  --color-stone-50: #fdfcfb;
-  --color-stone-100: #f5f2ed;
-  --color-stone-900: #1c1917;
+  /* ACCENT: Honig Gold (Die Verführung) */
+  /* Nutzung: bg-accent (Buttons), text-accent (Preise/Highlights) */
+  --color-accent: #f59e0b; /* Sattes Bernstein */
+  --color-accent-hover: #d97706; /* Dunkleres Gold */
+  --color-accent-light: #fef3c7; /* Helles Pollengelb (Badges/Boxen) */
 
-  /* --- ACCENT: Natur & Wald --- */
-  --color-accent: #65a30d;
+  /* NEUTRALS: Warme Steintöne (Statt kaltem Grau) */
+  --color-stone-50: #fafaf9; /* Seitenhintergrund */
+  --color-stone-100: #f5f5f4; /* Leichte Abgrenzungen */
+  --color-stone-200: #e7e5e4; /* Rahmen */
+  --color-stone-800: #292524; /* Dunkler Text */
+  --color-stone-900: #1c1917; /* Fast Schwarz (Deep Stone) */
 
   /* --- TYPOGRAFIE --- */
   --font-heading: "Inter", sans-serif;
@@ -23,16 +28,18 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* --- BASIS EINSTELLUNGEN --- */
 :root {
-  /* FIX: Variable korrigiert auf stone-50 */
+  /* Wir nutzen das warme Stone-50 als Standard-Hintergrund */
   --background: var(--color-stone-50);
   --foreground: var(--color-stone-900);
 }
 
-/* Dezentere Dark-Mode Anpassung oder einfach weglassen */
+/* Dark Mode Override: Wir bleiben beim hellen, natürlichen Look */
+/* Auch wenn der Nutzer Dark Mode an hat, bleibt die Seite warm/hell */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #fffdf9;
+    --background: var(--color-stone-50);
     --foreground: var(--color-stone-900);
   }
 }
@@ -46,11 +53,11 @@ body {
 
 html {
   scroll-behavior: smooth;
-  /* FIX: Erhöht auf 6rem, damit die Navbar (h-20) nichts verdeckt */
+  /* WICHTIG: Verhindert, dass die Navbar Überschriften verdeckt */
   scroll-padding-top: 6rem;
 }
 
-/* --- ANIMATIONEN --- */
+/* --- CUSTOM ANIMATIONEN --- */
 @keyframes float {
   0%,
   100% {
