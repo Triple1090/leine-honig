@@ -1,4 +1,3 @@
-import FAQ from "../components/FAQ";
 import Hero from "../components/hero";
 // import ProductList from "../components/ProductList"; // Vorerst ausgeblendet, da Shop im Aufbau
 import RentBees from "../components/RentBees";
@@ -27,9 +26,6 @@ export default function Home() {
       </section>
 
       <RentBees />
-
-      {/* Ich habe FAQ hier ergänzt, da du es oben importiert hattest */}
-      <FAQ />
     </>
   );
 }
