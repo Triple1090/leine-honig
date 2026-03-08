@@ -33,7 +33,7 @@ export default function ContactForm() {
           <input
             type="hidden"
             name="_redirect"
-            value="https://lunsen-honig.de/danke"
+            value="https://leine-honig.lunsen-digital.de/danke"
           />
 
           {/* 2. Honeypot Spam-Schutz (für Menschen unsichtbar) */}

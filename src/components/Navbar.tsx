@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; // <--- 1. NEU: Image importieren
+import Image from "next/image";
 import { Menu, X, ShoppingBasket } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -10,20 +10,16 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Dieser Effekt merkt, wenn du scrollst
+  // Scroll-Erkennung
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Links-Liste
+  // Links
   const navLinks = [
     { name: "Startseite", href: "/" },
     { name: "Über uns", href: "/ueber-uns" },
@@ -36,80 +32,87 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 py-2 shadow-md backdrop-blur-md" // Etwas weniger Padding beim Scrollen
-          : "bg-transparent py-4"
+          ? "bg-primary/95 py-3 shadow-md backdrop-blur-md" // Zustand: Gescrollt (Grüner Hintergrund)
+          : "bg-transparent py-5" // Zustand: Oben (Transparenter Hintergrund)
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        {/* 2. LOGO BILD */}
-        <Link href="/" className="group relative z-50">
+        {/* --- LOGO --- */}
+        <Link href="/" className="relative z-50 flex items-center gap-2">
+          {/* Logo-Wechsel wäre hier möglich, aber wir nutzen einfach das Standard-Logo */}
           <Image
-            src="/images/lunsen-honig-ohne.png" // Pfad zum Bild (public wird weggelassen)
+            src="/images/lunsen-honig.svg"
             alt="Lunsen-Honig Logo"
-            width={180} // Originalbreite (wird durch CSS skaliert)
-            height={60} // Originalhöhe
+            width={160}
+            height={50}
             className="h-10 w-auto object-contain transition-transform hover:scale-105 md:h-12"
-            priority // Lädt das Logo sofort
+            priority
           />
         </Link>
 
-        {/* DESKTOP MENU */}
+        {/* --- DESKTOP MENU --- */}
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className={`hover:text-primary text-sm font-semibold transition-colors ${
-                scrolled ? "text-stone-600" : "text-stone-700"
+              className={`hover:text-accent text-sm font-bold transition-colors ${
+                scrolled
+                  ? "text-white/90" // Gescrollt: Weißer Text auf Grün
+                  : "text-stone-800" // Oben: Dunkler Text (für Lesbarkeit auf hellem Bild/Weiß)
               }`}
             >
               {link.name}
             </Link>
           ))}
 
-          {/* Shop Button */}
+          {/* CTA Button: Immer Gold, immer gut sichtbar */}
           <Link
             href="/shop"
-            className="bg-primary hover:bg-primary-dark flex transform items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:scale-105 hover:shadow-lg"
+            className="bg-accent hover:bg-accent-hover flex transform items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:scale-105 hover:shadow-xl"
           >
             <ShoppingBasket size={18} />
-            Zum Shop
+            <span>Zum Shop</span>
           </Link>
         </div>
 
-        {/* MOBILE HAMBURGER BUTTON */}
+        {/* --- MOBILE HAMBURGER --- */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative z-50 p-2 text-stone-800 focus:outline-none md:hidden"
+          className={`relative z-50 transition-colors focus:outline-none md:hidden ${
+            isOpen ? "text-white" : scrolled ? "text-white" : "text-stone-800"
+          }`}
+          aria-label="Menü öffnen"
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          {isOpen ? <X size={32} /> : <Menu size={32} />}
         </button>
       </div>
 
-      {/* MOBILE MENU OVERLAY */}
+      {/* --- MOBILE OVERLAY (Bleibt immer Grün) --- */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center space-y-8 bg-white md:hidden"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            className="bg-primary fixed inset-0 z-40 flex flex-col items-center justify-center space-y-8 text-white md:hidden"
           >
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="hover:text-primary text-2xl font-bold text-stone-800 transition-colors"
+                className="hover:text-accent text-2xl font-bold transition-colors"
               >
                 {link.name}
               </Link>
             ))}
 
             <Link
-              href="/#preise"
+              href="/shop"
               onClick={() => setIsOpen(false)}
-              className="bg-primary flex items-center gap-2 rounded-full px-8 py-4 text-xl font-bold text-white shadow-lg"
+              className="bg-accent mt-4 flex items-center gap-3 rounded-full px-8 py-4 text-xl font-bold text-white shadow-lg transition-transform active:scale-95"
             >
               <ShoppingBasket size={24} />
               Zum Shop

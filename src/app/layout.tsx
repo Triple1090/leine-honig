@@ -19,7 +19,7 @@ const fontBody = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Lunsen-Honig",
+  title: "Leine-Honig",
   description: "Bester Honig aus Neustadt",
   // HIER DAS EMOJI EINFÜGEN:
   icons: {

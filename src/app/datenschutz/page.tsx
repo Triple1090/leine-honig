@@ -2,9 +2,9 @@ import Badge from "@/src/components/Badge";
 import { Shield, Lock, Eye, FileText } from "lucide-react";
 
 export const metadata = {
-  title: "Datenschutz | Lunsen-Honig",
+  title: "Datenschutz | Leine-Honig",
   description:
-    "Informationen zum Schutz Ihrer persönlichen Daten bei Lunsen-Honig.",
+    "Informationen zum Schutz Ihrer persönlichen Daten bei Leine-Honig.",
 };
 
 export default function Datenschutz() {
@@ -40,7 +40,7 @@ export default function Datenschutz() {
                 Sinne der DSGVO ist:
                 <br />
                 <br />
-                <strong>Lunsen-Honig</strong>
+                <strong>Leine-Honig</strong>
                 <br />
                 Jürgen Hochegger & Tjark Radewaldt
                 <br />
@@ -48,7 +48,7 @@ export default function Datenschutz() {
                 <br />
                 31535 Neustadt am Rübenberge
                 <br />
-                E-Mail: info@lunsen-honig.de
+                E-Mail: info@leine-honig.de
               </p>
             </div>
 

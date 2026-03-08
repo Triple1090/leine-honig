@@ -4,7 +4,7 @@ import { Heart, MapPin, Award, User } from "lucide-react";
 import Badge from "@/src/components/Badge";
 
 export const metadata = {
-  title: "Über uns | Lunsen-Honig",
+  title: "Über uns | Leine-Honig",
   description:
     "Jürgen & Tjark – Die Gesichter hinter dem echten Honig aus Neustadt.",
 };

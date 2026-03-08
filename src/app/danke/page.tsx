@@ -3,7 +3,7 @@ import { Heart, Home, ArrowRight, CheckCircle2 } from "lucide-react";
 import Badge from "@/src/components/Badge";
 
 export const metadata = {
-  title: "Danke für deine Nachricht | Lunsen Honig",
+  title: "Danke für deine Nachricht | Leine-Honig",
   description:
     "Wir haben deine Nachricht erhalten und melden uns bald bei dir.",
 };

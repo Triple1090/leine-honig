@@ -2,8 +2,8 @@ import Badge from "@/src/components/Badge";
 import { RotateCcw, AlertCircle, Mail, Truck, FileText } from "lucide-react";
 
 export const metadata = {
-  title: "Widerrufsbelehrung | Lunsen-Honig",
-  description: "Informationen zu Ihrem Widerrufsrecht bei Lunsen-Honig.",
+  title: "Widerrufsbelehrung | Leine-Honig",
+  description: "Informationen zu Ihrem Widerrufsrecht bei Leine-Honig.",
 };
 
 export default function Widerruf() {
@@ -54,13 +54,13 @@ export default function Widerruf() {
                 oder eine E-Mail) über Ihren Entschluss informieren:
               </p>
               <div className="rounded-2xl border border-stone-100 bg-stone-50 p-6 italic">
-                <strong>Lunsen-Honig</strong>
+                <strong>Leine-Honig</strong>
                 <br />
                 Jürgen Hochegger & Tjark Radewaldt
                 <br />
                 OT Luttmersen, 31535 Neustadt am Rübenberge
                 <br />
-                E-Mail: info@lunsen-honig.de
+                E-Mail: info@leine-honig.de
               </div>
             </div>
 

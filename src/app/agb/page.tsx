@@ -2,7 +2,7 @@ import Badge from "@/src/components/Badge";
 import { Gavel, Bug, ShieldAlert, Calendar, CreditCard } from "lucide-react";
 
 export const metadata = {
-  title: "AGB Bienenmiete | Lunsen-Honig",
+  title: "AGB Bienenmiete | Leine-Honig",
   description:
     "Allgemeine Geschäftsbedingungen für die Vermietung von Bienenvölkern.",
 };
@@ -20,7 +20,7 @@ export default function AGB() {
           </h1>
           <p className="text-lg text-stone-600">
             Allgemeine Geschäftsbedingungen für die Vermietung von Bienenvölkern
-            durch Lunsen-Honig.
+            durch Leine-Honig.
           </p>
         </div>
       </section>
@@ -35,7 +35,7 @@ export default function AGB() {
               </h2>
               <p>
                 Diese AGB gelten für alle Verträge über die Vermietung von
-                Bienenvölkern zwischen der Lunsen-Honig (Vermieter) und deren
+                Bienenvölkern zwischen der Leine-Honig (Vermieter) und deren
                 Kunden (Mieter).
               </p>
             </div>

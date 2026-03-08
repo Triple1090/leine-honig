@@ -91,7 +91,7 @@ export default function RentBees() {
               {
                 icon: Sprout,
                 title: "Naturschutz",
-                text: "Direkter Beitrag zur Biodiversität in Lunsen & Neustadt.",
+                text: "Direkter Beitrag zur Biodiversität in der Leine-Region & Neustadt.",
               },
               {
                 icon: Hexagon,

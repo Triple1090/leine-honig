@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Hexagon, Home, Leaf } from "lucide-react"; // Hier nehmen wir ein Waben- und Blatt-Icon
 
 export const metadata = {
-  title: "Seite nicht gefunden (404) | Lunsen-Honig",
+  title: "Seite nicht gefunden (404) | Leine-Honig",
   description:
     "Ups! Diese Seite scheint der Schwarm nicht gefunden zu haben. Kehre zum Honig zurück!",
 };

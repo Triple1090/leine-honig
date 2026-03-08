@@ -2,8 +2,8 @@ import Badge from "@/src/components/Badge";
 import { Scale, Info, Mail, MapPin, UserCheck } from "lucide-react";
 
 export const metadata = {
-  title: "Impressum | Lunsen-Honig",
-  description: "Gesetzliche Anbieterkennung von Lunsen-Honig.",
+  title: "Impressum | Leine-Honig",
+  description: "Gesetzliche Anbieterkennung von Leine-Honig.",
 };
 
 export default function Impressum() {
@@ -18,7 +18,7 @@ export default function Impressum() {
             Impressum
           </h1>
           <p className="text-lg text-stone-600 italic">
-            Lunsen-Honig – Imkerei aus Leidenschaft & Handwerk
+            Leine-Honig – Imkerei aus Leidenschaft & Handwerk
           </p>
         </div>
       </section>
@@ -32,7 +32,7 @@ export default function Impressum() {
                 <h2 className="font-heading decoration-primary/30 mb-6 flex items-center gap-3 text-2xl text-stone-900 underline underline-offset-8">
                   <Scale size={24} className="text-primary" /> Kontakt
                 </h2>
-                <p className="text-lg font-bold text-stone-800">Lunsen-Honig</p>
+                <p className="text-lg font-bold text-stone-800">Leine-Honig</p>
                 <p className="mt-2">
                   Jürgen Hochegger & Tjark Radewaldt
                   <br />
@@ -45,7 +45,7 @@ export default function Impressum() {
               <div className="space-y-3 border-t border-stone-50 pt-4">
                 <div className="flex items-center gap-3">
                   <Mail size={18} className="text-primary" />
-                  info( @ )lunsen-honig.de
+                  info( @ )leine-honig.de
                 </div>
                 <div className="flex items-center gap-3 text-sm italic">
                   <UserCheck size={18} className="text-primary" />
