@@ -107,6 +107,24 @@ export default function ContactForm() {
             ></textarea>
           </div>
 
+          {/* Datenschutz-Zustimmung */}
+          <div className="flex items-start gap-3 rounded-2xl border border-stone-200 bg-white px-5 py-4">
+            <input
+              type="checkbox"
+              id="privacy"
+              name="privacy_consent"
+              required
+              className="accent-primary mt-0.5 h-4 w-4 shrink-0 cursor-pointer"
+            />
+            <label htmlFor="privacy" className="cursor-pointer text-sm text-stone-600">
+              Ich habe die{" "}
+              <a href="/datenschutz" className="text-primary underline underline-offset-2 hover:text-primary-dark">
+                Datenschutzerklärung
+              </a>{" "}
+              gelesen und bin mit der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage einverstanden.
+            </label>
+          </div>
+
           {/* Absende-Button */}
           <div className="flex items-center justify-center">
             <Button type="submit" icon={Send}>
