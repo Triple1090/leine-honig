@@ -1,5 +1,3 @@
-"use client";
-
 import { Sprout, ShieldCheck, Hexagon } from "lucide-react";
 import Image from "next/image";
 import FAQ from "./FAQ"; // Wir importieren unsere neue FAQ

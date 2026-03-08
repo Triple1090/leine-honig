@@ -1,53 +1,52 @@
+import { withPayload } from "@payloadcms/next/withPayload";
+
+const securityHeaders = [
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=()",
+  },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=31536000; includeSubDomains",
+  },
+  {
+    key: "Content-Security-Policy",
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://analytics.lunsen-digital.de",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' https://fonts.gstatic.com",
+      "img-src 'self' data: blob: https:",
+      "connect-src 'self' https://analytics.lunsen-digital.de",
+      "form-action 'self' https://submit-form.com",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+    ].join("; "),
+  },
+];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async headers() {
     return [
+      // Admin-Panel: keine X-Frame-Options und lockere CSP (Payload braucht mehr Freiheit)
       {
-        source: "/:path*",
+        source: "/admin/:path*",
         headers: [
-          // Verhindert Clickjacking
-          { key: "X-Frame-Options", value: "DENY" },
-          // Verhindert MIME-Type-Sniffing
           { key: "X-Content-Type-Options", value: "nosniff" },
-          // Referrer-Datenleck einschränken
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          // Kamera, Mikrofon, Geolocation sperren
-          {
-            key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
-          },
-          // HTTPS erzwingen (1 Jahr)
-          {
-            key: "Strict-Transport-Security",
-            value: "max-age=31536000; includeSubDomains",
-          },
-          // Content Security Policy
-          {
-            key: "Content-Security-Policy",
-            value: [
-              "default-src 'self'",
-              // Next.js braucht inline scripts für Hydration; Umami Analytics
-              "script-src 'self' 'unsafe-inline' https://analytics.lunsen-digital.de",
-              // Tailwind/framer-motion braucht inline styles
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              // Google Fonts
-              "font-src 'self' https://fonts.gstatic.com",
-              // Bilder: data: für Emoji-Favicon, https für externe Bilder
-              // Bilder + Umami beacon
-              "img-src 'self' data: https:",
-              "connect-src 'self' https://analytics.lunsen-digital.de",
-              // Formular-Aktion: nur submit-form.com erlaubt
-              "form-action 'self' https://submit-form.com",
-              // Frames komplett sperren
-              "frame-ancestors 'none'",
-              // Basis-URL einschränken
-              "base-uri 'self'",
-            ].join("; "),
-          },
         ],
+      },
+      // Alle anderen Seiten: volle Security-Header
+      {
+        source: "/((?!admin).*)",
+        headers: securityHeaders,
       },
     ];
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig);
