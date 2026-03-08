@@ -3,6 +3,7 @@ import { Fraunces, Outfit } from "next/font/google"; // <--- Hier die neuen Font
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Script from "next/script";
 
 // 1. Die edle Überschrift (Serif, weich)
 const fontHeading = Fraunces({
@@ -41,6 +42,11 @@ export default function RootLayout({
         <Navbar />
         <main className="pt-20">{children}</main>
         <Footer />
+        <Script
+          src="https://analytics.lunsen-digital.de/script.js"
+          data-website-id="afa201e8-9653-4b3d-bc48-0848f128b194"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

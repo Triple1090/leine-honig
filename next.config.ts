@@ -26,14 +26,16 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              // Next.js braucht inline scripts für Hydration
-              "script-src 'self' 'unsafe-inline'",
+              // Next.js braucht inline scripts für Hydration; Umami Analytics
+              "script-src 'self' 'unsafe-inline' https://analytics.lunsen-digital.de",
               // Tailwind/framer-motion braucht inline styles
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               // Google Fonts
               "font-src 'self' https://fonts.gstatic.com",
               // Bilder: data: für Emoji-Favicon, https für externe Bilder
+              // Bilder + Umami beacon
               "img-src 'self' data: https:",
+              "connect-src 'self' https://analytics.lunsen-digital.de",
               // Formular-Aktion: nur submit-form.com erlaubt
               "form-action 'self' https://submit-form.com",
               // Frames komplett sperren
