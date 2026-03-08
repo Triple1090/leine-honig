@@ -13,7 +13,7 @@ export default function RentBees() {
       <section className="overflow-hidden px-6 pt-24 pb-32">
         <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
           <div className="order-2 md:order-1">
-            <span className="bg-primary mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold tracking-wider text-white uppercase shadow-sm">
+            <span className="bg-primary mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold tracking-wider text-stone-900 uppercase shadow-sm">
               Für Firmen & Privat
             </span>
             <h2 className="mb-6 text-4xl leading-tight font-extrabold text-stone-900 md:text-5xl">
@@ -45,7 +45,7 @@ export default function RentBees() {
             <div className="mt-8 flex gap-4">
               <a
                 href="/contactForm"
-                className="group bg-primary hover:bg-primary-dark hover:shadow-primary/40 flex items-center gap-2 rounded-full px-8 py-4 font-bold text-white shadow-lg transition-all"
+                className="group bg-primary hover:bg-primary-dark hover:shadow-primary/40 flex items-center gap-2 rounded-full px-8 py-4 font-bold text-stone-900 shadow-lg transition-all"
               >
                 Beratung anfragen
                 <svg

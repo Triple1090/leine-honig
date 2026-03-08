@@ -17,7 +17,7 @@ export default function ShopPage() {
             description="Mild und cremig, direkt aus den Frühlingsblüten von Neustadt."
             // imageSrc="/images/honig-frueh.jpg"
             shopifyButton={
-              <button className="bg-primary w-full rounded-xl py-3 font-bold text-white">
+              <button className="bg-primary w-full rounded-xl py-3 font-bold text-stone-900">
                 In den Warenkorb
               </button>
             }
@@ -28,7 +28,7 @@ export default function ShopPage() {
             price="9,00 €"
             description="Kräftig im Geschmack mit der vollen Energie des Sommers."
             shopifyButton={
-              <button className="bg-primary w-full rounded-xl py-3 font-bold text-white">
+              <button className="bg-primary w-full rounded-xl py-3 font-bold text-stone-900">
                 In den Warenkorb
               </button>
             }

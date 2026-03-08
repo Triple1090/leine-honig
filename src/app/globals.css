@@ -1,19 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  /* --- MARKENFARBEN: Wald & Wabe --- */
+  /* --- MARKENFARBEN: Honig & Wabe --- */
 
-  /* PRIMARY: Lunsen Olive (Das Fundament) */
+  /* PRIMARY: Honig Gold (Das Fundament) */
   /* Nutzung: bg-primary (Navbar/Footer), text-primary (Überschriften) */
-  --color-primary: #556b2f;
-  --color-primary-dark: #3f5220; /* Für Hover-Effekte */
-  --color-primary-light: #84a98c; /* Helles Salbei-Grün (für Hintergründe/Trennelemente) */
+  --color-primary: #f59e0b;
+  --color-primary-dark: #d97706; /* Für Hover-Effekte */
+  --color-primary-light: #fef3c7; /* Helles Pollengelb (für Hintergründe) */
 
-  /* ACCENT: Honig Gold (Die Verführung) */
-  /* Nutzung: bg-accent (Buttons), text-accent (Preise/Highlights) */
-  --color-accent: #f59e0b; /* Sattes Bernstein */
-  --color-accent-hover: #d97706; /* Dunkleres Gold */
-  --color-accent-light: #fef3c7; /* Helles Pollengelb (Badges/Boxen) */
+  /* ACCENT: Tiefes Bernstein (Kontrast-Akzent) */
+  --color-accent: #b45309;
+  --color-accent-hover: #92400e;
+  --color-accent-light: #fef3c7;
 
   /* NEUTRALS: Warme Steintöne (Statt kaltem Grau) */
   --color-stone-50: #fafaf9; /* Seitenhintergrund */

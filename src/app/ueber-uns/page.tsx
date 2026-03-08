@@ -150,7 +150,7 @@ export default function AboutUs() {
         {/* FIX: 'inline-flex' sorgt dafür, dass der Button nur so breit wie sein Inhalt ist */}
         <Link
           href="/contactForm"
-          className="group bg-primary hover:bg-primary-dark hover:shadow-primary/40 inline-flex items-center gap-2 rounded-full px-8 py-4 font-bold text-white shadow-lg transition-all"
+          className="group bg-primary hover:bg-primary-dark hover:shadow-primary/40 inline-flex items-center gap-2 rounded-full px-8 py-4 font-bold text-stone-900 shadow-lg transition-all"
         >
           Kontakt aufnehmen
         </Link>

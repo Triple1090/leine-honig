@@ -58,7 +58,7 @@ export default function Navbar() {
               href={link.href}
               className={`hover:text-accent text-sm font-bold transition-colors ${
                 scrolled
-                  ? "text-white/90" // Gescrollt: Weißer Text auf Grün
+                  ? "text-stone-900" // Gescrollt: Dunkler Text auf Gelb
                   : "text-stone-800" // Oben: Dunkler Text (für Lesbarkeit auf hellem Bild/Weiß)
               }`}
             >
@@ -80,7 +80,7 @@ export default function Navbar() {
         <button
           onClick={() => setIsOpen(!isOpen)}
           className={`relative z-50 transition-colors focus:outline-none md:hidden ${
-            isOpen ? "text-white" : scrolled ? "text-white" : "text-stone-800"
+            isOpen ? "text-stone-900" : scrolled ? "text-stone-900" : "text-stone-800"
           }`}
           aria-label="Menü öffnen"
         >
@@ -96,14 +96,14 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            className="bg-primary fixed inset-0 z-40 flex flex-col items-center justify-center space-y-8 text-white md:hidden"
+            className="bg-primary fixed inset-0 z-40 flex flex-col items-center justify-center space-y-8 text-stone-900 md:hidden"
           >
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="hover:text-accent text-2xl font-bold transition-colors"
+                className="hover:text-accent text-2xl font-bold text-stone-900 transition-colors"
               >
                 {link.name}
               </Link>

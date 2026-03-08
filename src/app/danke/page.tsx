@@ -39,7 +39,7 @@ export default function DankePage() {
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
           <Link
             href="/"
-            className="group bg-primary hover:bg-primary-dark hover:shadow-primary/40 flex items-center justify-center gap-2 rounded-full px-10 py-4 font-bold text-white shadow-lg transition-all"
+            className="group bg-primary hover:bg-primary-dark hover:shadow-primary/40 flex items-center justify-center gap-2 rounded-full px-10 py-4 font-bold text-stone-900 shadow-lg transition-all"
           >
             <Home size={20} /> Zur Startseite
           </Link>

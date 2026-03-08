@@ -28,7 +28,7 @@ export default function Button({
     "group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold transition-all active:scale-95";
   const variants = {
     primary:
-      "bg-primary hover:bg-primary-dark text-white shadow-lg hover:shadow-primary/40",
+      "bg-primary hover:bg-primary-dark text-stone-900 shadow-lg hover:shadow-primary/40",
     secondary:
       "bg-white border-2 border-stone-200 text-stone-700 hover:bg-stone-50 hover:border-stone-300 shadow-sm",
   };

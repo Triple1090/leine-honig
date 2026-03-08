@@ -8,7 +8,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary pt-20 pb-10 text-stone-100">
+    <footer className="bg-primary pt-20 pb-10 text-stone-900">
       <div className="mx-auto max-w-7xl px-6">
         {/* Hauptbereich */}
         <div className="mb-16 grid grid-cols-1 gap-12 md:gap-8 lg:grid-cols-4">
@@ -24,7 +24,7 @@ export default function Footer() {
                 className="h-12 w-auto opacity-90 brightness-0 invert transition-opacity hover:opacity-100"
               />
             </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-stone-200">
+            <p className="max-w-xs text-sm leading-relaxed text-stone-800">
               Echter Honig aus Neustadt am Rübenberge. Wir stehen für regionale
               Imkerei, Transparenz und den Schutz unserer Natur.
             </p>
@@ -32,10 +32,10 @@ export default function Footer() {
 
           {/* Spalte 2: Navigation */}
           <div>
-            <h4 className="mb-6 text-lg font-bold tracking-wide text-white">
+            <h4 className="mb-6 text-lg font-bold tracking-wide text-stone-900">
               Entdecken
             </h4>
-            <ul className="space-y-3 text-sm text-stone-300">
+            <ul className="space-y-3 text-sm text-stone-700">
               <li>
                 <Link
                   href="/"
@@ -63,7 +63,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/shop"
-                  className="hover:text-accent font-semibold text-white transition-colors duration-300"
+                  className="hover:text-accent font-semibold text-stone-900 transition-colors duration-300"
                 >
                   Zum Online-Shop
                 </Link>
@@ -73,10 +73,10 @@ export default function Footer() {
 
           {/* Spalte 3: Rechtliches */}
           <div>
-            <h4 className="mb-6 text-lg font-bold tracking-wide text-white">
+            <h4 className="mb-6 text-lg font-bold tracking-wide text-stone-900">
               Rechtliches
             </h4>
-            <ul className="space-y-3 text-sm text-stone-300">
+            <ul className="space-y-3 text-sm text-stone-700">
               <li>
                 <Link
                   href="/impressum"
@@ -106,14 +106,14 @@ export default function Footer() {
 
           {/* Spalte 4: Kontakt & Social */}
           <div>
-            <h4 className="mb-6 text-lg font-bold tracking-wide text-white">
+            <h4 className="mb-6 text-lg font-bold tracking-wide text-stone-900">
               Kontakt
             </h4>
-            <ul className="space-y-4 text-sm text-stone-300">
+            <ul className="space-y-4 text-sm text-stone-700">
               <li className="group flex items-start gap-3">
                 <MapPin
                   size={18}
-                  className="text-accent mt-0.5 transition-colors group-hover:text-white"
+                  className="text-accent mt-0.5 transition-colors group-hover:text-stone-700"
                 />
                 <span className="leading-tight">
                   Imkerei Leine-Honig
@@ -126,11 +126,11 @@ export default function Footer() {
               <li className="group flex items-center gap-3">
                 <Mail
                   size={18}
-                  className="text-accent transition-colors group-hover:text-white"
+                  className="text-accent transition-colors group-hover:text-stone-700"
                 />
                 <a
                   href="mailto:info@leine-honig.de"
-                  className="transition-colors hover:text-white"
+                  className="transition-colors hover:text-stone-900"
                 >
                   info@leine-honig.de
                 </a>
@@ -142,7 +142,7 @@ export default function Footer() {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:bg-accent inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-300 hover:text-white"
+                  className="hover:bg-accent inline-flex h-10 w-10 items-center justify-center rounded-full bg-stone-900/10 text-stone-900 transition-all duration-300 hover:text-stone-900"
                   aria-label="Instagram"
                 >
                   <Instagram size={20} />
@@ -153,10 +153,10 @@ export default function Footer() {
         </div>
 
         {/* Trennlinie */}
-        <div className="mb-8 border-t border-white/10" />
+        <div className="mb-8 border-t border-stone-900/10" />
 
         {/* Bottom Bar */}
-        <div className="flex flex-col items-center justify-between gap-4 text-xs text-stone-400 md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 text-xs text-stone-700 md:flex-row">
           <p>© {currentYear} Leine-Honig. Alle Rechte vorbehalten.</p>
 
           <div className="flex items-center gap-6">
