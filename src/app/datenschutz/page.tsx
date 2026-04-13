@@ -1,4 +1,4 @@
-import Badge from "@/src/components/Badge";
+import PageHeader from "@/src/components/PageHeader";
 import { Shield, Lock, Eye, FileText } from "lucide-react";
 
 export const metadata = {
@@ -10,21 +10,14 @@ export const metadata = {
 export default function Datenschutz() {
   return (
     <div className="min-h-screen bg-stone-50 pb-20">
-      {/* Header */}
-      <section className="border-b border-stone-100 bg-white px-6 pt-32 pb-16 text-center">
-        <div className="mx-auto max-w-4xl">
-          <Badge icon={Shield} className="mb-4">
-            Sicherheit & Vertrauen
-          </Badge>
-          <h1 className="mb-6 text-4xl font-extrabold text-stone-900 md:text-5xl">
-            Datenschutzerklärung
-          </h1>
-          <p className="text-lg text-stone-600">
-            Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Hier
-            erfahren Sie, wie wir mit Ihren Daten umgehen.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        image="/images/juergen/raps-abfuellen.jpeg"
+        imageAlt="Honig abfüllen"
+        badgeIcon={Shield}
+        badge="Sicherheit & Vertrauen"
+        title="Datenschutzerklärung"
+        subtitle="Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst."
+      />
 
       {/* Content */}
       <section className="px-6 py-16">

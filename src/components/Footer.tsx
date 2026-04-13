@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { Mail, MapPin, Instagram, Heart, Phone } from "lucide-react";
+import { Mail, MapPin, Instagram, Heart } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,15 +13,10 @@ export default function Footer() {
         <div className="mb-16 grid grid-cols-1 gap-12 md:gap-8 lg:grid-cols-4">
           {/* Spalte 1: Marke & Mission */}
           <div className="flex flex-col items-start gap-6">
-            <Link href="/" className="inline-block">
-              {/* Logo weiß färben mittels CSS-Filter für dunklen Hintergrund */}
-              <Image
-                src="/images/lunsen-honig.svg"
-                alt="Leine-Honig Logo"
-                width={160}
-                height={50}
-                className="h-12 w-auto opacity-90 brightness-0 invert transition-opacity hover:opacity-100"
-              />
+            <Link href="/" className="inline-block select-none">
+              <span className="font-heading text-2xl font-extrabold tracking-tight text-stone-900">
+                Leine<span className="text-accent">-</span>Honig
+              </span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-stone-800">
               Echter Honig aus Neustadt am Rübenberge. Wir stehen für regionale
@@ -62,7 +56,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/shop"
+                  href="/honig"
                   className="hover:text-accent font-semibold text-stone-900 transition-colors duration-300"
                 >
                   Zum Online-Shop

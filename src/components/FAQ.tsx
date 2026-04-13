@@ -1,23 +1,44 @@
 import { Plus, Mail } from "lucide-react";
 import Button from "./Button";
-import { getPayload } from "payload";
-import configPromise from "@payload-config";
 
-export default async function FAQ() {
-  const payload = await getPayload({ config: configPromise });
+const faqData = [
+  {
+    id: 1,
+    question: "Woher kommt euer Honig?",
+    answer: "Alle unsere Bienenvölker stehen in der Leineregion rund um Neustadt am Rübenberge. Der Honig kommt direkt aus der Wabe ins Glas — ohne Umwege, ohne Zusätze.",
+  },
+  {
+    id: 2,
+    question: "Ist euer Honig Bio-zertifiziert?",
+    answer: "Wir sind keine Bio-zertifizierte Imkerei, arbeiten aber nach denselben Grundsätzen: kein Einsatz von Pestiziden, keine Zusätze, keine Wärmebehandlung. Ehrlicher Honig eben.",
+  },
+  {
+    id: 3,
+    question: "Warum kristallisiert mein Honig aus?",
+    answer: "Kristallisation ist ein natürlicher Prozess und ein Zeichen für echten, unverfälschten Honig. Einfach das Glas in warmes Wasser (max. 40°C) stellen — dann wird er wieder flüssig.",
+  },
+  {
+    id: 4,
+    question: "Wie lange ist Honig haltbar?",
+    answer: "Honig ist praktisch unbegrenzt haltbar, wenn er trocken und lichtgeschützt gelagert wird. Das Mindesthaltbarkeitsdatum auf unseren Gläsern ist gesetzlich vorgeschrieben, nicht die tatsächliche Grenze.",
+  },
+  {
+    id: 5,
+    question: "Kann ich ein Bienenvolk für meinen Garten mieten?",
+    answer: "Ja! Wir bringen ein professionell betreutes Volk zu dir und kümmern uns um alles. Du brauchst nur einen geeigneten Standplatz. Schreib uns einfach.",
+  },
+  {
+    id: 6,
+    question: "Wie läuft die Bienenmiete ab?",
+    answer: "Wir besprechen gemeinsam den Standplatz, bringen das Volk im Frühjahr und holen es im Herbst wieder ab. Du bekommst am Ende der Saison deinen eigenen Honig — ca. 20 kg.",
+  },
+];
 
-  const { docs: faqData } = await payload.find({
-    collection: "faq-items",
-    sort: "sortOrder",
-    limit: 20,
-  });
-
+export default function FAQ() {
   return (
     <div className="mx-auto max-w-4xl" id="faq">
       <div className="mb-12 text-center">
-        <h3 className="mb-2 text-2xl font-bold text-stone-900">
-          Noch Fragen?
-        </h3>
+        <h3 className="mb-2 text-2xl font-bold text-stone-900">Noch Fragen?</h3>
         <p className="text-stone-500">Alles Wichtige auf einen Blick.</p>
       </div>
 
@@ -43,8 +64,8 @@ export default async function FAQ() {
       </div>
 
       <div className="flex items-center justify-center pt-10">
-        <Button href="/contactForm" icon={Mail}>
-          Kontaktieren Sie uns!
+        <Button href="/kontakt" icon={Mail}>
+          Frage stellen
         </Button>
       </div>
     </div>

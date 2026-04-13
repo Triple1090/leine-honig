@@ -1,4 +1,4 @@
-import Badge from "@/src/components/Badge";
+import PageHeader from "@/src/components/PageHeader";
 import { Gavel, Bug, ShieldAlert, Calendar, CreditCard } from "lucide-react";
 
 export const metadata = {
@@ -10,20 +10,14 @@ export const metadata = {
 export default function AGB() {
   return (
     <div className="min-h-screen bg-stone-50 pb-20">
-      <section className="border-b border-stone-100 bg-white px-6 pt-32 pb-16 text-center">
-        <div className="mx-auto max-w-4xl">
-          <Badge icon={Gavel} className="mb-4">
-            Rechtlicher Rahmen
-          </Badge>
-          <h1 className="mb-6 text-4xl font-extrabold text-stone-900 md:text-5xl">
-            AGB <span className="text-primary">Bienenmiete</span>
-          </h1>
-          <p className="text-lg text-stone-600">
-            Allgemeine Geschäftsbedingungen für die Vermietung von Bienenvölkern
-            durch Leine-Honig.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        image="/images/juergen/zarge.jpeg"
+        imageAlt="Bienenbeute"
+        badgeIcon={Gavel}
+        badge="Rechtlicher Rahmen"
+        title={<>AGB <span className="text-primary">Bienenmiete</span></>}
+        subtitle="Allgemeine Geschäftsbedingungen für die Vermietung von Bienenvölkern durch Leine-Honig."
+      />
 
       <section className="px-6 py-16">
         <div className="mx-auto max-w-4xl rounded-[2.5rem] border border-stone-100 bg-white p-8 shadow-sm md:p-16">

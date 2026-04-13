@@ -2,93 +2,106 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { Menu, X, ShoppingBasket } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "@/src/lib/cart";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { itemCount, cartTotal, openDrawer } = useCart();
 
-  // Scroll-Erkennung
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Links
   const navLinks = [
     { name: "Startseite", href: "/" },
+    { name: "Bienen mieten", href: "/bienen-mieten" },
     { name: "Über uns", href: "/ueber-uns" },
-    { name: "Kontakt", href: "/contactForm" },
-    { name: "Unser Honig", href: "/#sorten" },
-    { name: "Bienen mieten", href: "/#bienen-mieten" },
+    { name: "Kontakt", href: "/kontakt" },
   ];
 
   return (
     <nav
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-primary/95 py-3 shadow-md backdrop-blur-md" // Zustand: Gescrollt (Grüner Hintergrund)
-          : "bg-transparent py-5" // Zustand: Oben (Transparenter Hintergrund)
+        scrolled ? "bg-primary/95 py-3 shadow-md backdrop-blur-md" : "bg-transparent py-5"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        {/* --- LOGO --- */}
-        <Link href="/" className="relative z-50 flex items-center gap-2">
-          {/* Logo-Wechsel wäre hier möglich, aber wir nutzen einfach das Standard-Logo */}
-          <Image
-            src="/images/lunsen-honig.svg"
-            alt="Lunsen-Honig Logo"
-            width={160}
-            height={50}
-            className="h-10 w-auto object-contain transition-transform hover:scale-105 md:h-12"
-            priority
-          />
+        {/* Logo */}
+        <Link href="/" className="relative z-50 flex items-center gap-2 select-none">
+          <span className={`font-heading text-xl font-extrabold tracking-tight md:text-2xl transition-colors ${scrolled ? "text-white" : "text-stone-900"}`}>
+            Leine<span className="text-accent">-</span>Honig
+          </span>
         </Link>
 
-        {/* --- DESKTOP MENU --- */}
+        {/* Desktop Nav */}
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className={`hover:text-accent text-sm font-bold transition-colors ${
-                scrolled
-                  ? "text-stone-900" // Gescrollt: Dunkler Text auf Gelb
-                  : "text-stone-800" // Oben: Dunkler Text (für Lesbarkeit auf hellem Bild/Weiß)
+              className={`text-sm font-bold transition-colors hover:text-accent ${
+                scrolled ? "text-white" : "text-stone-900"
               }`}
             >
               {link.name}
             </Link>
           ))}
 
-          {/* CTA Button: Immer Gold, immer gut sichtbar */}
+          {/* CTA */}
           <Link
-            href="/shop"
-            className="bg-accent hover:bg-accent-hover flex transform items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:scale-105 hover:shadow-xl"
+            href="/honig"
+            className="bg-accent hover:bg-accent-hover flex transform items-center rounded-full px-6 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:scale-105 hover:shadow-xl"
           >
-            <ShoppingBasket size={18} />
-            <span>Zum Shop</span>
+            Honig kaufen
           </Link>
+
+          {/* Warenkorb */}
+          <button
+            onClick={openDrawer}
+            className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition-all hover:shadow-md ${
+              scrolled
+                ? "border-white/40 text-white hover:border-white/70"
+                : "border-stone-400/50 text-stone-900 hover:border-stone-500"
+            }`}
+            aria-label="Warenkorb öffnen"
+          >
+            <ShoppingCart size={16} />
+            {itemCount > 0
+              ? new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cartTotal / 100)
+              : "0,00 €"}
+          </button>
         </div>
 
-        {/* --- MOBILE HAMBURGER --- */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`relative z-50 transition-colors focus:outline-none md:hidden ${
-            isOpen ? "text-stone-900" : scrolled ? "text-stone-900" : "text-stone-800"
-          }`}
-          aria-label="Menü öffnen"
-        >
-          {isOpen ? <X size={32} /> : <Menu size={32} />}
-        </button>
+        {/* Mobile */}
+        <div className="flex items-center gap-4 md:hidden">
+          <button
+            onClick={openDrawer}
+            className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${
+              scrolled ? "border-white/40 text-white" : "border-stone-400/50 text-stone-900"
+            }`}
+            aria-label="Warenkorb öffnen"
+          >
+            <ShoppingCart size={14} />
+            {new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cartTotal / 100)}
+          </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className={`relative z-50 transition-colors focus:outline-none ${
+              isOpen ? "text-stone-900" : scrolled ? "text-white" : "text-stone-900"
+            }`}
+            aria-label="Menü öffnen"
+          >
+            {isOpen ? <X size={32} /> : <Menu size={32} />}
+          </button>
+        </div>
       </div>
 
-      {/* --- MOBILE OVERLAY (Bleibt immer Grün) --- */}
+      {/* Mobile Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -108,14 +121,12 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-
             <Link
-              href="/shop"
+              href="/honig"
               onClick={() => setIsOpen(false)}
-              className="bg-accent mt-4 flex items-center gap-3 rounded-full px-8 py-4 text-xl font-bold text-white shadow-lg transition-transform active:scale-95"
+              className="bg-accent mt-4 rounded-full px-8 py-4 text-xl font-bold text-white shadow-lg transition-transform active:scale-95"
             >
-              <ShoppingBasket size={24} />
-              Zum Shop
+              Honig kaufen
             </Link>
           </motion.div>
         )}

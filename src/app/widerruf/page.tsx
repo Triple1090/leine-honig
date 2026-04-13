@@ -1,4 +1,4 @@
-import Badge from "@/src/components/Badge";
+import PageHeader from "@/src/components/PageHeader";
 import { RotateCcw, AlertCircle, Mail, Truck, FileText } from "lucide-react";
 
 export const metadata = {
@@ -9,21 +9,14 @@ export const metadata = {
 export default function Widerruf() {
   return (
     <div className="min-h-screen bg-stone-50 pb-20">
-      {/* Header */}
-      <section className="border-b border-stone-100 bg-white px-6 pt-32 pb-16 text-center">
-        <div className="mx-auto max-w-4xl">
-          <Badge icon={RotateCcw} className="mb-4">
-            Verbraucherrechte
-          </Badge>
-          <h1 className="mb-6 text-4xl font-extrabold text-stone-900 md:text-5xl">
-            Widerrufs<span className="text-primary">belehrung</span>
-          </h1>
-          <p className="text-lg text-stone-600">
-            Hier erfahren Sie, wie Sie Verträge widerrufen können und welche
-            Ausnahmen gelten.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        image="/images/juergen/honig-hobbock.jpeg"
+        imageAlt="Honig im Hobbock"
+        badgeIcon={RotateCcw}
+        badge="Verbraucherrechte"
+        title={<>Widerrufs<span className="text-primary">belehrung</span></>}
+        subtitle="Hier erfahren Sie, wie Sie Verträge widerrufen können und welche Ausnahmen gelten."
+      />
 
       {/* Content */}
       <section className="px-6 py-16">

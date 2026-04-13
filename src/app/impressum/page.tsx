@@ -1,4 +1,4 @@
-import Badge from "@/src/components/Badge";
+import PageHeader from "@/src/components/PageHeader";
 import { Scale, Info, Mail, MapPin, UserCheck } from "lucide-react";
 
 export const metadata = {
@@ -9,19 +9,14 @@ export const metadata = {
 export default function Impressum() {
   return (
     <div className="min-h-screen bg-stone-50 pb-20">
-      <section className="border-b border-stone-100 bg-white px-6 pt-32 pb-16 text-center">
-        <div className="mx-auto max-w-4xl">
-          <Badge icon={Info} className="mb-4">
-            Anbieterkennung
-          </Badge>
-          <h1 className="mb-6 text-4xl font-extrabold text-stone-900 md:text-5xl">
-            Impressum
-          </h1>
-          <p className="text-lg text-stone-600 italic">
-            Leine-Honig – Imkerei aus Leidenschaft & Handwerk
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        image="/images/juergen/bienenstand.jpeg"
+        imageAlt="Bienenstand"
+        badgeIcon={Info}
+        badge="Anbieterkennung"
+        title="Impressum"
+        subtitle="Leine-Honig – Imkerei aus Leidenschaft & Handwerk"
+      />
 
       <section className="px-6 py-16">
         <div className="mx-auto max-w-4xl rounded-[2.5rem] border border-stone-100 bg-white p-8 shadow-sm md:p-16">

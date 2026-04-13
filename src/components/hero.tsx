@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingBasket, MapPin, Laugh } from "lucide-react";
-import Image from "next/image"; // WICHTIG: Für bessere Performance
+import { MapPin } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import Badge from "./Badge";
 import Button from "./Button";
 
@@ -55,13 +56,19 @@ export default function Hero() {
 
         {/* Buttons */}
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button href="/shop" icon={ShoppingBasket} variant="primary">
-            Honig Online-Shop
-          </Button>
+          <Link
+            href="/honig"
+            className="bg-accent hover:bg-accent-hover flex transform items-center rounded-full px-8 py-4 font-bold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+          >
+            Honig kaufen
+          </Link>
 
-          <Button href="/#bienen-mieten" icon={Laugh} variant="secondary">
+          <Link
+            href="/bienen-mieten"
+            className="flex transform items-center rounded-full border-2 border-stone-900/20 bg-white px-8 py-4 font-bold text-stone-900 shadow-lg transition-all hover:scale-105 hover:bg-stone-50 hover:shadow-xl"
+          >
             Bienen mieten
-          </Button>
+          </Link>
         </div>
       </motion.div>
     </section>

@@ -42,7 +42,7 @@ export default function RentBees() {
 
             <div className="mt-8 flex gap-4">
               <a
-                href="/contactForm"
+                href="/kontakt"
                 className="group bg-primary hover:bg-primary-dark hover:shadow-primary/40 flex items-center gap-2 rounded-full px-8 py-4 font-bold text-stone-900 shadow-lg transition-all"
               >
                 Beratung anfragen

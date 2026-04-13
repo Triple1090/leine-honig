@@ -1,17 +1,11 @@
-import { withPayload } from "@payloadcms/next/withPayload";
+import type { NextConfig } from "next";
 
 const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  {
-    key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=()",
-  },
-  {
-    key: "Strict-Transport-Security",
-    value: "max-age=31536000; includeSubDomains",
-  },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
   {
     key: "Content-Security-Policy",
     value: [
@@ -20,7 +14,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https:",
-      "connect-src 'self' https://analytics.lunsen-digital.de",
+      "connect-src 'self' https://analytics.lunsen-digital.de https://api.leine-honig.de http://localhost:9000",
       "form-action 'self' https://submit-form.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
@@ -28,25 +22,21 @@ const securityHeaders = [
   },
 ];
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   async headers() {
     return [
-      // Admin-Panel: keine X-Frame-Options und lockere CSP (Payload braucht mehr Freiheit)
       {
-        source: "/admin/:path*",
-        headers: [
-          { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-        ],
-      },
-      // Alle anderen Seiten: volle Security-Header
-      {
-        source: "/((?!admin).*)",
+        source: "/(.*)",
         headers: securityHeaders,
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "**.leine-honig.de" },
+      { protocol: "http", hostname: "localhost" },
+    ],
+  },
 };
 
-export default withPayload(nextConfig);
+export default nextConfig;

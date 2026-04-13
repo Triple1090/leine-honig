@@ -15,8 +15,8 @@ export default function Badge({
   variant = "primary" 
 }: BadgeProps) {
   
-  const primaryStyle = "bg-primary text-stone-900 border-transparent";
-  const secondaryStyle = "bg-white border-stone-200 text-stone-500 shadow-sm";
+  const primaryStyle = "bg-primary text-white border-transparent";
+  const secondaryStyle = "bg-primary text-white border-transparent";
 
   const style = variant === "primary" ? primaryStyle : secondaryStyle;
 

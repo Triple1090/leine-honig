@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { Fraunces, Outfit } from "next/font/google"; // <--- Hier die neuen Fonts
+import { Fraunces, Outfit } from "next/font/google";
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Script from "next/script";
+import Navbar from "@/src/components/Navbar";
+import Footer from "@/src/components/Footer";
+import CartDrawer from "@/src/components/CartDrawer";
+import { CartProvider } from "@/src/lib/cart";
 
-// 1. Die edle Überschrift (Serif, weich)
 const fontHeading = Fraunces({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
 });
 
-// 2. Der moderne Fließtext (Sans-Serif, sauber)
 const fontBody = Outfit({
   subsets: ["latin"],
   variable: "--font-body",
@@ -20,33 +19,23 @@ const fontBody = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Leine-Honig",
-  description: "Bester Honig aus Neustadt",
-  // HIER DAS EMOJI EINFÜGEN:
+  title: "Leine-Honig – Ehrlicher Honig & Bienenvermietung",
+  description: "Echter Honig direkt vom Imker aus Neustadt am Rübenberge. Jetzt online bestellen oder Bienenvolk mieten.",
   icons: {
     icon: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍯</text></svg>`,
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de">
-      {/* Hier laden wir die Variablen in CSS */}
-      <body
-        className={`${fontHeading.variable} ${fontBody.variable} font-sans antialiased`}
-      >
-        <Navbar />
-        <main className="pt-20">{children}</main>
-        <Footer />
-        <Script
-          src="https://analytics.lunsen-digital.de/script.js"
-          data-website-id="afa201e8-9653-4b3d-bc48-0848f128b194"
-          strategy="afterInteractive"
-        />
+      <body className={`${fontHeading.variable} ${fontBody.variable} font-sans antialiased`}>
+        <CartProvider>
+          <Navbar />
+          <CartDrawer />
+          <main className="pt-20">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
