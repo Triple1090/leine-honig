@@ -33,7 +33,7 @@ export default function Welcome() {
     <section className="bg-stone-50 px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
-          <h2 className="text-4xl font-extrabold text-stone-900 md:text-5xl">
+          <h2 className="text-4xl font-heading font-extrabold text-stone-900 md:text-5xl">
             Willkommen bei <span className="text-primary">Leine-Honig</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-stone-600">
@@ -50,7 +50,7 @@ export default function Welcome() {
               <div className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl ${card.accent}`}>
                 <card.icon size={28} />
               </div>
-              <h3 className="mb-3 text-xl font-extrabold text-stone-900">{card.title}</h3>
+              <h3 className="mb-3 text-xl font-heading font-extrabold text-stone-900">{card.title}</h3>
               <p className="flex-grow text-sm leading-relaxed text-stone-600">{card.text}</p>
               <Link
                 href={card.href}

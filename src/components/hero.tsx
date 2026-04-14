@@ -30,7 +30,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 mx-4 max-w-4xl rounded-[3rem] border border-white/50 bg-white/90 p-8 text-center shadow-2xl backdrop-blur-xl md:p-14"
+        className="relative z-10 mx-4 max-w-4xl rounded-[2rem] border border-white/50 bg-white/90 p-6 text-center shadow-2xl backdrop-blur-xl sm:rounded-[3rem] md:p-14"
       >
         {/* Badge */}
         <div className="mb-8 flex justify-center">
@@ -38,7 +38,7 @@ export default function Hero() {
         </div>
 
         {/* Headline */}
-        <h1 className="mb-6 text-4xl leading-tight font-extrabold tracking-tight text-stone-900 md:text-6xl">
+        <h1 className="mb-6 text-4xl leading-tight font-heading font-extrabold tracking-tight text-stone-900 md:text-6xl">
           Leine-Honig <br />
           <span className="text-primary mt-2 block text-3xl md:text-5xl">
             Ehrlicher Honig & Bienenvermietung
@@ -58,7 +58,7 @@ export default function Hero() {
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
             href="/honig"
-            className="bg-accent hover:bg-accent-hover flex transform items-center rounded-full px-8 py-4 font-bold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+            className="flex transform items-center rounded-full bg-primary px-8 py-4 font-bold text-stone-900 shadow-lg transition-all hover:scale-105 hover:bg-primary-dark hover:shadow-xl"
           >
             Honig kaufen
           </Link>
@@ -70,6 +70,9 @@ export default function Hero() {
             Bienen mieten
           </Link>
         </div>
+        <p className="mt-5 text-xs text-stone-500">
+          Gläser ab 6,90 € · Versand ab 50 € kostenlos
+        </p>
       </motion.div>
     </section>
   );

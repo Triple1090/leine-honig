@@ -29,10 +29,10 @@ export default function AddToCartButton({ variantId, disabled }: Props) {
     <button
       onClick={handleClick}
       disabled={disabled || status === "loading"}
-      className={`flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-bold shadow-md transition-all ${
+      className={`flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-bold shadow-md transition-all active:scale-95 ${
         status === "added"
-          ? "bg-green-500 text-white"
-          : "bg-accent hover:bg-accent-hover text-white hover:shadow-xl"
+          ? "scale-[1.02] bg-green-500 text-white"
+          : "bg-accent text-white hover:bg-accent-hover hover:scale-[1.02] hover:shadow-xl"
       } disabled:cursor-not-allowed disabled:opacity-50`}
     >
       {status === "loading" && <Loader2 size={18} className="animate-spin" />}

@@ -52,7 +52,7 @@ export default function PageHeader({
             <Badge icon={badgeIcon}>{badge}</Badge>
           </div>
         )}
-        <h1 className="mb-4 text-4xl font-extrabold text-white md:text-6xl">
+        <h1 className="mb-4 text-4xl font-heading font-extrabold text-white md:text-6xl">
           {title}
         </h1>
         {subtitle && (

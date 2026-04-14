@@ -1,165 +1,120 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, MapPin, Instagram, Heart } from "lucide-react";
+import { Mail, MapPin, Instagram } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary pt-20 pb-10 text-stone-900">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Hauptbereich */}
-        <div className="mb-16 grid grid-cols-1 gap-12 md:gap-8 lg:grid-cols-4">
-          {/* Spalte 1: Marke & Mission */}
-          <div className="flex flex-col items-start gap-6">
+    <footer className="bg-stone-900 text-white">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
+          {/* Spalte 1: Marke */}
+          <div className="flex flex-col gap-5">
             <Link href="/" className="inline-block select-none">
-              <span className="font-heading text-2xl font-extrabold tracking-tight text-stone-900">
-                Leine<span className="text-accent">-</span>Honig
+              <span className="font-heading text-2xl font-extrabold tracking-tight text-white">
+                Leine<span className="text-amber-400">-</span>Honig
               </span>
             </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-stone-800">
-              Echter Honig aus Neustadt am Rübenberge. Wir stehen für regionale
-              Imkerei, Transparenz und den Schutz unserer Natur.
+            <p className="text-sm leading-relaxed text-stone-400">
+              Echter Honig aus Neustadt am Rübenberge. Regional, transparent
+              und zum Schutz unserer Natur.
             </p>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-700 text-stone-400 transition-all hover:border-amber-400 hover:text-amber-400"
+              aria-label="Instagram"
+            >
+              <Instagram size={18} />
+            </a>
           </div>
 
           {/* Spalte 2: Navigation */}
           <div>
-            <h4 className="mb-6 text-lg font-bold tracking-wide text-stone-900">
+            <h4 className="mb-5 text-xs font-bold uppercase tracking-widest text-stone-500">
               Entdecken
             </h4>
-            <ul className="space-y-3 text-sm text-stone-700">
-              <li>
-                <Link
-                  href="/"
-                  className="hover:text-accent flex items-center gap-2 transition-colors duration-300"
-                >
-                  <span>Startseite</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/ueber-uns"
-                  className="hover:text-accent transition-colors duration-300"
-                >
-                  Über uns
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#sorten"
-                  className="hover:text-accent transition-colors duration-300"
-                >
-                  Unsere Honigsorten
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/honig"
-                  className="hover:text-accent font-semibold text-stone-900 transition-colors duration-300"
-                >
-                  Zum Online-Shop
-                </Link>
-              </li>
+            <ul className="space-y-3 text-sm">
+              {[
+                { label: "Startseite", href: "/" },
+                { label: "Honig kaufen", href: "/honig" },
+                { label: "Bienen mieten", href: "/bienen-mieten" },
+                { label: "Über uns", href: "/ueber-uns" },
+                { label: "Kontakt", href: "/kontakt" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-stone-400 transition-colors hover:text-amber-400"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Spalte 3: Rechtliches */}
           <div>
-            <h4 className="mb-6 text-lg font-bold tracking-wide text-stone-900">
+            <h4 className="mb-5 text-xs font-bold uppercase tracking-widest text-stone-500">
               Rechtliches
             </h4>
-            <ul className="space-y-3 text-sm text-stone-700">
-              <li>
-                <Link
-                  href="/impressum"
-                  className="hover:text-accent transition-colors duration-300"
-                >
-                  Impressum
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/datenschutz"
-                  className="hover:text-accent transition-colors duration-300"
-                >
-                  Datenschutz
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/agb"
-                  className="hover:text-accent transition-colors duration-300"
-                >
-                  AGB & Widerruf
-                </Link>
-              </li>
+            <ul className="space-y-3 text-sm">
+              {[
+                { label: "Impressum", href: "/impressum" },
+                { label: "Datenschutz", href: "/datenschutz" },
+                { label: "AGB & Widerruf", href: "/agb" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-stone-400 transition-colors hover:text-amber-400"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Spalte 4: Kontakt & Social */}
+          {/* Spalte 4: Kontakt */}
           <div>
-            <h4 className="mb-6 text-lg font-bold tracking-wide text-stone-900">
+            <h4 className="mb-5 text-xs font-bold uppercase tracking-widest text-stone-500">
               Kontakt
             </h4>
-            <ul className="space-y-4 text-sm text-stone-700">
-              <li className="group flex items-start gap-3">
-                <MapPin
-                  size={18}
-                  className="text-accent mt-0.5 transition-colors group-hover:text-stone-700"
-                />
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start gap-3 text-stone-400">
+                <MapPin size={16} className="mt-0.5 shrink-0 text-amber-400" />
                 <span className="leading-tight">
                   Imkerei Leine-Honig
                   <br />
-                  31535 Neustadt
-                  <br />
-                  OT Luttmersen
+                  31535 Neustadt, OT Luttmersen
                 </span>
               </li>
-              <li className="group flex items-center gap-3">
-                <Mail
-                  size={18}
-                  className="text-accent transition-colors group-hover:text-stone-700"
-                />
+              <li className="flex items-center gap-3 text-stone-400">
+                <Mail size={16} className="shrink-0 text-amber-400" />
                 <a
                   href="mailto:info@leine-honig.de"
-                  className="transition-colors hover:text-stone-900"
+                  className="transition-colors hover:text-amber-400"
                 >
                   info@leine-honig.de
-                </a>
-              </li>
-
-              {/* Social Media Icons */}
-              <li className="pt-4">
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:bg-accent inline-flex h-10 w-10 items-center justify-center rounded-full bg-stone-900/10 text-stone-900 transition-all duration-300 hover:text-stone-900"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={20} />
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Trennlinie */}
-        <div className="mb-8 border-t border-stone-900/10" />
-
-        {/* Bottom Bar */}
-        <div className="flex flex-col items-center justify-between gap-4 text-xs text-stone-700 md:flex-row">
-          <p>© {currentYear} Leine-Honig. Alle Rechte vorbehalten.</p>
-
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5 opacity-80 transition-opacity hover:opacity-100">
-              Design mit{" "}
-              <Heart size={12} className="fill-red-500 text-red-500" /> für
-              Bienen
-            </span>
-          </div>
+        {/* Copyright */}
+        <div className="mt-12 border-t border-stone-800 pt-8 flex flex-col items-center justify-between gap-3 md:flex-row">
+          <p className="text-xs text-stone-600">
+            © {currentYear} Leine-Honig. Alle Rechte vorbehalten.
+          </p>
+          <p className="text-xs text-stone-600">
+            Imkerei aus Leidenschaft · Neustadt am Rübenberge
+          </p>
         </div>
       </div>
     </footer>

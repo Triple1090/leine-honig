@@ -60,7 +60,7 @@ export default async function HonigPage() {
           <Badge icon={ShoppingBasket} className="mb-6">
             Direkt vom Imker
           </Badge>
-          <h1 className="mb-4 text-4xl font-extrabold text-white md:text-6xl">
+          <h1 className="mb-4 text-4xl font-heading font-extrabold text-white md:text-6xl">
             Unsere <span className="text-primary">Honigsorten</span>
           </h1>
           <p className="mx-auto max-w-xl text-lg text-white/80">
@@ -83,7 +83,7 @@ export default async function HonigPage() {
                   <Link
                     key={product.id}
                     href={`/honig/${product.handle}`}
-                    className="group flex h-full flex-col rounded-[2.5rem] border border-stone-200 bg-white p-4 shadow-sm transition-all hover:shadow-md"
+                    className="group flex h-full flex-col rounded-[2.5rem] border border-stone-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/30"
                   >
                     <div className="flex aspect-square items-center justify-center overflow-hidden rounded-[2rem] bg-stone-50 p-6">
                       {product.thumbnail ? (
