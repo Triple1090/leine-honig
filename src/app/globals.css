@@ -23,7 +23,7 @@
   --color-stone-900: #1c1917;
 
   /* --- TYPOGRAFIE --- */
-  --font-heading: "Fraunces", serif;
+  --font-heading: Georgia, "Palatino Linotype", "Times New Roman", serif;
   --font-sans: "Outfit", sans-serif;
   --font-mono: monospace;
 }
