@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/src/lib/cart";
@@ -32,10 +33,15 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
         {/* Logo */}
-        <Link href="/" className="relative z-50 flex items-center gap-2 select-none">
-          <span className={`font-heading text-xl font-extrabold tracking-tight md:text-2xl transition-colors ${scrolled ? "text-white" : "text-stone-900"}`}>
-            Leine<span className="text-accent">-</span>Honig
-          </span>
+        <Link href="/" className="relative z-50 select-none">
+          <Image
+            src="/logo.svg"
+            alt="Leine-Honig"
+            width={160}
+            height={43}
+            priority
+            className="h-10 w-auto"
+          />
         </Link>
 
         {/* Desktop Nav */}
