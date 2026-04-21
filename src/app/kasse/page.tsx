@@ -13,6 +13,20 @@ import StripePaymentForm from "./StripePaymentForm";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "");
 const GERMANY_COUNTRY_CODE = "de";
 
+const DHL_TIERS = [
+  { maxWeight: 2000,  amount: 4.29 },
+  { maxWeight: 5000,  amount: 6.49 },
+  { maxWeight: 10000, amount: 8.49 },
+  { maxWeight: 20000, amount: 13.99 },
+];
+
+function cartWeightGrams(items: any[]): number {
+  return items.reduce((sum, item) => {
+    const w = item.variant?.weight ?? (item.variant_title?.includes("250g") ? 440 : 750);
+    return sum + w * (item.quantity ?? 1);
+  }, 0);
+}
+
 export default function KassePage() {
   const router = useRouter();
   const { cartId, refreshCount, isInitialized } = useCart();
@@ -52,10 +66,14 @@ export default function KassePage() {
             headers: { "x-publishable-api-key": pubKey },
           });
           const data = await res.json();
-          const opts = data.shipping_options ?? [];
+          const opts: any[] = data.shipping_options ?? [];
           if (opts.length) {
             setShippingOptions(opts);
-            setSelectedShippingOptionId(opts[0].id);
+            // pre-select correct tier based on cart weight
+            const totalWeight = cartWeightGrams(cart.items ?? []);
+            const tier = DHL_TIERS.find(t => totalWeight <= t.maxWeight) ?? DHL_TIERS[DHL_TIERS.length - 1];
+            const match = opts.find((o: any) => Math.abs((o.amount ?? 0) - tier.amount) < 0.01) ?? opts[0];
+            setSelectedShippingOptionId(match.id);
           }
         } catch (err) {
           console.error("Shipping options error:", err);
