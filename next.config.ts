@@ -14,7 +14,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https:",
-      "connect-src 'self' https://analytics.lunsen-digital.de https://api.leine-honig.de http://localhost:9000",
+      "connect-src 'self' https://analytics.lunsen-digital.de https://shop.leine-honig.de https://api.leine-honig.de http://localhost:9000",
       "form-action 'self' https://submit-form.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
