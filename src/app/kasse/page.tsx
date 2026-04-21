@@ -22,6 +22,9 @@ export default function KassePage() {
   const [paymentMethod, setPaymentMethod] = useState<"stripe" | "vorkasse">("vorkasse");
   const [stripeClientSecret, setStripeClientSecret] = useState<string | null>(null);
 
+  const [shippingOptions, setShippingOptions] = useState<any[]>([]);
+  const [selectedShippingOptionId, setSelectedShippingOptionId] = useState<string | null>(null);
+
   const [form, setForm] = useState({
     first_name: "",
     last_name: "",
@@ -36,7 +39,18 @@ export default function KassePage() {
     if (!isInitialized) return;
     if (!cartId) { setLoading(false); return; }
     medusa.store.cart.retrieve(cartId)
-      .then(({ cart }) => { setCart(cart); setLoading(false); })
+      .then(async ({ cart }) => {
+        setCart(cart);
+        setLoading(false);
+        try {
+          const storeAny = medusa.store as any;
+          const { shipping_options } = await storeAny.shipping.listOptions({ cart_id: cartId });
+          if (shipping_options?.length) {
+            setShippingOptions(shipping_options);
+            setSelectedShippingOptionId(shipping_options[0].id);
+          }
+        } catch { /* shipping options optional */ }
+      })
       .catch(() => setLoading(false));
   }, [cartId, isInitialized]);
 
@@ -69,9 +83,13 @@ export default function KassePage() {
 
     try {
       const storeAny = medusa.store as any;
-      const { shipping_options } = await storeAny.shipping.listOptions({ cart_id: cartId });
-      if (shipping_options?.length) {
-        await medusa.store.cart.addShippingMethod(cartId, { option_id: shipping_options[0].id });
+      let optionId = selectedShippingOptionId;
+      if (!optionId) {
+        const { shipping_options } = await storeAny.shipping.listOptions({ cart_id: cartId });
+        optionId = shipping_options?.[0]?.id ?? null;
+      }
+      if (optionId) {
+        await medusa.store.cart.addShippingMethod(cartId, { option_id: optionId });
       }
     } catch { /* optional */ }
   }
@@ -233,11 +251,31 @@ export default function KassePage() {
                   ))}
                 </div>
                 <div className="my-4 border-t border-stone-100" />
+                {shippingOptions.length > 0 ? (
+                  <div className="mb-3 space-y-2">
+                    {shippingOptions.map((opt) => (
+                      <label key={opt.id} className={`flex cursor-pointer items-center justify-between rounded-2xl border-2 px-4 py-3 text-sm transition-all ${selectedShippingOptionId === opt.id ? "border-primary bg-primary/5" : "border-stone-200 hover:border-stone-300"}`}>
+                        <span className="flex items-center gap-2">
+                          <input type="radio" name="shipping" value={opt.id} checked={selectedShippingOptionId === opt.id} onChange={() => setSelectedShippingOptionId(opt.id)} className="accent-primary" />
+                          <span className="font-medium text-stone-800">{opt.name}</span>
+                        </span>
+                        <span className="font-bold text-stone-900">{formatPrice(opt.amount ?? 0)}</span>
+                      </label>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="mb-3 flex justify-between text-sm text-stone-500">
+                    <span>Versand</span>
+                    <span>wird berechnet</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-lg font-bold text-stone-900">
                   <span>Gesamt</span>
-                  <span className="font-heading text-primary">{formatPrice(cart.total ?? 0)}</span>
+                  <span className="font-heading text-primary">
+                    {formatPrice((cart.subtotal ?? cart.total ?? 0) + (shippingOptions.find(o => o.id === selectedShippingOptionId)?.amount ?? 0))}
+                  </span>
                 </div>
-                <p className="mb-6 text-xs text-stone-400">Inkl. MwSt. · zzgl. Versand</p>
+                <p className="mb-6 text-xs text-stone-400">Inkl. MwSt.</p>
                 <button
                   type="submit"
                   disabled={submitting}
