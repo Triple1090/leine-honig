@@ -87,17 +87,17 @@ export default async function ProductPage({ params }: Props) {
               {eurVariants?.map((variant: any) => (
                 <div
                   key={variant.id}
-                  className="rounded-2xl border border-stone-100 bg-stone-50 p-4"
+                  className="flex items-center justify-between rounded-2xl border border-stone-100 bg-stone-50 px-5 py-3"
                 >
-                  <div className="mb-3 flex items-center justify-between">
-                    <span className="font-bold text-stone-800">{variant.title}</span>
+                  <span className="font-bold text-stone-800">{variant.title}</span>
+                  <div className="flex items-center gap-4">
                     {variant.price && (
                       <span className="font-heading text-xl font-black text-primary">
                         {formatPrice(variant.price.amount)}
                       </span>
                     )}
+                    <QuickAddButton variantId={variant.id} />
                   </div>
-                  <QuickAddButton variantId={variant.id} />
                 </div>
               ))}
             </div>
