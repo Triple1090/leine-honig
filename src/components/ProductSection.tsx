@@ -89,12 +89,11 @@ export default async function ProductSection() {
                       </p>
                     )}
                   </div>
-                  <div className="mt-6 flex w-full items-center justify-between gap-2 px-2">
-                    <span className="flex items-center gap-2 text-sm font-semibold text-stone-400 group-hover:text-stone-600 transition-colors">
-                      <ShoppingBasket size={15} />
-                      {singleVariantId ? "In den Warenkorb" : "Variante wählen"}
-                    </span>
-                    {singleVariantId && <QuickAddButton variantId={singleVariantId} />}
+                  <div className="mt-6 flex w-full items-center justify-end px-2">
+                    {singleVariantId
+                      ? <QuickAddButton variantId={singleVariantId} />
+                      : <span className="flex items-center gap-2 text-sm font-semibold text-stone-400 group-hover:text-stone-600 transition-colors"><ShoppingBasket size={15} /> Variante wählen</span>
+                    }
                   </div>
                 </Link>
               );

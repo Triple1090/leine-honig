@@ -3,6 +3,7 @@
 import { Plus, Minus, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/src/lib/cart";
+import { useToast } from "@/src/components/Toast";
 
 interface QuickAddButtonProps {
   variantId: string;
@@ -10,6 +11,7 @@ interface QuickAddButtonProps {
 
 export default function QuickAddButton({ variantId }: QuickAddButtonProps) {
   const { addItem, decreaseItem, items } = useCart();
+  const { showToast } = useToast();
   const [loading, setLoading] = useState<"inc" | "dec" | null>(null);
 
   const quantity = items.find((i) => i.variant_id === variantId)?.quantity ?? 0;
@@ -20,7 +22,8 @@ export default function QuickAddButton({ variantId }: QuickAddButtonProps) {
     if (loading) return;
     setLoading("inc");
     try {
-      await addItem(variantId, 1);
+      await addItem(variantId, 1, true);
+      showToast("Zum Warenkorb hinzugefügt");
     } finally {
       setLoading(null);
     }

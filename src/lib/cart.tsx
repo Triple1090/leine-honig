@@ -18,7 +18,7 @@ interface CartContextType {
   isInitialized: boolean;
   openDrawer: () => void;
   closeDrawer: () => void;
-  addItem: (variantId: string, quantity: number) => Promise<void>;
+  addItem: (variantId: string, quantity: number, silent?: boolean) => Promise<void>;
   decreaseItem: (variantId: string) => Promise<void>;
   refreshCount: () => Promise<void>;
 }
@@ -91,11 +91,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return cart.id;
   }
 
-  async function addItem(variantId: string, quantity: number) {
+  async function addItem(variantId: string, quantity: number, silent = false) {
     const id = await ensureCart();
     await medusa.store.cart.createLineItem(id, { variant_id: variantId, quantity });
     await loadCount(id);
-    setIsDrawerOpen(true);
+    if (!silent) setIsDrawerOpen(true);
   }
 
   async function decreaseItem(variantId: string) {

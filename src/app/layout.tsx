@@ -5,6 +5,7 @@ import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
 import CartDrawer from "@/src/components/CartDrawer";
 import { CartProvider } from "@/src/lib/cart";
+import { ToastProvider } from "@/src/components/Toast";
 
 const fontBody = Outfit({
   subsets: ["latin"],
@@ -24,12 +25,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de">
       <body className={`${fontBody.variable} font-sans antialiased`}>
-        <CartProvider>
-          <Navbar />
-          <CartDrawer />
-          <main className="pt-20">{children}</main>
-          <Footer />
-        </CartProvider>
+        <ToastProvider>
+          <CartProvider>
+            <Navbar />
+            <CartDrawer />
+            <main className="pt-20">{children}</main>
+            <Footer />
+          </CartProvider>
+        </ToastProvider>
       </body>
     </html>
   );
