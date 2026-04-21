@@ -28,42 +28,31 @@ export default function Button({
     "group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold transition-all active:scale-95";
   const variants = {
     primary:
-      "bg-primary hover:bg-primary-dark text-white shadow-lg hover:shadow-primary/40",
+      "bg-primary hover:bg-primary-dark text-accent shadow-lg hover:shadow-primary/30",
     secondary:
-      "bg-white border-2 border-stone-200 text-stone-900 hover:bg-stone-50 hover:border-stone-300 shadow-sm",
+      "bg-white border-2 border-stone-200 text-accent hover:bg-stone-50 hover:border-primary/30 shadow-sm",
   };
 
   const combinedClasses = `${baseStyles} ${variants[variant]} ${className}`;
 
-  // Die Bounce-Logik
   const handleAnchorClick = (e: React.MouseEvent) => {
-    // Falls kein href da ist oder es kein Anker ist, tun wir nichts
     if (!href || !href.startsWith("#")) return;
-
     e.preventDefault();
     const target = document.querySelector(href);
-
     if (target) {
       const startPosition = window.pageYOffset;
       const targetPosition =
-        target.getBoundingClientRect().top + startPosition - 100; // Puffer für Navbar
+        target.getBoundingClientRect().top + startPosition - 100;
       const distance = targetPosition - startPosition;
       const duration = 800;
       let start: number | null = null;
-
       const animationStep = (timestamp: number) => {
         if (!start) start = timestamp;
         const elapsed = timestamp - start;
         const progress = Math.min(elapsed / duration, 1);
-        const ease = easeOutBack(progress);
-
-        window.scrollTo(0, startPosition + distance * ease);
-
-        if (elapsed < duration) {
-          window.requestAnimationFrame(animationStep);
-        } else {
-          window.history.pushState(null, "", href);
-        }
+        window.scrollTo(0, startPosition + distance * easeOutBack(progress));
+        if (elapsed < duration) window.requestAnimationFrame(animationStep);
+        else window.history.pushState(null, "", href);
       };
       window.requestAnimationFrame(animationStep);
     }
@@ -71,41 +60,17 @@ export default function Button({
 
   const buttonContent = (
     <>
-      {Icon && (
-        <Icon
-          size={20}
-          className="transition-transform group-hover:-translate-x-1"
-        />
-      )}
+      {Icon && <Icon size={20} className="transition-transform group-hover:-translate-x-1" />}
       {children}
     </>
   );
 
-  // LOGIK-CHECK: Welches HTML-Element nutzen wir?
   if (href) {
-    const isAnchor = href.startsWith("#");
-
-    if (isAnchor) {
-      // Für interne Anker nutzen wir das Standard-<a> Tag
-      return (
-        <a href={href} className={combinedClasses} onClick={handleAnchorClick}>
-          {buttonContent}
-        </a>
-      );
+    if (href.startsWith("#")) {
+      return <a href={href} className={combinedClasses} onClick={handleAnchorClick}>{buttonContent}</a>;
     }
-
-    // Für echte Seiten-Wechsel nutzen wir weiterhin <Link>
-    return (
-      <Link href={href} className={combinedClasses}>
-        {buttonContent}
-      </Link>
-    );
+    return <Link href={href} className={combinedClasses}>{buttonContent}</Link>;
   }
 
-  // Für Formular-Buttons (submit)
-  return (
-    <button type={type} className={combinedClasses}>
-      {buttonContent}
-    </button>
-  );
+  return <button type={type} className={combinedClasses}>{buttonContent}</button>;
 }

@@ -1,25 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  /* --- MARKENFARBEN: Honig & Wabe --- */
+  /* --- MARKENFARBEN: direkt aus dem Logo --- */
 
-  /* PRIMARY: Honig Gold (Das Fundament) */
-  /* Nutzung: bg-primary (Navbar/Footer), text-primary (Überschriften) */
-  --color-primary: #f59e0b;
-  --color-primary-dark: #d97706; /* Für Hover-Effekte */
-  --color-primary-light: #fef3c7; /* Helles Pollengelb (für Hintergründe) */
+  /* PRIMARY: Honig-Gold (#D4941A = die Farbe von „HONIG" im Logo) */
+  --color-primary: #D4941A;
+  --color-primary-dark: #B87814;
+  --color-primary-light: #FEF3DC;
 
-  /* ACCENT: Tiefes Bernstein (Kontrast-Akzent) */
-  --color-accent: #b45309;
-  --color-accent-hover: #92400e;
-  --color-accent-light: #fef3c7;
+  /* ACCENT: Marken-Dunkelbraun (#3A2E1A = die Farbe von „LEINE" im Logo) */
+  --color-accent: #3A2E1A;
+  --color-accent-hover: #2C2214;
 
-  /* NEUTRALS: Warme Steintöne (Statt kaltem Grau) */
-  --color-stone-50: #fafaf9; /* Seitenhintergrund */
-  --color-stone-100: #f5f5f4; /* Leichte Abgrenzungen */
-  --color-stone-200: #e7e5e4; /* Rahmen */
-  --color-stone-800: #292524; /* Dunkler Text */
-  --color-stone-900: #1c1917; /* Fast Schwarz (Deep Stone) */
+  /* BRAND BLUE: Schieferblau aus der Logo-Welle (subtil, dekorativ) */
+  --color-brand-blue: #6A9FB8;
+
+  /* NEUTRALS: Warme Steintöne */
+  --color-stone-50: #FDFAF4;
+  --color-stone-100: #f5f5f4;
+  --color-stone-200: #e7e5e4;
+  --color-stone-800: #292524;
+  --color-stone-900: #1c1917;
 
   /* --- TYPOGRAFIE --- */
   --font-heading: "Fraunces", serif;
@@ -27,19 +28,15 @@
   --font-mono: monospace;
 }
 
-/* --- BASIS EINSTELLUNGEN --- */
 :root {
-  /* Wir nutzen das warme Stone-50 als Standard-Hintergrund */
-  --background: var(--color-stone-50);
-  --foreground: var(--color-stone-900);
+  --background: #FDFAF4;
+  --foreground: #3A2E1A;
 }
 
-/* Dark Mode Override: Wir bleiben beim hellen, natürlichen Look */
-/* Auch wenn der Nutzer Dark Mode an hat, bleibt die Seite warm/hell */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: var(--color-stone-50);
-    --foreground: var(--color-stone-900);
+    --background: #FDFAF4;
+    --foreground: #3A2E1A;
   }
 }
 
@@ -52,35 +49,21 @@ body {
 
 html {
   scroll-behavior: smooth;
-  /* WICHTIG: Verhindert, dass die Navbar Überschriften verdeckt */
   scroll-padding-top: 6rem;
 }
 
-/* --- CUSTOM ANIMATIONEN --- */
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
 
-/* --- SEITENÜBERGÄNGE --- */
 @keyframes pagein {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 main > * {

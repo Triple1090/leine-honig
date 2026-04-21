@@ -25,15 +25,15 @@ const signals = [
 
 export default function TrustBar() {
   return (
-    <section className="border-y border-stone-200 bg-white px-6 py-10">
+    <section className="border-y border-primary/15 bg-white px-6 py-10">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           {signals.map((s) => (
             <div key={s.label} className="flex flex-col items-center gap-2 text-center">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10">
-                <s.icon size={22} className="text-primary-dark" />
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/12">
+                <s.icon size={22} className="text-primary" />
               </div>
-              <p className="text-sm font-bold text-stone-900">{s.label}</p>
+              <p className="text-sm font-bold text-accent">{s.label}</p>
               <p className="text-xs leading-snug text-stone-500">{s.detail}</p>
             </div>
           ))}

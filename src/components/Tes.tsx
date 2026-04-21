@@ -39,10 +39,10 @@ export default function Tes() {
     <section className="bg-primary-light px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
-          <h2 className="text-4xl font-heading font-extrabold text-stone-900 md:text-5xl">
+          <h2 className="font-heading text-4xl font-extrabold text-accent md:text-5xl">
             Was unsere Kunden sagen
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-stone-600">
+          <p className="mx-auto mt-4 max-w-xl text-lg text-stone-500">
             Echte Stimmen aus der Region – unbearbeitet und direkt.
           </p>
         </div>
@@ -53,14 +53,15 @@ export default function Tes() {
               key={t.name}
               className="flex flex-col rounded-[2.5rem] border border-primary/20 bg-white p-8 shadow-sm transition-all hover:shadow-md"
             >
-              <Quote size={28} className="mb-4 text-primary/40" />
-              <p className="flex-grow text-sm leading-relaxed text-stone-700">
+              {/* Quote-Icon in Marken-Schieferblau — aus der Logo-Welle */}
+              <Quote size={28} className="mb-4 text-[#6A9FB8]/60" />
+              <p className="flex-grow text-sm leading-relaxed text-stone-600">
                 {t.text}
               </p>
               <div className="mt-6 flex items-center justify-between border-t border-stone-100 pt-5">
                 <div>
-                  <p className="text-sm font-bold text-stone-900">{t.name}</p>
-                  <p className="text-xs text-stone-500">{t.location} · {t.product}</p>
+                  <p className="text-sm font-bold text-accent">{t.name}</p>
+                  <p className="text-xs text-stone-400">{t.location} · {t.product}</p>
                 </div>
                 <Stars count={t.stars} />
               </div>
