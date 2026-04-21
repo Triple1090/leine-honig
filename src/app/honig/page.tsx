@@ -5,6 +5,8 @@ import { medusa, formatPrice } from "@/src/lib/medusa";
 import Badge from "@/src/components/Badge";
 
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Honigsorten | Leine-Honig",
   description: "Alle Honigsorten direkt vom Imker – Blüten-, Wald- und Rapshonig aus Neustadt am Rübenberge.",
