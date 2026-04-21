@@ -37,10 +37,10 @@ export default function Navbar() {
           <Image
             src="/logo.svg"
             alt="Leine-Honig"
-            width={160}
-            height={43}
+            width={200}
+            height={54}
             priority
-            className="h-10 w-auto"
+            className="h-[3.125rem] w-auto"
           />
         </Link>
 
