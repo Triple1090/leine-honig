@@ -40,7 +40,7 @@ export default function Navbar() {
             width={200}
             height={54}
             priority
-            className={`h-[3.125rem] w-auto transition-all duration-300 ${scrolled ? "brightness-0 invert" : ""}`}
+            className={`h-[3.6rem] w-auto transition-all duration-300 ${scrolled ? "brightness-0 invert" : ""}`}
           />
         </Link>
 
