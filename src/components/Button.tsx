@@ -14,6 +14,7 @@ interface ButtonProps {
   className?: string;
   icon?: ElementType;
   variant?: "primary" | "secondary";
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -23,9 +24,10 @@ export default function Button({
   className = "",
   icon: Icon,
   variant = "primary",
+  disabled = false,
 }: ButtonProps) {
   const baseStyles =
-    "group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold transition-all active:scale-95";
+    "group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed";
   const variants = {
     primary:
       "bg-primary hover:bg-primary-dark text-accent shadow-lg hover:shadow-primary/30",
@@ -72,5 +74,5 @@ export default function Button({
     return <Link href={href} className={combinedClasses}>{buttonContent}</Link>;
   }
 
-  return <button type={type} className={combinedClasses}>{buttonContent}</button>;
+  return <button type={type} className={combinedClasses} disabled={disabled}>{buttonContent}</button>;
 }
