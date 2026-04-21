@@ -15,7 +15,7 @@ const GERMANY_COUNTRY_CODE = "de";
 
 export default function KassePage() {
   const router = useRouter();
-  const { cartId, refreshCount } = useCart();
+  const { cartId, refreshCount, isInitialized } = useCart();
   const [cart, setCart] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -33,11 +33,12 @@ export default function KassePage() {
   });
 
   useEffect(() => {
+    if (!isInitialized) return;
     if (!cartId) { setLoading(false); return; }
     medusa.store.cart.retrieve(cartId)
       .then(({ cart }) => { setCart(cart); setLoading(false); })
       .catch(() => setLoading(false));
-  }, [cartId]);
+  }, [cartId, isInitialized]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -109,6 +110,7 @@ export default function KassePage() {
         const clientSecret = session?.data?.client_secret;
         if (!clientSecret) throw new Error("Kein Stripe client_secret erhalten.");
         setStripeClientSecret(clientSecret);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     } catch (err) {
       console.error(err);

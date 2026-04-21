@@ -8,6 +8,7 @@ interface CartContextType {
   itemCount: number;
   cartTotal: number;
   isDrawerOpen: boolean;
+  isInitialized: boolean;
   openDrawer: () => void;
   closeDrawer: () => void;
   addItem: (variantId: string, quantity: number) => Promise<void>;
@@ -19,6 +20,7 @@ const CartContext = createContext<CartContextType>({
   itemCount: 0,
   cartTotal: 0,
   isDrawerOpen: false,
+  isInitialized: false,
   openDrawer: () => {},
   closeDrawer: () => {},
   addItem: async () => {},
@@ -30,12 +32,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [itemCount, setItemCount] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("lh_cart_id");
     if (stored) {
       setCartId(stored);
-      loadCount(stored);
+      loadCount(stored).finally(() => setIsInitialized(true));
+    } else {
+      setIsInitialized(true);
     }
   }, []);
 
@@ -74,7 +79,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider value={{
-      cartId, itemCount, cartTotal, isDrawerOpen,
+      cartId, itemCount, cartTotal, isDrawerOpen, isInitialized,
       openDrawer: () => setIsDrawerOpen(true),
       closeDrawer: () => setIsDrawerOpen(false),
       addItem, refreshCount,
