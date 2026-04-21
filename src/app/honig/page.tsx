@@ -103,24 +103,22 @@ export default async function HonigPage() {
                         <HoneyJarPlaceholder />
                       )}
                     </div>
-                    <div className="mt-5 flex flex-grow flex-col px-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <h2 className="font-heading text-lg font-extrabold leading-tight text-stone-900">
-                          {product.title}
-                        </h2>
-                        {lowestPrice && (
-                          <span className="whitespace-nowrap font-heading text-lg font-black text-primary">
-                            ab {formatPrice(lowestPrice.amount)}
-                          </span>
-                        )}
-                      </div>
+                    <div className="mt-5 flex flex-grow flex-col items-center px-2 text-center">
+                      <h2 className="font-heading text-lg font-extrabold leading-tight text-stone-900">
+                        {product.title}
+                      </h2>
+                      {lowestPrice && (
+                        <span className="mt-1 font-heading text-lg font-black text-primary">
+                          ab {formatPrice(lowestPrice.amount)}
+                        </span>
+                      )}
                       {product.description && (
                         <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed text-stone-600">
                           {product.description}
                         </p>
                       )}
                     </div>
-                    <div className="mt-6 flex w-full items-center justify-between gap-2 px-2">
+                    <div className="mt-6 flex w-full items-center justify-center px-2">
                       {!singleVariantId && (
                         <span className="flex items-center gap-2 text-sm font-semibold text-stone-400 group-hover:text-stone-600 transition-colors">
                           <ShoppingBasket size={15} /> Variante wählen
