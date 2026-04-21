@@ -83,7 +83,7 @@ export default function KassePage() {
       localStorage.removeItem("lh_cart_id");
       await refreshCount();
       const isVorkasse = paymentMethod === "vorkasse";
-      router.push(`/kasse/bestaetigung?order=${result.order.id}&vorkasse=${isVorkasse}`);
+      router.push(`/kasse/bestaetigung?order=${result.order.display_id}&vorkasse=${isVorkasse}`);
     }
   }
 

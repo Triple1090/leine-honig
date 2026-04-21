@@ -10,9 +10,14 @@ export const metadata = {
   title: "Bestellung bestätigt | Leine-Honig",
 };
 
+function formatOrderNumber(displayId: string): string {
+  return `LH-${String(displayId).padStart(4, "0")}`;
+}
+
 export default async function BestaetigungPage({ searchParams }: Props) {
   const { order, vorkasse } = await searchParams;
   const isVorkasse = vorkasse === "true";
+  const orderNumber = order ? formatOrderNumber(order) : null;
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-stone-50 px-4 py-20 text-center">
@@ -32,9 +37,9 @@ export default async function BestaetigungPage({ searchParams }: Props) {
           Vielen Dank!
         </h1>
 
-        {order && (
+        {orderNumber && (
           <p className="mb-2 text-sm text-stone-400">
-            Bestellnummer: <span className="font-mono font-bold text-stone-600">{order}</span>
+            Bestellnummer: <span className="font-mono font-bold text-stone-600">{orderNumber}</span>
           </p>
         )}
 
@@ -63,7 +68,7 @@ export default async function BestaetigungPage({ searchParams }: Props) {
               </p>
               <p>
                 <span className="font-bold">Verwendungszweck:</span>{" "}
-                {order ? `Bestellung ${order}` : "Deine Bestellnummer"}
+                {orderNumber ?? "Deine Bestellnummer"}
               </p>
             </div>
             <p className="mt-4 text-sm text-amber-700">
