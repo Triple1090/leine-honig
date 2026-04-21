@@ -3,10 +3,16 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { medusa } from "./medusa";
 
+interface CartItem {
+  variant_id: string;
+  quantity: number;
+}
+
 interface CartContextType {
   cartId: string | null;
   itemCount: number;
   cartTotal: number;
+  items: CartItem[];
   isDrawerOpen: boolean;
   isInitialized: boolean;
   openDrawer: () => void;
@@ -19,6 +25,7 @@ const CartContext = createContext<CartContextType>({
   cartId: null,
   itemCount: 0,
   cartTotal: 0,
+  items: [],
   isDrawerOpen: false,
   isInitialized: false,
   openDrawer: () => {},
@@ -31,6 +38,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cartId, setCartId] = useState<string | null>(null);
   const [itemCount, setItemCount] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
+  const [items, setItems] = useState<CartItem[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -52,16 +60,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setCartId(null);
         setItemCount(0);
         setCartTotal(0);
+        setItems([]);
         return;
       }
       const count = cart.items?.reduce((sum: number, i: any) => sum + i.quantity, 0) ?? 0;
       setItemCount(count);
       setCartTotal(cart.total ?? 0);
+      setItems((cart.items ?? []).map((i: any) => ({ variant_id: i.variant_id, quantity: i.quantity })));
     } catch {
       localStorage.removeItem("lh_cart_id");
       setCartId(null);
       setItemCount(0);
       setCartTotal(0);
+      setItems([]);
     }
   }
 
@@ -86,7 +97,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider value={{
-      cartId, itemCount, cartTotal, isDrawerOpen, isInitialized,
+      cartId, itemCount, cartTotal, items, isDrawerOpen, isInitialized,
       openDrawer: () => setIsDrawerOpen(true),
       closeDrawer: () => setIsDrawerOpen(false),
       addItem, refreshCount,
