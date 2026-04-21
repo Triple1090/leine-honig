@@ -46,13 +46,20 @@ export default function KassePage() {
           await medusa.store.cart.update(cartId, {
             shipping_address: { country_code: "de" },
           });
-          const storeAny = medusa.store as any;
-          const { shipping_options } = await storeAny.shipping.listOptions({ cart_id: cartId });
-          if (shipping_options?.length) {
-            setShippingOptions(shipping_options);
-            setSelectedShippingOptionId(shipping_options[0].id);
+          const backendUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000";
+          const pubKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "";
+          const res = await fetch(`${backendUrl}/store/shipping-options?cart_id=${cartId}`, {
+            headers: { "x-publishable-api-key": pubKey },
+          });
+          const data = await res.json();
+          const opts = data.shipping_options ?? [];
+          if (opts.length) {
+            setShippingOptions(opts);
+            setSelectedShippingOptionId(opts[0].id);
           }
-        } catch { /* shipping options optional */ }
+        } catch (err) {
+          console.error("Shipping options error:", err);
+        }
       })
       .catch(() => setLoading(false));
   }, [cartId, isInitialized]);
@@ -85,11 +92,15 @@ export default function KassePage() {
     });
 
     try {
-      const storeAny = medusa.store as any;
       let optionId = selectedShippingOptionId;
       if (!optionId) {
-        const { shipping_options } = await storeAny.shipping.listOptions({ cart_id: cartId });
-        optionId = shipping_options?.[0]?.id ?? null;
+        const backendUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000";
+        const pubKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "";
+        const res = await fetch(`${backendUrl}/store/shipping-options?cart_id=${cartId}`, {
+          headers: { "x-publishable-api-key": pubKey },
+        });
+        const data = await res.json();
+        optionId = data.shipping_options?.[0]?.id ?? null;
       }
       if (optionId) {
         await medusa.store.cart.addShippingMethod(cartId, { option_id: optionId });
