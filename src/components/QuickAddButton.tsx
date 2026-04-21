@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus, Minus, Loader2 } from "lucide-react";
+import { Plus, Minus, Loader2, ShoppingBasket } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/src/lib/cart";
 import { useToast } from "@/src/components/Toast";
@@ -47,9 +47,12 @@ export default function QuickAddButton({ variantId }: QuickAddButtonProps) {
         onClick={handleIncrease}
         aria-label="In den Warenkorb"
         disabled={loading !== null}
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-accent shadow transition-all hover:bg-primary-dark active:scale-90 disabled:opacity-50"
+        className="flex h-10 items-center gap-1.5 rounded-full bg-primary px-3 text-accent shadow transition-all hover:bg-primary-dark active:scale-95 disabled:opacity-50"
       >
-        {loading === "inc" ? <Loader2 size={18} className="animate-spin" /> : <Plus size={18} />}
+        {loading === "inc"
+          ? <Loader2 size={16} className="animate-spin" />
+          : <><ShoppingBasket size={16} /><Plus size={13} strokeWidth={3} /></>
+        }
       </button>
     );
   }
