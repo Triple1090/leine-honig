@@ -38,11 +38,18 @@ export default function Hero() {
         </div>
 
         {/* Headline */}
-        <h1 className="mb-6 text-4xl leading-tight font-heading font-extrabold tracking-tight text-stone-900 md:text-6xl">
-          Leine-Honig <br />
-          <span className="text-primary mt-2 block text-3xl md:text-5xl">
-            Ehrlicher Honig & Bienenvermietung
-          </span>
+        <div className="mb-6 flex justify-center">
+          <Image
+            src="/logo.svg"
+            alt="Leine-Honig"
+            width={365}
+            height={78}
+            priority
+            className="h-16 w-auto md:h-24"
+          />
+        </div>
+        <h1 className="mb-6 text-2xl leading-tight font-heading font-semibold tracking-tight text-stone-600 md:text-3xl">
+          Ehrlicher Honig & Bienenvermietung
         </h1>
 
         {/* Text */}
