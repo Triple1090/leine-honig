@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 import { medusa } from "./medusa";
 
 interface CartItem {
+  id: string;
   variant_id: string;
   quantity: number;
 }
@@ -18,6 +19,7 @@ interface CartContextType {
   openDrawer: () => void;
   closeDrawer: () => void;
   addItem: (variantId: string, quantity: number) => Promise<void>;
+  decreaseItem: (variantId: string) => Promise<void>;
   refreshCount: () => Promise<void>;
 }
 
@@ -31,6 +33,7 @@ const CartContext = createContext<CartContextType>({
   openDrawer: () => {},
   closeDrawer: () => {},
   addItem: async () => {},
+  decreaseItem: async () => {},
   refreshCount: async () => {},
 });
 
@@ -66,7 +69,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const count = cart.items?.reduce((sum: number, i: any) => sum + i.quantity, 0) ?? 0;
       setItemCount(count);
       setCartTotal(cart.total ?? 0);
-      setItems((cart.items ?? []).map((i: any) => ({ variant_id: i.variant_id, quantity: i.quantity })));
+      setItems((cart.items ?? []).map((i: any) => ({
+        id: i.id,
+        variant_id: i.variant_id,
+        quantity: i.quantity,
+      })));
     } catch {
       localStorage.removeItem("lh_cart_id");
       setCartId(null);
@@ -91,6 +98,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setIsDrawerOpen(true);
   }
 
+  async function decreaseItem(variantId: string) {
+    if (!cartId) return;
+    const item = items.find((i) => i.variant_id === variantId);
+    if (!item) return;
+    if (item.quantity <= 1) {
+      await medusa.store.cart.deleteLineItem(cartId, item.id);
+    } else {
+      await medusa.store.cart.updateLineItem(cartId, item.id, { quantity: item.quantity - 1 });
+    }
+    await loadCount(cartId);
+  }
+
   async function refreshCount() {
     if (cartId) await loadCount(cartId);
   }
@@ -100,7 +119,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       cartId, itemCount, cartTotal, items, isDrawerOpen, isInitialized,
       openDrawer: () => setIsDrawerOpen(true),
       closeDrawer: () => setIsDrawerOpen(false),
-      addItem, refreshCount,
+      addItem, decreaseItem, refreshCount,
     }}>
       {children}
     </CartContext.Provider>
