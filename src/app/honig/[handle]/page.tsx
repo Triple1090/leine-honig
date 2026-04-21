@@ -97,7 +97,7 @@ export default async function ProductPage({ params }: Props) {
                       </span>
                     )}
                   </div>
-                  <QuickAddButton variantId={variant.id} fullWidth />
+                  <QuickAddButton variantId={variant.id} />
                 </div>
               ))}
             </div>
