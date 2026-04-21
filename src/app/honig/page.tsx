@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ShoppingBasket } from "lucide-react";
 import { medusa, formatPrice } from "@/src/lib/medusa";
 import Badge from "@/src/components/Badge";
+import QuickAddButton from "@/src/components/QuickAddButton";
 
 
 export const dynamic = "force-dynamic";
@@ -76,10 +77,12 @@ export default async function HonigPage() {
           {products.length > 0 ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {(products as any[]).map((product) => {
-                const lowestPrice = product.variants
-                  ?.flatMap((v: any) => v.prices ?? [])
+                const variants = product.variants ?? [];
+                const lowestPrice = variants
+                  .flatMap((v: any) => v.prices ?? [])
                   .filter((p: any) => p.currency_code === "eur")
                   .sort((a: any, b: any) => a.amount - b.amount)[0];
+                const singleVariantId = variants.length === 1 ? variants[0].id : null;
 
                 return (
                   <Link
@@ -117,9 +120,14 @@ export default async function HonigPage() {
                         </p>
                       )}
                     </div>
-                    <div className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-stone-900 shadow-sm transition-all group-hover:bg-primary-dark">
-                      <ShoppingBasket size={16} />
-                      Auswählen
+                    <div className="mt-6 flex w-full items-center justify-between gap-2 px-2">
+                      <span className="flex items-center gap-2 text-sm font-bold text-stone-500 transition-colors group-hover:text-stone-900">
+                        <ShoppingBasket size={15} />
+                        {singleVariantId ? "Direkt kaufen" : "Variante wählen"}
+                      </span>
+                      {singleVariantId && (
+                        <QuickAddButton variantId={singleVariantId} />
+                      )}
                     </div>
                   </Link>
                 );
