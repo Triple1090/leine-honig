@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Package } from "lucide-react";
 import { medusa, formatPrice } from "@/src/lib/medusa";
-import AddToCartButton from "./AddToCartButton";
+import QuickAddButton from "@/src/components/QuickAddButton";
 
 interface Props {
   params: Promise<{ handle: string }>;
@@ -97,10 +97,7 @@ export default async function ProductPage({ params }: Props) {
                       </span>
                     )}
                   </div>
-                  <AddToCartButton
-                    variantId={variant.id}
-                    disabled={variant.inventory_quantity === 0}
-                  />
+                  <QuickAddButton variantId={variant.id} fullWidth />
                 </div>
               ))}
             </div>
