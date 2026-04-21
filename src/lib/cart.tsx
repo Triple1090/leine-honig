@@ -47,6 +47,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   async function loadCount(id: string) {
     try {
       const { cart } = await medusa.store.cart.retrieve(id);
+      if ((cart as any).completed_at || (cart as any).status === "completed") {
+        localStorage.removeItem("lh_cart_id");
+        setCartId(null);
+        setItemCount(0);
+        setCartTotal(0);
+        return;
+      }
       const count = cart.items?.reduce((sum: number, i: any) => sum + i.quantity, 0) ?? 0;
       setItemCount(count);
       setCartTotal(cart.total ?? 0);
