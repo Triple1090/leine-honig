@@ -43,6 +43,9 @@ export default function KassePage() {
         setCart(cart);
         setLoading(false);
         try {
+          await medusa.store.cart.update(cartId, {
+            shipping_address: { country_code: "de" },
+          });
           const storeAny = medusa.store as any;
           const { shipping_options } = await storeAny.shipping.listOptions({ cart_id: cartId });
           if (shipping_options?.length) {
