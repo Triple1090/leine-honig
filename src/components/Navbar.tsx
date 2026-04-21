@@ -72,7 +72,7 @@ export default function Navbar() {
           >
             <ShoppingCart size={16} />
             {itemCount > 0
-              ? new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cartTotal / 100)
+              ? new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cartTotal)
               : "0,00 €"}
           </button>
         </div>
@@ -87,7 +87,7 @@ export default function Navbar() {
             aria-label="Warenkorb öffnen"
           >
             <ShoppingCart size={14} />
-            {new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cartTotal / 100)}
+            {new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cartTotal)}
           </button>
           <button
             onClick={() => setIsOpen(!isOpen)}
