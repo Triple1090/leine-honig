@@ -36,8 +36,7 @@ export default function KassePage() {
   const [paymentMethod, setPaymentMethod] = useState<"stripe" | "vorkasse">("vorkasse");
   const [stripeClientSecret, setStripeClientSecret] = useState<string | null>(null);
 
-  const [shippingOptions, setShippingOptions] = useState<any[]>([]);
-  const [selectedShippingOptionId, setSelectedShippingOptionId] = useState<string | null>(null);
+  const [shippingMethodName, setShippingMethodName] = useState<string | null>(null);
 
   const [form, setForm] = useState({
     first_name: "",
@@ -52,34 +51,38 @@ export default function KassePage() {
   useEffect(() => {
     if (!isInitialized) return;
     if (!cartId) { setLoading(false); return; }
-    medusa.store.cart.retrieve(cartId)
-      .then(async ({ cart }) => {
-        setCart(cart);
+    (async () => {
+      try {
+        const { cart: initialCart } = await medusa.store.cart.retrieve(cartId);
+        setCart(initialCart);
         setLoading(false);
-        try {
-          await medusa.store.cart.update(cartId, {
-            shipping_address: { country_code: "de" },
-          });
-          const backendUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000";
-          const pubKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "";
-          const res = await fetch(`${backendUrl}/store/shipping-options?cart_id=${cartId}`, {
-            headers: { "x-publishable-api-key": pubKey },
-          });
-          const data = await res.json();
-          const opts: any[] = data.shipping_options ?? [];
-          if (opts.length) {
-            setShippingOptions(opts);
-            // pre-select correct tier based on cart weight
-            const totalWeight = cartWeightGrams(cart.items ?? []);
-            const tier = DHL_TIERS.find(t => totalWeight <= t.maxWeight) ?? DHL_TIERS[DHL_TIERS.length - 1];
-            const match = opts.find((o: any) => Math.abs((o.amount ?? 0) - tier.amount) < 0.01) ?? opts[0];
-            setSelectedShippingOptionId(match.id);
-          }
-        } catch (err) {
-          console.error("Shipping options error:", err);
-        }
-      })
-      .catch(() => setLoading(false));
+
+        await medusa.store.cart.update(cartId, {
+          shipping_address: { country_code: "de" },
+        });
+
+        const backendUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000";
+        const pubKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "";
+        const res = await fetch(`${backendUrl}/store/shipping-options?cart_id=${cartId}`, {
+          headers: { "x-publishable-api-key": pubKey },
+        });
+        const data = await res.json();
+        const opts: any[] = data.shipping_options ?? [];
+        if (!opts.length) return;
+
+        const totalWeight = cartWeightGrams(initialCart.items ?? []);
+        const tier = DHL_TIERS.find(t => totalWeight <= t.maxWeight) ?? DHL_TIERS[DHL_TIERS.length - 1];
+        const match = opts.find((o: any) => Math.abs((o.amount ?? 0) - tier.amount) < 0.01) ?? opts[0];
+
+        await medusa.store.cart.addShippingMethod(cartId, { option_id: match.id });
+        setShippingMethodName(match.name);
+        const { cart: updated } = await medusa.store.cart.retrieve(cartId);
+        setCart(updated);
+      } catch (err) {
+        console.error("Shipping setup error:", err);
+        setLoading(false);
+      }
+    })();
   }, [cartId, isInitialized]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -109,21 +112,7 @@ export default function KassePage() {
       },
     });
 
-    try {
-      let optionId = selectedShippingOptionId;
-      if (!optionId) {
-        const backendUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000";
-        const pubKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "";
-        const res = await fetch(`${backendUrl}/store/shipping-options?cart_id=${cartId}`, {
-          headers: { "x-publishable-api-key": pubKey },
-        });
-        const data = await res.json();
-        optionId = data.shipping_options?.[0]?.id ?? null;
-      }
-      if (optionId) {
-        await medusa.store.cart.addShippingMethod(cartId, { option_id: optionId });
-      }
-    } catch { /* optional */ }
+    // shipping method is already set on cart via useEffect; nothing to do here
   }
 
   async function completeOrder() {
@@ -283,29 +272,21 @@ export default function KassePage() {
                   ))}
                 </div>
                 <div className="my-4 border-t border-stone-100" />
-                {shippingOptions.length > 0 ? (
-                  <div className="mb-3 space-y-2">
-                    {shippingOptions.map((opt) => (
-                      <label key={opt.id} className={`flex cursor-pointer items-center justify-between rounded-2xl border-2 px-4 py-3 text-sm transition-all ${selectedShippingOptionId === opt.id ? "border-primary bg-primary/5" : "border-stone-200 hover:border-stone-300"}`}>
-                        <span className="flex items-center gap-2">
-                          <input type="radio" name="shipping" value={opt.id} checked={selectedShippingOptionId === opt.id} onChange={() => setSelectedShippingOptionId(opt.id)} className="accent-primary" />
-                          <span className="font-medium text-stone-800">{opt.name}</span>
-                        </span>
-                        <span className="font-bold text-stone-900">{formatPrice(opt.amount ?? 0)}</span>
-                      </label>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="mb-3 flex justify-between text-sm text-stone-500">
-                    <span>Versand</span>
-                    <span>wird berechnet</span>
-                  </div>
-                )}
+                <div className="mb-2 flex justify-between text-sm text-stone-600">
+                  <span>Zwischensumme</span>
+                  <span>{formatPrice(cart.item_subtotal ?? cart.subtotal ?? 0)}</span>
+                </div>
+                <div className="mb-3 flex justify-between text-sm text-stone-600">
+                  <span>Versand{shippingMethodName ? ` (${shippingMethodName})` : ""}</span>
+                  <span>
+                    {cart.shipping_subtotal != null
+                      ? formatPrice(cart.shipping_subtotal)
+                      : "wird berechnet"}
+                  </span>
+                </div>
                 <div className="flex justify-between text-lg font-bold text-stone-900">
                   <span>Gesamt</span>
-                  <span className="font-heading text-primary">
-                    {formatPrice((cart.subtotal ?? cart.total ?? 0) + (shippingOptions.find(o => o.id === selectedShippingOptionId)?.amount ?? 0))}
-                  </span>
+                  <span className="font-heading text-primary">{formatPrice(cart.total ?? 0)}</span>
                 </div>
                 <p className="mb-6 text-xs text-stone-400">Inkl. MwSt.</p>
                 <button
