@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
 import CartDrawer from "@/src/components/CartDrawer";
+import CookieBanner from "@/src/components/CookieBanner";
 import { CartProvider } from "@/src/lib/cart";
 import { ToastProvider } from "@/src/components/Toast";
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <CartDrawer />
             <main className="pt-20">{children}</main>
             <Footer />
+            <CookieBanner />
           </CartProvider>
         </ToastProvider>
       </body>
