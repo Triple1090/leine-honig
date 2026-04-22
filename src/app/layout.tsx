@@ -14,11 +14,32 @@ const fontBody = Outfit({
   display: "swap",
 });
 
+const SITE_URL = "https://www.leine-honig.de";
+
 export const metadata: Metadata = {
-  title: "Leine-Honig – Ehrlicher Honig & Bienenvermietung",
-  description: "Echter Honig direkt vom Imker aus Neustadt am Rübenberge. Jetzt online bestellen oder Bienenvolk mieten.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Leine-Honig – Ehrlicher Honig aus der Region Hannover",
+    template: "%s | Leine-Honig",
+  },
+  description: "Echter Honig direkt vom Imker aus Neustadt am Rübenberge. Blüten-, Wald- und Rapshonig – regional, handgefüllt und ohne Zusätze.",
   icons: {
-    icon: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍯</text></svg>`,
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
+  openGraph: {
+    type: "website",
+    locale: "de_DE",
+    url: SITE_URL,
+    siteName: "Leine-Honig",
+    title: "Leine-Honig – Ehrlicher Honig aus der Region Hannover",
+    description: "Echter Honig direkt vom Imker aus Neustadt am Rübenberge. Regional, handgefüllt, ohne Zusätze.",
+    images: [{ url: "/images/juergen/bienenstand.jpeg", width: 1200, height: 630, alt: "Leine-Honig Bienenstand" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Leine-Honig – Ehrlicher Honig aus der Region Hannover",
+    description: "Echter Honig direkt vom Imker aus Neustadt am Rübenberge.",
+    images: ["/images/juergen/bienenstand.jpeg"],
   },
 };
 

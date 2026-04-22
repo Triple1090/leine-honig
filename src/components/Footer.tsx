@@ -71,7 +71,8 @@ export default function Footer() {
               {[
                 { label: "Impressum", href: "/impressum" },
                 { label: "Datenschutz", href: "/datenschutz" },
-                { label: "AGB & Widerruf", href: "/agb" },
+                { label: "AGB", href: "/agb" },
+                { label: "Widerrufsbelehrung", href: "/widerruf" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link

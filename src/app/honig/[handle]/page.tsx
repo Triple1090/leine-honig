@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { ArrowLeft, Package } from "lucide-react";
 import { medusa, formatPrice } from "@/src/lib/medusa";
 import QuickAddButton from "@/src/components/QuickAddButton";
@@ -24,10 +25,36 @@ async function getProduct(handle: string) {
 export async function generateMetadata({ params }: Props) {
   const { handle } = await params;
   const product = await getProduct(handle);
-  if (!product) return { title: "Produkt nicht gefunden | Leine-Honig" };
+  if (!product) return { title: "Produkt nicht gefunden" };
+
+  const image = (product as any).thumbnail ?? ((product as any).images as any[])?.[0]?.url;
+  const lowestPrice = ((product as any).variants as any[])
+    ?.flatMap((v: any) => v.prices ?? [])
+    .filter((p: any) => p.currency_code === "eur")
+    .map((p: any) => Number(p.amount))
+    .sort((a: number, b: number) => a - b)[0];
+
   return {
-    title: `${product.title} | Leine-Honig`,
-    description: product.description ?? undefined,
+    title: product.title,
+    description: (product as any).description ?? `${product.title} – Echter Honig vom Imker Leine-Honig aus Neustadt am Rübenberge.`,
+    openGraph: {
+      type: "website",
+      title: `${product.title} | Leine-Honig`,
+      description: (product as any).description ?? `${product.title} – direkt vom Imker.`,
+      images: image ? [{ url: image, width: 800, height: 800, alt: product.title }] : undefined,
+      url: `https://www.leine-honig.de/honig/${handle}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.title} | Leine-Honig`,
+      images: image ? [image] : undefined,
+    },
+    ...(lowestPrice != null && {
+      other: {
+        "product:price:amount": String(lowestPrice),
+        "product:price:currency": "EUR",
+      },
+    }),
   };
 }
 
@@ -41,10 +68,35 @@ export default async function ProductPage({ params }: Props) {
     price: (v.prices ?? []).find((p: any) => p.currency_code === "eur"),
   }));
 
-  const image = product.thumbnail ?? (product.images as any[])?.[0]?.url;
+  const image = (product as any).thumbnail ?? ((product as any).images as any[])?.[0]?.url;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    description: (product as any).description ?? undefined,
+    image: image ?? undefined,
+    brand: { "@type": "Brand", name: "Leine-Honig" },
+    url: `https://www.leine-honig.de/honig/${handle}`,
+    offers: eurVariants
+      ?.filter((v) => v.price)
+      .map((v) => ({
+        "@type": "Offer",
+        name: v.title,
+        price: String(v.price.amount),
+        priceCurrency: "EUR",
+        availability: "https://schema.org/InStock",
+        seller: { "@type": "Organization", name: "Leine-Honig" },
+      })),
+  };
 
   return (
     <div className="min-h-screen bg-stone-50 pb-24 pt-32">
+      <Script
+        id="product-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="mx-auto max-w-5xl px-6">
         <Link
           href="/honig"
@@ -77,9 +129,9 @@ export default async function ProductPage({ params }: Props) {
               {product.title}
             </h1>
 
-            {product.description && (
+            {(product as any).description && (
               <p className="mb-8 text-base leading-relaxed text-stone-600">
-                {product.description}
+                {(product as any).description}
               </p>
             )}
 
