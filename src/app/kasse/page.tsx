@@ -33,6 +33,7 @@ export default function KassePage() {
   const [cart, setCart] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<"stripe" | "vorkasse">("vorkasse");
   const [stripeClientSecret, setStripeClientSecret] = useState<string | null>(null);
 
@@ -131,6 +132,7 @@ export default function KassePage() {
     if (!cartId) return;
     setSubmitting(true);
 
+    setSubmitError(null);
     try {
       await prepareCart();
 
@@ -153,7 +155,7 @@ export default function KassePage() {
       }
     } catch (err) {
       console.error(err);
-      alert("Fehler beim Vorbereiten der Bestellung. Bitte versuche es erneut.");
+      setSubmitError("Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder kontaktiere uns unter info@leine-honig.de.");
     } finally {
       setSubmitting(false);
     }
@@ -297,6 +299,11 @@ export default function KassePage() {
                   </>
                 )}
                 <p className="mb-6 mt-1 text-xs" style={{ color: "var(--color-ink-mute)" }}>Gemäß §19 UStG wird keine Mehrwertsteuer ausgewiesen.</p>
+                {submitError && (
+                  <p className="mb-4 rounded-2xl px-4 py-3 text-sm" style={{ background: "rgba(239,68,68,0.15)", color: "#fca5a5", border: "1px solid rgba(239,68,68,0.3)" }}>
+                    {submitError}
+                  </p>
+                )}
                 <button
                   type="submit"
                   disabled={submitting}

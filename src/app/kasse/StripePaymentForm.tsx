@@ -42,11 +42,16 @@ export default function StripePaymentForm({ onSuccess }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <PaymentElement />
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && (
+        <p className="rounded-2xl px-4 py-3 text-sm" style={{ background: "rgba(239,68,68,0.15)", color: "#fca5a5", border: "1px solid rgba(239,68,68,0.3)" }}>
+          {error}
+        </p>
+      )}
       <button
         type="submit"
         disabled={!stripe || submitting}
-        className="flex w-full items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 font-bold text-white shadow-md transition-all hover:bg-accent-hover disabled:opacity-50"
+        className="flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold shadow-md transition-all hover:opacity-90 active:scale-95 disabled:opacity-50"
+        style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}
       >
         {submitting ? <Loader2 size={18} className="animate-spin" /> : <ShoppingBasket size={18} />}
         {submitting ? "Wird verarbeitet…" : "Jetzt bezahlen"}
