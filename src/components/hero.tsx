@@ -88,7 +88,7 @@ export default function Hero({ minPrice, minShipping }: HeroProps) {
             className="inline-flex items-center rounded-full px-8 py-4 text-sm font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
             style={{ background: "var(--color-primary)", color: "var(--color-bg)", borderRadius: "999px" }}
           >
-            Honig kaufen →
+            Honig kaufen
           </Link>
           <Link
             href="/bienen-mieten"
