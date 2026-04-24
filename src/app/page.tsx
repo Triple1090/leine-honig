@@ -12,15 +12,17 @@ async function getMinPrice(): Promise<number | undefined> {
   try {
     const { products } = await medusa.store.product.list({
       limit: 100,
-      fields: "id,variants.id,variants.prices",
+      fields: "id,handle,title,variants.id,variants.title,variants.prices",
     });
     const prices = (products as any[])
       .flatMap((p) => p.variants ?? [])
       .flatMap((v: any) => v.prices ?? [])
       .filter((p: any) => p.currency_code === "eur")
       .map((p: any) => Number(p.amount));
+    console.log("[homepage] variant prices found:", prices);
     return prices.length ? Math.min(...prices) : undefined;
-  } catch {
+  } catch (e) {
+    console.error("[homepage] getMinPrice failed:", e);
     return undefined;
   }
 }
