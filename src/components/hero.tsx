@@ -103,13 +103,12 @@ export default function Hero({ minPrice, minShipping }: HeroProps) {
           </Link>
         </div>
 
-        {(minPrice != null || minShipping != null) && (
-          <p className="mt-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>
-            {minPrice != null && `Gläser ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minPrice / 100)}`}
-            {minPrice != null && minShipping != null && " · "}
-            {minShipping != null && `Versand ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minShipping)}`}
-          </p>
-        )}
+        <p className="mt-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>
+          {minPrice != null
+            ? `Gläser ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minPrice / 100)} · `
+            : ""}
+          {`Versand ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minShipping ?? 4.29)}`}
+        </p>
       </motion.div>
     </section>
   );
