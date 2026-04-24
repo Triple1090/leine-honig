@@ -26,6 +26,7 @@ export default function Navbar() {
   ];
 
   return (
+    <>
     <nav
       className="fixed top-0 right-0 left-0 z-50 transition-all duration-300"
       style={{
@@ -94,18 +95,22 @@ export default function Navbar() {
             <ShoppingCart size={14} />
             {new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(cartTotal)}
           </button>
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="relative z-50 transition-colors focus:outline-none"
-            style={{ color: "var(--color-ink)" }}
-            aria-label="Menü"
-          >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          {!isOpen && (
+            <button
+              onClick={() => setIsOpen(true)}
+              className="transition-colors focus:outline-none"
+              style={{ color: "var(--color-ink)" }}
+              aria-label="Menü öffnen"
+            >
+              <Menu size={28} />
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Mobile Overlay */}
+    </nav>
+
+      {/* Mobile Overlay — must be outside <nav> so backdrop-filter doesn't trap fixed positioning */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -113,9 +118,17 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center space-y-8 md:hidden"
+            className="fixed inset-0 z-[60] flex flex-col items-center justify-center space-y-8 md:hidden"
             style={{ background: "var(--color-bg-deep)" }}
           >
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-5 right-8 transition-colors focus:outline-none"
+              style={{ color: "var(--color-ink)" }}
+              aria-label="Menü schließen"
+            >
+              <X size={28} />
+            </button>
             <LeineHonigLogo size="lg" />
             <div className="mt-4 flex flex-col items-center gap-6">
               {navLinks.map((link) => (
@@ -141,6 +154,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }
