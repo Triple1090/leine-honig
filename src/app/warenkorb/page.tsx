@@ -40,7 +40,8 @@ export default function WarenkorbPage() {
         total: i.subtotal ?? i.unit_price * i.quantity,
       }));
       setItems(mapped);
-      setTotal(cart.total ?? 0);
+      const itemSubtotal = (cart.items ?? []).reduce((sum: number, i: any) => sum + (i.subtotal ?? i.unit_price * i.quantity), 0);
+      setTotal(itemSubtotal);
     } catch {
       setItems([]);
     } finally {
@@ -162,12 +163,12 @@ export default function WarenkorbPage() {
             {/* Summary */}
             <div className="rounded-[2.5rem] p-8" style={{ background: "var(--color-bg-soft)", border: "1px solid var(--color-line)" }}>
               <div className="flex items-center justify-between text-lg font-medium" style={{ color: "var(--color-ink)" }}>
-                <span>Gesamt</span>
+                <span>Warenwert</span>
                 <span className="font-heading text-2xl font-semibold" style={{ color: "var(--color-primary)" }}>
                   {formatPrice(total)}
                 </span>
               </div>
-              <p className="mt-1 text-sm" style={{ color: "var(--color-ink-mute)" }}>Inkl. MwSt. · zzgl. Versandkosten</p>
+              <p className="mt-1 text-sm" style={{ color: "var(--color-ink-mute)" }}>Versandkosten werden im Checkout berechnet</p>
 
               <Link
                 href="/kasse"
