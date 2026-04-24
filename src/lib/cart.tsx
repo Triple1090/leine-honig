@@ -68,7 +68,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       const count = cart.items?.reduce((sum: number, i: any) => sum + i.quantity, 0) ?? 0;
       setItemCount(count);
-      setCartTotal(cart.total ?? 0);
+      const itemSubtotal = (cart.items ?? []).reduce((sum: number, i: any) => sum + (i.subtotal ?? i.unit_price * i.quantity), 0);
+      setCartTotal(itemSubtotal);
       setItems((cart.items ?? []).map((i: any) => ({
         id: i.id,
         variant_id: i.variant_id,

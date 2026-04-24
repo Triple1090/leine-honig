@@ -38,7 +38,8 @@ export default function CartDrawer() {
         unit_price: i.unit_price,
         subtotal: i.subtotal ?? i.unit_price * i.quantity,
       })));
-      setTotal(cart.total ?? 0);
+      const itemSubtotal = (cart.items ?? []).reduce((sum: number, i: any) => sum + (i.subtotal ?? i.unit_price * i.quantity), 0);
+      setTotal(itemSubtotal);
     } catch {
       setItems([]);
     } finally {
@@ -193,12 +194,12 @@ export default function CartDrawer() {
             {items.length > 0 && (
               <div className="px-6 py-5" style={{ borderTop: "1px solid var(--color-line)" }}>
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="text-sm" style={{ color: "var(--color-ink-mute)" }}>Gesamt</span>
+                  <span className="text-sm" style={{ color: "var(--color-ink-mute)" }}>Warenwert</span>
                   <span className="text-xl font-semibold" style={{ color: "var(--color-ink)" }}>
                     {formatPrice(total)}
                   </span>
                 </div>
-                <p className="mb-4 text-xs" style={{ color: "var(--color-ink-mute)" }}>Inkl. MwSt. · zzgl. Versandkosten</p>
+                <p className="mb-4 text-xs" style={{ color: "var(--color-ink-mute)" }}>Versandkosten werden im Checkout berechnet</p>
                 <Link
                   href="/kasse"
                   onClick={closeDrawer}
