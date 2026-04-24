@@ -78,7 +78,7 @@ export default function Hero({ minPrice, minShipping }: HeroProps) {
           className="mx-auto mb-10 max-w-lg text-base leading-relaxed md:text-lg"
           style={{ color: "var(--color-ink-soft)", lineHeight: "1.65" }}
         >
-          Wir sind Jürgen & Tjark — zwei Imker aus Leidenschaft. Bei uns kommt der Honig ohne Umwege direkt aus der Wabe ins Glas.
+          Honig direkt vom Imker kaufen oder ein Bienenvolk mieten — aus der Region Hannover, für Zuhause oder Ihr Unternehmen.
         </p>
 
         {/* CTAs */}
