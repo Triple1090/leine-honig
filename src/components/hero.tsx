@@ -105,7 +105,7 @@ export default function Hero({ minPrice, minShipping }: HeroProps) {
 
         <p className="mt-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>
           {minPrice != null
-            ? `Gläser ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minPrice / 100)} · `
+            ? `Gläser ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minPrice)} · `
             : ""}
           {`Versand ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minShipping ?? 4.29)}`}
         </p>
