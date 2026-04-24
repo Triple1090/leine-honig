@@ -23,6 +23,9 @@ async function getMinPrice(): Promise<number | undefined> {
     const res = await fetch(url, { headers, cache: "no-store" });
     const data = await res.json();
 
+    const firstVariant = data.products?.[0]?.variants?.[0];
+    console.log("[homepage] calculated_price:", JSON.stringify(firstVariant?.calculated_price));
+
     const amounts = (data.products as any[])
       .flatMap((p: any) => p.variants ?? [])
       .map((v: any) => v.calculated_price?.calculated_amount ?? v.calculated_price?.original_amount)
