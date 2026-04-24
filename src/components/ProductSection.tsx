@@ -39,7 +39,7 @@ export default async function ProductSection() {
             Unsere Honigsorten
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-stone-600">
-            Ab 5 Gläsern gibt es einen Mengenrabatt. Alle Sorten in 250g und 500g erhältlich.
+            Alle Sorten in 250g und 500g erhältlich.
           </p>
         </div>
 

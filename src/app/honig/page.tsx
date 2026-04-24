@@ -67,7 +67,7 @@ export default async function HonigPage() {
             Unsere <span className="italic" style={{ color: "var(--color-primary)" }}>Honigsorten</span>
           </h1>
           <p className="mx-auto max-w-xl text-lg text-white/80">
-            Ab 5 Gläsern gibt es einen Mengenrabatt. Alle Sorten in 250g und 500g erhältlich.
+            Alle Sorten in 250g und 500g erhältlich.
           </p>
         </div>
       </section>

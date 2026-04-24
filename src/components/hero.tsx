@@ -5,7 +5,12 @@ import { MapPin } from "lucide-react";
 import Link from "next/link";
 import LeineHonigLogo from "./LeineHonigLogo";
 
-export default function Hero() {
+interface HeroProps {
+  minPrice?: number;
+  minShipping?: number;
+}
+
+export default function Hero({ minPrice, minShipping }: HeroProps) {
   return (
     <section
       className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 text-center"
@@ -98,9 +103,13 @@ export default function Hero() {
           </Link>
         </div>
 
-        <p className="mt-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>
-          Gläser ab 6,90 € · Versand ab 5,99 €
-        </p>
+        {(minPrice != null || minShipping != null) && (
+          <p className="mt-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>
+            {minPrice != null && `Gläser ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minPrice / 100)}`}
+            {minPrice != null && minShipping != null && " · "}
+            {minShipping != null && `Versand ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minShipping)}`}
+          </p>
+        )}
       </motion.div>
     </section>
   );
