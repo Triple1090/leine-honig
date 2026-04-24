@@ -8,8 +8,6 @@ const cards = [
     text: "Direkt aus der Wabe ins Glas — ohne Umwege, ohne Zusätze. In 250g und 500g erhältlich.",
     href: "/honig",
     cta: "Honig kaufen",
-    iconBg: "bg-primary/15 text-primary",
-    ctaBg: "bg-primary text-accent hover:bg-primary-dark",
   },
   {
     icon: Sprout,
@@ -17,8 +15,6 @@ const cards = [
     text: "Du stellst den Platz, wir bringen das Leben. Ein professionell betreutes Volk für deinen Garten oder dein Unternehmen.",
     href: "/bienen-mieten",
     cta: "Mehr erfahren",
-    iconBg: "bg-accent/8 text-accent",
-    ctaBg: "bg-accent text-white hover:bg-accent-hover",
   },
   {
     icon: Hexagon,
@@ -26,21 +22,24 @@ const cards = [
     text: "Alle unsere Bienenvölker stehen rund um Neustadt am Rübenberge — nah, regional und transparent.",
     href: "/ueber-uns",
     cta: "Über uns",
-    iconBg: "bg-[#6A9FB8]/12 text-[#6A9FB8]",
-    ctaBg: "bg-stone-100 text-accent hover:bg-stone-200",
   },
 ];
 
 export default function Welcome() {
   return (
-    <section className="bg-stone-50 px-6 py-24">
+    <section className="px-6 py-24" style={{ background: "var(--color-bg)" }}>
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
-          <h2 className="font-heading text-4xl font-extrabold text-accent md:text-5xl">
-            Willkommen bei{" "}
-            <span className="text-primary">Leine-Honig</span>
+          <p
+            className="mb-3 text-xs font-medium uppercase tracking-widest"
+            style={{ color: "var(--color-primary)", letterSpacing: "3px" }}
+          >
+            Willkommen
+          </p>
+          <h2 className="font-heading text-4xl font-light md:text-5xl" style={{ color: "var(--color-ink)" }}>
+            Leine-<span className="italic" style={{ color: "var(--color-primary)" }}>Honig</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-stone-500">
+          <p className="mx-auto mt-4 max-w-xl text-base" style={{ color: "var(--color-ink-mute)", lineHeight: "1.65" }}>
             Wir sind Jürgen & Tjark — zwei Imker aus Leidenschaft aus der Region Hannover.
           </p>
         </div>
@@ -49,16 +48,24 @@ export default function Welcome() {
           {cards.map((card) => (
             <div
               key={card.title}
-              className="flex flex-col rounded-[2.5rem] border border-stone-200 bg-white p-8 shadow-sm transition-all hover:shadow-md"
+              className="flex flex-col rounded-[2.5rem] p-8 transition-all duration-300 hover:-translate-y-1"
+              style={{
+                background: "var(--color-bg-soft)",
+                border: "1px solid var(--color-line)",
+              }}
             >
-              <div className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl ${card.iconBg}`}>
-                <card.icon size={28} />
+              <div
+                className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl"
+                style={{ background: "var(--color-primary-light)" }}
+              >
+                <card.icon size={24} style={{ color: "var(--color-primary)" }} />
               </div>
-              <h3 className="mb-3 font-heading text-xl font-extrabold text-accent">{card.title}</h3>
-              <p className="flex-grow text-sm leading-relaxed text-stone-500">{card.text}</p>
+              <h3 className="mb-3 font-heading text-xl" style={{ color: "var(--color-ink)" }}>{card.title}</h3>
+              <p className="flex-grow text-sm leading-relaxed" style={{ color: "var(--color-ink-mute)" }}>{card.text}</p>
               <Link
                 href={card.href}
-                className={`mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-colors ${card.ctaBg}`}
+                className="mt-8 inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-200 hover:border-primary hover:text-primary"
+                style={{ borderColor: "var(--color-line)", color: "var(--color-ink-soft)" }}
               >
                 {card.cta} →
               </Link>

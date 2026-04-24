@@ -36,7 +36,7 @@ export default async function HonigPage() {
   const products = await getProducts();
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-24">
+    <div className="min-h-screen pb-24" style={{ background: "var(--color-bg)" }}>
       <section className="relative flex min-h-[40vh] items-end justify-center overflow-hidden pb-16 pt-32 text-center">
         {/* Hintergrundbild */}
         <Image
@@ -63,8 +63,8 @@ export default async function HonigPage() {
           <Badge icon={ShoppingBasket} className="mb-6">
             Direkt vom Imker
           </Badge>
-          <h1 className="mb-4 text-4xl font-heading font-extrabold text-white md:text-6xl">
-            Unsere <span className="text-primary">Honigsorten</span>
+          <h1 className="mb-4 text-4xl font-heading font-light text-white md:text-6xl">
+            Unsere <span className="italic" style={{ color: "var(--color-primary)" }}>Honigsorten</span>
           </h1>
           <p className="mx-auto max-w-xl text-lg text-white/80">
             Ab 5 Gläsern gibt es einen Mengenrabatt. Alle Sorten in 250g und 500g erhältlich.
@@ -88,9 +88,10 @@ export default async function HonigPage() {
                   <Link
                     key={product.id}
                     href={`/honig/${product.handle}`}
-                    className="group flex h-full flex-col rounded-[2.5rem] border border-stone-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/30"
+                    className="group flex h-full flex-col rounded-[2.5rem] p-4 transition-all duration-300 hover:-translate-y-1"
+                    style={{ background: "var(--color-bg-soft)", border: "1px solid var(--color-line)" }}
                   >
-                    <div className="flex aspect-square items-center justify-center overflow-hidden rounded-[2rem] bg-stone-50 p-6">
+                    <div className="flex aspect-square items-center justify-center overflow-hidden rounded-[2rem] p-6" style={{ background: "var(--color-bg-elev)" }}>
                       {product.thumbnail ? (
                         <Image
                           src={product.thumbnail}
@@ -104,23 +105,23 @@ export default async function HonigPage() {
                       )}
                     </div>
                     <div className="mt-5 flex flex-grow flex-col items-center px-2 text-center">
-                      <h2 className="font-heading text-lg font-extrabold leading-tight text-stone-900">
+                      <h2 className="font-heading text-lg font-light leading-tight" style={{ color: "var(--color-ink)" }}>
                         {product.title}
                       </h2>
                       {lowestPrice && (
-                        <span className="mt-1 font-heading text-lg font-black text-primary">
+                        <span className="mt-1 font-heading text-lg font-semibold" style={{ color: "var(--color-primary)" }}>
                           ab {formatPrice(lowestPrice.amount)}
                         </span>
                       )}
                       {product.description && (
-                        <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed text-stone-600">
+                        <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed" style={{ color: "var(--color-ink-mute)" }}>
                           {product.description}
                         </p>
                       )}
                     </div>
                     <div className="mt-6 flex w-full items-center justify-center px-2">
                       {!singleVariantId && (
-                        <span className="flex items-center gap-2 text-sm font-semibold text-stone-400 group-hover:text-stone-600 transition-colors">
+                        <span className="flex items-center gap-2 text-sm font-medium transition-colors" style={{ color: "var(--color-ink-mute)" }}>
                           <ShoppingBasket size={15} /> Variante wählen
                         </span>
                       )}
@@ -133,7 +134,7 @@ export default async function HonigPage() {
           ) : (
             <div className="py-24 text-center">
               <HoneyJarPlaceholder />
-              <p className="mt-6 text-lg text-stone-600">
+              <p className="mt-6 text-lg" style={{ color: "var(--color-ink-mute)" }}>
                 Unsere Honigsorten werden gerade eingerichtet. Schau bald wieder vorbei!
               </p>
             </div>

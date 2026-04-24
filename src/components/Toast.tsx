@@ -30,9 +30,10 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className="flex items-center gap-3 rounded-2xl bg-accent px-5 py-3 text-white shadow-lg animate-in fade-in slide-in-from-right-4 duration-300"
+            className="flex items-center gap-3 rounded-2xl px-5 py-3 shadow-lg animate-in fade-in slide-in-from-right-4 duration-300"
+            style={{ background: "var(--color-bg-deep)", border: "1px solid var(--color-line)", color: "var(--color-ink)" }}
           >
-            <ShoppingBasket size={16} className="shrink-0 text-primary" />
+            <ShoppingBasket size={16} className="shrink-0" style={{ color: "var(--color-primary)" }} />
             <span className="text-sm font-semibold">{toast.message}</span>
           </div>
         ))}

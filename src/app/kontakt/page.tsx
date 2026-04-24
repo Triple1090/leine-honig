@@ -12,7 +12,7 @@ export default function Kontakt() {
   const [state, action, pending] = useActionState(sendContactEmail, initialState);
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen" style={{ background: "var(--color-bg)" }}>
       <PageHeader
         image="/images/juergen/bienenstand2.jpeg"
         imageAlt="Bienenstand"

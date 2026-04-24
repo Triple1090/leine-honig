@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function AboutUs() {
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
+    <div className="min-h-screen pb-20" style={{ background: "var(--color-bg)" }}>
 
       <PageHeader
         image="/images/pexels-robertkso-17381656.jpg"

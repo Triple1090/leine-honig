@@ -1,70 +1,43 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Mail, MapPin, Instagram } from "lucide-react";
+import LeineHonigLogo from "./LeineHonigLogo";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#3A2E1A] text-white">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
+    <footer style={{ background: "var(--color-bg-deep)", borderTop: "1px solid var(--color-line)" }}>
+      <div className="mx-auto max-w-7xl px-8 py-16">
+        <div className="grid grid-cols-1 gap-14 md:grid-cols-3">
+
           {/* Spalte 1: Marke */}
           <div className="flex flex-col gap-5">
             <Link href="/" className="inline-block select-none">
-              <Image
-                src="/logo.svg"
-                alt="Leine-Honig"
-                width={180}
-                height={39}
-                className="h-9 w-auto brightness-0 invert"
-              />
+              <LeineHonigLogo size="md" />
             </Link>
-            <p className="text-sm leading-relaxed text-white/50">
-              Echter Honig aus Neustadt am Rübenberge. Regional, transparent
-              und zum Schutz unserer Natur.
+            <p className="text-sm leading-relaxed" style={{ color: "var(--color-ink-mute)" }}>
+              Echter Honig aus Neustadt am Rübenberge. Regional, transparent und zum Schutz unserer Natur.
             </p>
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/50 transition-all hover:border-primary hover:text-primary"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all hover:border-primary hover:text-primary"
+              style={{ borderColor: "var(--color-line)", color: "var(--color-ink-mute)" }}
               aria-label="Instagram"
             >
               <Instagram size={18} />
             </a>
           </div>
 
-          {/* Spalte 2: Navigation */}
+          {/* Spalte 2: Rechtliches */}
           <div>
-            <h4 className="mb-5 text-xs font-bold uppercase tracking-widest text-white/30">
-              Entdecken
-            </h4>
-            <ul className="space-y-3 text-sm">
-              {[
-                { label: "Startseite", href: "/" },
-                { label: "Honig kaufen", href: "/honig" },
-                { label: "Bienen mieten", href: "/bienen-mieten" },
-                { label: "Über uns", href: "/ueber-uns" },
-                { label: "Kontakt", href: "/kontakt" },
-              ].map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-white/50 transition-colors hover:text-primary"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Spalte 3: Rechtliches */}
-          <div>
-            <h4 className="mb-5 text-xs font-bold uppercase tracking-widest text-white/30">
+            <h4
+              className="mb-5 text-xs font-semibold uppercase tracking-widest"
+              style={{ color: "var(--color-primary)", letterSpacing: "3px" }}
+            >
               Rechtliches
             </h4>
             <ul className="space-y-3 text-sm">
@@ -77,7 +50,8 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-white/50 transition-colors hover:text-primary"
+                    className="transition-colors hover:text-primary"
+                    style={{ color: "var(--color-ink-mute)" }}
                   >
                     {link.label}
                   </Link>
@@ -86,26 +60,25 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Spalte 4: Kontakt */}
+          {/* Spalte 3: Kontakt */}
           <div>
-            <h4 className="mb-5 text-xs font-bold uppercase tracking-widest text-white/30">
+            <h4
+              className="mb-5 text-xs font-semibold uppercase tracking-widest"
+              style={{ color: "var(--color-primary)", letterSpacing: "3px" }}
+            >
               Kontakt
             </h4>
             <ul className="space-y-4 text-sm">
-              <li className="flex items-start gap-3 text-white/50">
+              <li className="flex items-start gap-3" style={{ color: "var(--color-ink-mute)" }}>
                 <MapPin size={16} className="mt-0.5 shrink-0 text-primary" />
                 <span className="leading-tight">
-                  Imkerei Leine-Honig
-                  <br />
+                  Imkerei Leine-Honig<br />
                   31535 Neustadt, OT Luttmersen
                 </span>
               </li>
-              <li className="flex items-center gap-3 text-white/50">
+              <li className="flex items-center gap-3" style={{ color: "var(--color-ink-mute)" }}>
                 <Mail size={16} className="shrink-0 text-primary" />
-                <a
-                  href="mailto:info@leine-honig.de"
-                  className="transition-colors hover:text-primary"
-                >
+                <a href="mailto:info@leine-honig.de" className="transition-colors hover:text-primary">
                   info@leine-honig.de
                 </a>
               </li>
@@ -114,11 +87,14 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 md:flex-row">
-          <p className="text-xs text-white/25">
+        <div
+          className="mt-12 flex flex-col items-center justify-between gap-3 border-t pt-8 md:flex-row"
+          style={{ borderColor: "var(--color-line)" }}
+        >
+          <p className="text-xs" style={{ color: "rgba(245,239,222,0.25)" }}>
             © {currentYear} Leine-Honig. Alle Rechte vorbehalten.
           </p>
-          <p className="text-xs text-white/25">
+          <p className="text-xs" style={{ color: "rgba(245,239,222,0.25)" }}>
             Imkerei aus Leidenschaft · Neustadt am Rübenberge
           </p>
         </div>

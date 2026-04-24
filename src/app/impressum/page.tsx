@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function Impressum() {
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
+    <div className="min-h-screen pb-20" style={{ background: "var(--color-bg)" }}>
       <PageHeader
         image="/images/juergen/bienenstand.jpeg"
         imageAlt="Bienenstand"

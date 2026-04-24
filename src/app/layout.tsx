@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Outfit, Fraunces } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
@@ -10,8 +10,16 @@ import { ToastProvider } from "@/src/components/Toast";
 
 const fontBody = Outfit({
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-sans",
   display: "swap",
+});
+
+const fontHeading = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+  style: ["normal", "italic"],
+  axes: ["opsz"],
 });
 
 const SITE_URL = "https://www.leine-honig.de";
@@ -46,7 +54,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de">
-      <body className={`${fontBody.variable} font-sans antialiased`}>
+      <body className={`${fontBody.variable} ${fontHeading.variable} font-sans antialiased`}>
         <ToastProvider>
           <CartProvider>
             <Navbar />

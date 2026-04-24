@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function Datenschutz() {
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
+    <div className="min-h-screen pb-20" style={{ background: "var(--color-bg)" }}>
       <PageHeader
         image="/images/juergen/raps-abfuellen.jpeg"
         imageAlt="Honig abfüllen"

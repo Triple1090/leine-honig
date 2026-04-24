@@ -48,7 +48,7 @@ export default function QuickAddButton({ variantId, fullWidth }: QuickAddButtonP
         onClick={handleIncrease}
         aria-label="In den Warenkorb"
         disabled={loading !== null}
-        className={`flex h-11 items-center justify-center gap-2 rounded-full bg-primary text-accent shadow transition-all hover:bg-primary-dark active:scale-95 disabled:opacity-50 ${fullWidth ? "w-full px-6 font-bold" : "px-3"}`}
+        className={`flex h-11 items-center justify-center gap-2 rounded-full bg-primary text-[var(--color-bg)] shadow transition-all hover:bg-primary-dark active:scale-95 disabled:opacity-50 ${fullWidth ? "w-full px-6 font-bold" : "px-3"}`}
       >
         {loading === "inc"
           ? <Loader2 size={16} className="animate-spin" />
@@ -68,18 +68,18 @@ export default function QuickAddButton({ variantId, fullWidth }: QuickAddButtonP
         onClick={handleDecrease}
         disabled={loading !== null}
         aria-label="Weniger"
-        className="flex h-9 w-9 items-center justify-center rounded-full text-accent transition hover:bg-primary-dark active:scale-90 disabled:opacity-50"
+        className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--color-bg)] transition hover:bg-primary-dark active:scale-90 disabled:opacity-50"
       >
         {loading === "dec" ? <Loader2 size={15} className="animate-spin" /> : <Minus size={15} />}
       </button>
-      <span className="min-w-[2rem] text-center text-sm font-bold text-accent">
+      <span className="min-w-[2rem] text-center text-sm font-bold text-[var(--color-bg)]">
         {quantity}
       </span>
       <button
         onClick={handleIncrease}
         disabled={loading !== null}
         aria-label="Mehr"
-        className="flex h-9 w-9 items-center justify-center rounded-full text-accent transition hover:bg-primary-dark active:scale-90 disabled:opacity-50"
+        className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--color-bg)] transition hover:bg-primary-dark active:scale-90 disabled:opacity-50"
       >
         {loading === "inc" ? <Loader2 size={15} className="animate-spin" /> : <Plus size={15} />}
       </button>

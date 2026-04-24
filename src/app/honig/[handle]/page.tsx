@@ -91,7 +91,7 @@ export default async function ProductPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-24 pt-32">
+    <div className="min-h-screen pb-24 pt-32" style={{ background: "var(--color-bg)" }}>
       <Script
         id="product-jsonld"
         type="application/ld+json"
@@ -100,14 +100,15 @@ export default async function ProductPage({ params }: Props) {
       <div className="mx-auto max-w-5xl px-6">
         <Link
           href="/honig"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-stone-500 transition-colors hover:text-stone-900"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary"
+          style={{ color: "var(--color-ink-mute)" }}
         >
           <ArrowLeft size={16} /> Alle Sorten
         </Link>
 
-        <div className="grid gap-12 rounded-[2.5rem] border border-stone-100 bg-white p-8 shadow-sm md:grid-cols-2 md:p-12">
+        <div className="grid gap-12 rounded-[2.5rem] p-8 md:grid-cols-2 md:p-12" style={{ background: "var(--color-bg-soft)", border: "1px solid var(--color-line)" }}>
           {/* Image */}
-          <div className="flex items-center justify-center rounded-[2rem] bg-stone-50 p-8">
+          <div className="flex items-center justify-center rounded-[2rem] p-8" style={{ background: "var(--color-bg-elev)" }}>
             {image ? (
               <Image
                 src={image}
@@ -125,12 +126,12 @@ export default async function ProductPage({ params }: Props) {
 
           {/* Info */}
           <div className="flex flex-col justify-center">
-            <h1 className="mb-4 text-3xl font-extrabold text-stone-900 md:text-4xl">
+            <h1 className="mb-4 text-3xl font-heading font-light md:text-4xl" style={{ color: "var(--color-ink)" }}>
               {product.title}
             </h1>
 
             {(product as any).description && (
-              <p className="mb-8 text-base leading-relaxed text-stone-600">
+              <p className="mb-8 text-base leading-relaxed" style={{ color: "var(--color-ink-mute)" }}>
                 {(product as any).description}
               </p>
             )}
@@ -139,12 +140,13 @@ export default async function ProductPage({ params }: Props) {
               {eurVariants?.map((variant: any) => (
                 <div
                   key={variant.id}
-                  className="flex items-center justify-between rounded-2xl border border-stone-100 bg-stone-50 px-5 py-3"
+                  className="flex items-center justify-between rounded-2xl px-5 py-3"
+                  style={{ background: "var(--color-bg-elev)", border: "1px solid var(--color-line)" }}
                 >
-                  <span className="font-bold text-stone-800">{variant.title}</span>
+                  <span className="font-medium" style={{ color: "var(--color-ink)" }}>{variant.title}</span>
                   <div className="flex items-center gap-4">
                     {variant.price && (
-                      <span className="font-heading text-xl font-black text-primary">
+                      <span className="font-heading text-xl font-semibold" style={{ color: "var(--color-primary)" }}>
                         {formatPrice(variant.price.amount)}
                       </span>
                     )}
@@ -154,7 +156,7 @@ export default async function ProductPage({ params }: Props) {
               ))}
             </div>
 
-            <p className="mt-6 text-xs text-stone-400">
+            <p className="mt-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>
               Inkl. MwSt. · Versandkosten werden im Checkout berechnet.
             </p>
           </div>

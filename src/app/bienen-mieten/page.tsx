@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function BienenMieten() {
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen" style={{ background: "var(--color-bg)" }}>
       <PageHeader
         image="/images/juergen/bienenstand-schnee.jpeg"
         imageAlt="Bienenstand"

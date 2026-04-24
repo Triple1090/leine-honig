@@ -94,17 +94,19 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 right-0 z-50 flex h-full w-full max-w-md flex-col bg-white shadow-2xl"
+            className="fixed top-0 right-0 z-50 flex h-full w-full max-w-md flex-col shadow-2xl"
+            style={{ background: "var(--color-bg-soft)" }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-stone-100 px-6 py-5">
+            <div className="flex items-center justify-between px-6 py-5" style={{ borderBottom: "1px solid var(--color-line)" }}>
               <div className="flex items-center gap-3">
-                <ShoppingBasket size={20} className="text-accent" />
-                <h2 className="text-lg font-extrabold text-stone-900">Warenkorb</h2>
+                <ShoppingBasket size={20} style={{ color: "var(--color-primary)" }} />
+                <h2 className="text-lg font-semibold" style={{ color: "var(--color-ink)" }}>Warenkorb</h2>
               </div>
               <button
                 onClick={closeDrawer}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-stone-100 text-stone-500 transition-colors hover:bg-stone-200"
+                className="flex h-8 w-8 items-center justify-center rounded-full transition-colors"
+                style={{ background: "var(--color-bg-elev)", color: "var(--color-ink-mute)" }}
               >
                 <X size={16} />
               </button>
@@ -118,11 +120,12 @@ export default function CartDrawer() {
                 </div>
               ) : items.length === 0 ? (
                 <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
-                  <Package size={48} className="text-stone-200" />
-                  <p className="text-stone-500">Dein Warenkorb ist leer.</p>
+                  <Package size={48} style={{ color: "var(--color-line)" }} />
+                  <p style={{ color: "var(--color-ink-mute)" }}>Dein Warenkorb ist leer.</p>
                   <button
                     onClick={closeDrawer}
-                    className="rounded-full bg-primary px-6 py-2.5 text-sm font-bold text-stone-900 transition-colors hover:bg-primary-dark"
+                    className="rounded-full px-6 py-2.5 text-sm font-semibold transition-all hover:opacity-90 active:scale-95"
+                    style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}
                   >
                     Weiter einkaufen
                   </button>
@@ -130,8 +133,8 @@ export default function CartDrawer() {
               ) : (
                 <div className="space-y-4">
                   {items.map((item) => (
-                    <div key={item.id} className="flex items-center gap-4 rounded-2xl border border-stone-100 bg-stone-50 p-3">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white">
+                    <div key={item.id} className="flex items-center gap-4 rounded-2xl p-3" style={{ background: "var(--color-bg-elev)", border: "1px solid var(--color-line)" }}>
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl" style={{ background: "var(--color-bg)" }}>
                         {item.thumbnail ? (
                           <Image
                             src={item.thumbnail}
@@ -141,14 +144,14 @@ export default function CartDrawer() {
                             className="max-h-12 w-auto object-contain"
                           />
                         ) : (
-                          <Package size={24} className="text-stone-300" />
+                          <Package size={24} style={{ color: "var(--color-ink-mute)" }} />
                         )}
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-bold text-stone-900">{item.title}</p>
-                        <p className="text-xs text-stone-400">{item.variant_title}</p>
-                        <p className="mt-0.5 text-sm font-black text-primary">
+                        <p className="truncate text-sm font-semibold" style={{ color: "var(--color-ink)" }}>{item.title}</p>
+                        <p className="text-xs" style={{ color: "var(--color-ink-mute)" }}>{item.variant_title}</p>
+                        <p className="mt-0.5 text-sm font-semibold" style={{ color: "var(--color-primary)" }}>
                           {formatPrice(item.subtotal)}
                         </p>
                       </div>
@@ -157,16 +160,18 @@ export default function CartDrawer() {
                         <div className="flex items-center gap-1.5">
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-stone-500 shadow-sm transition-colors hover:bg-stone-100"
+                            className="flex h-6 w-6 items-center justify-center rounded-full shadow-sm transition-colors"
+                            style={{ background: "var(--color-bg)", color: "var(--color-ink-mute)" }}
                           >
                             <Minus size={10} />
                           </button>
-                          <span className="w-4 text-center text-sm font-bold text-stone-800">
+                          <span className="w-4 text-center text-sm font-medium" style={{ color: "var(--color-ink)" }}>
                             {item.quantity}
                           </span>
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-stone-500 shadow-sm transition-colors hover:bg-stone-100"
+                            className="flex h-6 w-6 items-center justify-center rounded-full shadow-sm transition-colors"
+                            style={{ background: "var(--color-bg)", color: "var(--color-ink-mute)" }}
                           >
                             <Plus size={10} />
                           </button>
@@ -186,24 +191,26 @@ export default function CartDrawer() {
 
             {/* Footer */}
             {items.length > 0 && (
-              <div className="border-t border-stone-100 px-6 py-5">
+              <div className="px-6 py-5" style={{ borderTop: "1px solid var(--color-line)" }}>
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="text-sm text-stone-500">Gesamt</span>
-                  <span className="text-xl font-black text-stone-900">
+                  <span className="text-sm" style={{ color: "var(--color-ink-mute)" }}>Gesamt</span>
+                  <span className="text-xl font-semibold" style={{ color: "var(--color-ink)" }}>
                     {formatPrice(total)}
                   </span>
                 </div>
-                <p className="mb-4 text-xs text-stone-400">Inkl. MwSt. · zzgl. Versandkosten</p>
+                <p className="mb-4 text-xs" style={{ color: "var(--color-ink-mute)" }}>Inkl. MwSt. · zzgl. Versandkosten</p>
                 <Link
                   href="/kasse"
                   onClick={closeDrawer}
-                  className="flex w-full items-center justify-center gap-2 rounded-full bg-accent py-4 font-bold text-white shadow-md transition-all hover:bg-accent-hover"
+                  className="flex w-full items-center justify-center gap-2 rounded-full py-4 font-semibold shadow-md transition-all hover:opacity-90 active:scale-95"
+                  style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}
                 >
                   Zur Kasse <ArrowRight size={16} />
                 </Link>
                 <button
                   onClick={closeDrawer}
-                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-stone-100 py-3 text-sm font-bold text-stone-600 transition-colors hover:bg-stone-200"
+                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-medium transition-colors"
+                  style={{ background: "var(--color-bg-elev)", color: "var(--color-ink-mute)" }}
                 >
                   Weiter einkaufen
                 </button>

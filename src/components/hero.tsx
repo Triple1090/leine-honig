@@ -2,83 +2,104 @@
 
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import Badge from "./Badge";
+import LeineHonigLogo from "./LeineHonigLogo";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
-      {/* Hintergrundbild */}
-      <div className="absolute inset-0 -z-20">
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="Honigwabe Hintergrund"
-          fill
-          className="object-cover object-center"
-          priority
-          quality={90}
-        />
+    <section
+      className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 text-center"
+      style={{ background: "var(--color-bg)" }}
+    >
+      {/* Dekoratives Waben-Muster */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.04]" aria-hidden="true">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="hex" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
+              <polygon points="30,2 58,17 58,47 30,62 2,47 2,17" fill="none" stroke="#e8b863" strokeWidth="0.8"/>
+              <polygon points="30,28 58,43 58,73 30,88 2,73 2,43" fill="none" stroke="#e8b863" strokeWidth="0.8"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hex)"/>
+        </svg>
       </div>
 
-      {/* Overlay — warmer Bernstein-Ton statt neutralem Schwarz */}
-      <div className="absolute inset-0 -z-10 bg-[#3A2E1A]/40 backdrop-blur-[2px]" />
+      {/* Gradient glow top */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-96 w-[600px] rounded-full blur-[120px] opacity-20"
+        style={{ background: "var(--color-primary)" }}
+        aria-hidden="true"
+      />
 
-      {/* Glas-Karte */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 mx-4 max-w-4xl rounded-[2rem] border border-primary/20 bg-white/92 p-6 text-center shadow-2xl backdrop-blur-xl sm:rounded-[3rem] md:p-14"
+        className="relative z-10 mx-auto max-w-3xl"
       >
-        {/* Badge */}
+        {/* Eyebrow Badge */}
         <div className="mb-8 flex justify-center">
-          <Badge icon={MapPin}>Region Hannover</Badge>
+          <span
+            className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-widest"
+            style={{
+              borderColor: "var(--color-primary)",
+              color: "var(--color-primary)",
+              background: "var(--color-primary-light)",
+              letterSpacing: "3px",
+            }}
+          >
+            <MapPin size={12} /> Region Hannover
+          </span>
         </div>
 
         {/* Logo */}
-        <div className="mb-4 flex justify-center">
-          <Image
-            src="/logo.svg"
-            alt="Leine-Honig"
-            width={365}
-            height={78}
-            priority
-            className="h-16 w-auto md:h-24"
-          />
+        <div className="mb-8 flex justify-center">
+          <LeineHonigLogo size="lg" />
         </div>
 
-        {/* Untertitel */}
-        <p className="mb-10 font-heading text-xl font-semibold tracking-wide text-accent/60 md:text-2xl">
-          Ehrlicher Honig & Bienenvermietung
-        </p>
+        {/* Headline */}
+        <h1
+          className="font-heading mb-6 text-4xl font-light leading-tight md:text-6xl"
+          style={{ color: "var(--color-ink)" }}
+        >
+          Ehrlicher Honig &{" "}
+          <span className="italic" style={{ color: "var(--color-primary)" }}>
+            Bienenvermietung
+          </span>
+        </h1>
 
-        {/* Beschreibungstext */}
-        <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-stone-600 md:text-xl">
-          Wir sind <strong className="text-accent">Jürgen und Tjark</strong>. Bei uns
-          kommt der Honig ohne Umwege direkt aus der Wabe ins Glas. Und falls du
-          Platz im Garten hast, bringen wir das Summen zu dir – wir kümmern uns
-          um alles.
+        {/* Subline */}
+        <p
+          className="mx-auto mb-10 max-w-lg text-base leading-relaxed md:text-lg"
+          style={{ color: "var(--color-ink-soft)", lineHeight: "1.65" }}
+        >
+          Wir sind Jürgen & Tjark — zwei Imker aus Leidenschaft. Bei uns kommt der Honig ohne Umwege direkt aus der Wabe ins Glas.
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
             href="/honig"
-            className="flex transform items-center rounded-full bg-primary px-8 py-4 font-bold text-accent shadow-lg transition-all hover:scale-105 hover:bg-primary-dark hover:shadow-xl"
+            className="inline-flex items-center rounded-full px-8 py-4 text-sm font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
+            style={{ background: "var(--color-primary)", color: "var(--color-bg)", borderRadius: "999px" }}
           >
-            Honig kaufen
+            Honig kaufen →
           </Link>
           <Link
             href="/bienen-mieten"
-            className="flex transform items-center rounded-full border-2 border-accent/15 bg-white px-8 py-4 font-bold text-accent shadow-lg transition-all hover:scale-105 hover:border-primary/40 hover:shadow-xl"
+            className="inline-flex items-center rounded-full border px-8 py-4 text-sm font-semibold transition-all duration-200 hover:border-primary hover:text-primary active:scale-95"
+            style={{
+              borderColor: "var(--color-line)",
+              color: "var(--color-ink-soft)",
+              borderRadius: "999px",
+            }}
           >
             Bienen mieten
           </Link>
         </div>
 
-        <p className="mt-5 text-xs text-stone-400">
-          Gläser ab 6,90 € · Versand ab 50 € kostenlos
+        <p className="mt-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>
+          Gläser ab 6,90 € · Versand ab 5,99 €
         </p>
       </motion.div>
     </section>

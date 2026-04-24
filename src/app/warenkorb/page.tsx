@@ -65,26 +65,27 @@ export default function WarenkorbPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-stone-50">
+      <div className="flex min-h-screen items-center justify-center" style={{ background: "var(--color-bg)" }}>
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-24 pt-32">
+    <div className="min-h-screen pb-24 pt-32" style={{ background: "var(--color-bg)" }}>
       <div className="mx-auto max-w-4xl px-6">
-        <h1 className="mb-10 text-3xl font-extrabold text-stone-900 md:text-4xl">
+        <h1 className="mb-10 font-heading text-3xl font-light md:text-4xl" style={{ color: "var(--color-ink)" }}>
           Dein Warenkorb
         </h1>
 
         {items.length === 0 ? (
-          <div className="rounded-[2.5rem] border border-stone-100 bg-white p-16 text-center shadow-sm">
-            <Package size={64} className="mx-auto mb-4 text-stone-300" />
-            <p className="mb-8 text-lg text-stone-600">Dein Warenkorb ist leer.</p>
+          <div className="rounded-[2.5rem] p-16 text-center" style={{ background: "var(--color-bg-soft)", border: "1px solid var(--color-line)" }}>
+            <Package size={64} className="mx-auto mb-4" style={{ color: "var(--color-line)" }} />
+            <p className="mb-8 text-lg" style={{ color: "var(--color-ink-mute)" }}>Dein Warenkorb ist leer.</p>
             <Link
               href="/honig"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 font-bold text-white shadow-md transition-all hover:bg-accent-hover hover:shadow-xl"
+              className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold shadow-md transition-all hover:opacity-90 active:scale-95"
+              style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}
             >
               <ShoppingBasket size={18} /> Zum Shop
             </Link>
@@ -92,15 +93,14 @@ export default function WarenkorbPage() {
         ) : (
           <div className="space-y-6">
             {/* Items */}
-            <div className="rounded-[2.5rem] border border-stone-100 bg-white shadow-sm">
+            <div className="rounded-[2.5rem]" style={{ background: "var(--color-bg-soft)", border: "1px solid var(--color-line)" }}>
               {items.map((item, idx) => (
                 <div
                   key={item.id}
-                  className={`flex items-center gap-4 p-6 ${
-                    idx < items.length - 1 ? "border-b border-stone-100" : ""
-                  }`}
+                  className="flex items-center gap-4 p-6"
+                  style={idx < items.length - 1 ? { borderBottom: "1px solid var(--color-line)" } : {}}
                 >
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-stone-50">
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl" style={{ background: "var(--color-bg-elev)" }}>
                     {item.thumbnail ? (
                       <Image
                         src={item.thumbnail}
@@ -110,45 +110,48 @@ export default function WarenkorbPage() {
                         className="max-h-14 w-auto object-contain"
                       />
                     ) : (
-                      <Package size={32} className="text-stone-300" />
+                      <Package size={32} style={{ color: "var(--color-ink-mute)" }} />
                     )}
                   </div>
 
                   <div className="flex-grow">
-                    <p className="font-bold text-stone-900">{item.title}</p>
-                    <p className="text-sm text-stone-500">{item.variant_title}</p>
+                    <p className="font-medium" style={{ color: "var(--color-ink)" }}>{item.title}</p>
+                    <p className="text-sm" style={{ color: "var(--color-ink-mute)" }}>{item.variant_title}</p>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      className="flex h-8 w-8 items-center justify-center rounded-full bg-stone-100 text-stone-600 transition-colors hover:bg-stone-200"
+                      className="flex h-8 w-8 items-center justify-center rounded-full transition-colors"
+                      style={{ background: "var(--color-bg-elev)", color: "var(--color-ink-mute)" }}
                     >
                       <Minus size={14} />
                     </button>
-                    <span className="w-6 text-center font-bold text-stone-900">
+                    <span className="w-6 text-center font-medium" style={{ color: "var(--color-ink)" }}>
                       {item.quantity}
                     </span>
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      className="flex h-8 w-8 items-center justify-center rounded-full bg-stone-100 text-stone-600 transition-colors hover:bg-stone-200"
+                      className="flex h-8 w-8 items-center justify-center rounded-full transition-colors"
+                      style={{ background: "var(--color-bg-elev)", color: "var(--color-ink-mute)" }}
                     >
                       <Plus size={14} />
                     </button>
                   </div>
 
                   <div className="w-24 text-right">
-                    <p className="font-heading font-black text-primary">
+                    <p className="font-heading font-semibold" style={{ color: "var(--color-primary)" }}>
                       {formatPrice(item.total)}
                     </p>
-                    <p className="text-xs text-stone-400">
+                    <p className="text-xs" style={{ color: "var(--color-ink-mute)" }}>
                       {formatPrice(item.unit_price)} / Stk.
                     </p>
                   </div>
 
                   <button
                     onClick={() => updateQuantity(item.id, 0)}
-                    className="ml-2 text-stone-300 transition-colors hover:text-red-400"
+                    className="ml-2 transition-colors hover:text-red-400"
+                    style={{ color: "var(--color-ink-mute)" }}
                   >
                     <Trash2 size={18} />
                   </button>
@@ -157,25 +160,27 @@ export default function WarenkorbPage() {
             </div>
 
             {/* Summary */}
-            <div className="rounded-[2.5rem] border border-stone-100 bg-white p-8 shadow-sm">
-              <div className="flex items-center justify-between text-lg font-bold text-stone-900">
+            <div className="rounded-[2.5rem] p-8" style={{ background: "var(--color-bg-soft)", border: "1px solid var(--color-line)" }}>
+              <div className="flex items-center justify-between text-lg font-medium" style={{ color: "var(--color-ink)" }}>
                 <span>Gesamt</span>
-                <span className="font-heading text-2xl font-black text-primary">
+                <span className="font-heading text-2xl font-semibold" style={{ color: "var(--color-primary)" }}>
                   {formatPrice(total)}
                 </span>
               </div>
-              <p className="mt-1 text-sm text-stone-400">Inkl. MwSt. · zzgl. Versandkosten</p>
+              <p className="mt-1 text-sm" style={{ color: "var(--color-ink-mute)" }}>Inkl. MwSt. · zzgl. Versandkosten</p>
 
               <Link
                 href="/kasse"
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 font-bold text-white shadow-md transition-all hover:bg-accent-hover hover:shadow-xl"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold shadow-md transition-all hover:opacity-90 active:scale-95"
+                style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}
               >
                 Zur Kasse <ArrowRight size={18} />
               </Link>
 
               <Link
                 href="/honig"
-                className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-stone-100 px-8 py-3 text-sm font-bold text-stone-700 transition-colors hover:bg-stone-200"
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-full px-8 py-3 text-sm font-medium transition-colors"
+                style={{ background: "var(--color-bg-elev)", color: "var(--color-ink-mute)" }}
               >
                 <ShoppingBasket size={16} /> Weiter einkaufen
               </Link>
