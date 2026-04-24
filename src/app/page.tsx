@@ -12,18 +12,23 @@ async function getMinPrice(): Promise<number | undefined> {
   try {
     const backendUrl = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000";
     const pubKey = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || "";
-    const res = await fetch(`${backendUrl}/store/products?limit=1`, {
-      headers: { "x-publishable-api-key": pubKey },
-      cache: "no-store",
-    });
+    const headers = { "x-publishable-api-key": pubKey };
+
+    const regRes = await fetch(`${backendUrl}/store/regions`, { headers, cache: "no-store" });
+    const regData = await regRes.json();
+    const regionId: string | undefined = regData.regions?.[0]?.id;
+    if (!regionId) return undefined;
+
+    const url = `${backendUrl}/store/products?limit=100&region_id=${regionId}&fields=id,variants.id,variants.calculated_price`;
+    const res = await fetch(url, { headers, cache: "no-store" });
     const data = await res.json();
-    const prices = (data.products as any[])
+
+    const amounts = (data.products as any[])
       .flatMap((p: any) => p.variants ?? [])
-      .flatMap((v: any) => v.prices ?? [])
-      .filter((p: any) => p.currency_code === "eur")
-      .map((p: any) => Number(p.amount));
-    console.log("[homepage] first variant full:", JSON.stringify(data.products?.[0]?.variants?.[0] ?? {}));
-    return prices.length ? Math.min(...prices) : undefined;
+      .map((v: any) => v.calculated_price?.calculated_amount ?? v.calculated_price?.original_amount)
+      .filter((a): a is number => typeof a === "number");
+
+    return amounts.length ? Math.min(...amounts) : undefined;
   } catch (e) {
     console.error("[homepage] getMinPrice failed:", e);
     return undefined;
