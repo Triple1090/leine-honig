@@ -296,7 +296,7 @@ export default function KassePage() {
                     <p className="mt-1 text-xs" style={{ color: "var(--color-ink-mute)" }}>Versandkosten werden automatisch ermittelt</p>
                   </>
                 )}
-                <p className="mb-6 mt-1 text-xs" style={{ color: "var(--color-ink-mute)" }}>Inkl. MwSt.</p>
+                <p className="mb-6 mt-1 text-xs" style={{ color: "var(--color-ink-mute)" }}>Gemäß §19 UStG wird keine Mehrwertsteuer ausgewiesen.</p>
                 <button
                   type="submit"
                   disabled={submitting}

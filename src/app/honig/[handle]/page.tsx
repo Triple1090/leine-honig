@@ -157,7 +157,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
 
             <p className="mt-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>
-              Inkl. MwSt. · Versandkosten werden im Checkout berechnet.
+              Versandkosten werden im Checkout berechnet.
             </p>
           </div>
         </div>
