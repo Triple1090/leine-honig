@@ -272,23 +272,31 @@ export default function KassePage() {
                   ))}
                 </div>
                 <div className="my-4" style={{ borderTop: "1px solid var(--color-line)" }} />
-                <div className="mb-2 flex justify-between text-sm" style={{ color: "var(--color-ink-mute)" }}>
-                  <span>Zwischensumme</span>
-                  <span>{formatPrice(cart.item_subtotal ?? cart.subtotal ?? 0)}</span>
-                </div>
-                <div className="mb-3 flex justify-between text-sm" style={{ color: "var(--color-ink-mute)" }}>
-                  <span>Versand{shippingMethodName ? ` (${shippingMethodName})` : ""}</span>
-                  <span>
-                    {cart.shipping_subtotal != null
-                      ? formatPrice(cart.shipping_subtotal)
-                      : "wird berechnet"}
-                  </span>
-                </div>
-                <div className="flex justify-between text-lg font-medium" style={{ color: "var(--color-ink)" }}>
-                  <span>Gesamt</span>
-                  <span className="font-heading" style={{ color: "var(--color-primary)" }}>{formatPrice(cart.total ?? 0)}</span>
-                </div>
-                <p className="mb-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>Inkl. MwSt.</p>
+                {shippingMethodName ? (
+                  <>
+                    <div className="mb-2 flex justify-between text-sm" style={{ color: "var(--color-ink-mute)" }}>
+                      <span>Zwischensumme</span>
+                      <span>{formatPrice(cart.item_subtotal ?? cart.subtotal ?? 0)}</span>
+                    </div>
+                    <div className="mb-3 flex justify-between text-sm" style={{ color: "var(--color-ink-mute)" }}>
+                      <span>Versand ({shippingMethodName})</span>
+                      <span>{formatPrice(cart.shipping_subtotal ?? 0)}</span>
+                    </div>
+                    <div className="flex justify-between text-lg font-medium" style={{ color: "var(--color-ink)" }}>
+                      <span>Gesamt</span>
+                      <span className="font-heading" style={{ color: "var(--color-primary)" }}>{formatPrice(cart.total ?? 0)}</span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex justify-between text-lg font-medium" style={{ color: "var(--color-ink)" }}>
+                      <span>Warenwert</span>
+                      <span className="font-heading" style={{ color: "var(--color-primary)" }}>{formatPrice(cart.item_subtotal ?? cart.subtotal ?? 0)}</span>
+                    </div>
+                    <p className="mt-1 text-xs" style={{ color: "var(--color-ink-mute)" }}>Versandkosten werden automatisch ermittelt</p>
+                  </>
+                )}
+                <p className="mb-6 mt-1 text-xs" style={{ color: "var(--color-ink-mute)" }}>Inkl. MwSt.</p>
                 <button
                   type="submit"
                   disabled={submitting}
