@@ -4,6 +4,8 @@ import TrustBar from "../components/TrustBar";
 import Tes from "../components/Tes";
 import { medusa } from "@/src/lib/medusa";
 
+export const dynamic = "force-dynamic";
+
 const MIN_SHIPPING = 4.29;
 
 async function getMinPrice(): Promise<number | undefined> {
