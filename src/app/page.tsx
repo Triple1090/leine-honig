@@ -10,7 +10,7 @@ async function getMinPrice(): Promise<number | undefined> {
   try {
     const { products } = await medusa.store.product.list({
       limit: 100,
-      fields: "variants.prices",
+      fields: "id,variants.id,variants.prices",
     });
     const prices = (products as any[])
       .flatMap((p) => p.variants ?? [])
