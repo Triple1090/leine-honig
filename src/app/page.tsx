@@ -1,8 +1,8 @@
-import Hero from "../components/hero";
-import Welcome from "../components/Welcome";
-import TrustBar from "../components/TrustBar";
-import Tes from "../components/Tes";
-import { medusa } from "@/src/lib/medusa";
+import Hero from "@/src/components/hero";
+import TrustBar from "@/src/components/TrustBar";
+import FeaturedProducts from "@/src/components/FeaturedProducts";
+import Welcome from "@/src/components/Welcome";
+import ClosingCta from "@/src/components/ClosingCta";
 
 export const dynamic = "force-dynamic";
 
@@ -41,8 +41,9 @@ export default async function Home() {
     <>
       <Hero minPrice={minPrice} minShipping={MIN_SHIPPING} />
       <TrustBar />
+      <FeaturedProducts />
       <Welcome />
-      <Tes />
+      <ClosingCta />
     </>
   );
 }

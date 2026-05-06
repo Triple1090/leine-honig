@@ -49,7 +49,7 @@ export default function AGB() {
                 <p>
                   Die Präsentation der Produkte im Online-Shop stellt kein rechtlich bindendes
                   Angebot, sondern eine Einladung zur Bestellung dar. Mit Klick auf „Jetzt
-                  kaufen" geben Sie ein verbindliches Angebot zum Abschluss eines Kaufvertrags
+                  kaufen" gibst du ein verbindliches Angebot zum Abschluss eines Kaufvertrags
                   ab. Der Vertrag kommt durch unsere Bestellbestätigung per E-Mail zustande.
                 </p>
               </div>
@@ -66,7 +66,7 @@ export default function AGB() {
                 </p>
                 <p className="mt-3">
                   Zahlung per Kreditkarte (Stripe) oder Vorkasse per Überweisung. Bei Vorkasse
-                  erfolgt der Versand nach Zahlungseingang. Bitte überweisen Sie den Betrag
+                  erfolgt der Versand nach Zahlungseingang. Bitte überweise den Betrag
                   innerhalb von 7 Tagen unter Angabe der Bestellnummer als Verwendungszweck.
                 </p>
               </div>
@@ -112,7 +112,7 @@ export default function AGB() {
                 <h3 className="font-heading mb-3 text-xl text-amber-900">§ 7 Widerrufsrecht</h3>
                 <p className="text-amber-800">
                   Verbrauchern steht ein gesetzliches 14-tägiges Widerrufsrecht zu. Details
-                  und das Widerrufsformular finden Sie in unserer separaten{" "}
+                  und das Widerrufsformular findest du in unserer separaten{" "}
                   <a href="/widerruf" className="underline">Widerrufsbelehrung</a>.
                 </p>
                 <p className="mt-3 text-sm text-amber-800">
@@ -221,7 +221,7 @@ export default function AGB() {
                 <h3 className="font-heading mb-3 text-xl text-stone-900">6. Widerrufsrecht</h3>
                 <p className="text-sm">
                   Verbrauchern steht ein gesetzliches Widerrufsrecht zu. Informationen hierzu
-                  finden Sie in unserer separaten{" "}
+                  findest du in unserer separaten{" "}
                   <a href="/widerruf" className="text-primary underline">Widerrufsbelehrung</a>.
                 </p>
               </div>

@@ -82,7 +82,7 @@ export default async function BestaetigungPage({ searchParams }: Props) {
           <Link
             href="/"
             className="flex items-center justify-center gap-2 rounded-full px-10 py-4 font-semibold shadow-lg transition-all hover:opacity-90 active:scale-95"
-            style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}
+            style={{ background: "var(--color-primary)", color: "var(--lh-ink)" }}
           >
             <Home size={20} /> Zur Startseite
           </Link>

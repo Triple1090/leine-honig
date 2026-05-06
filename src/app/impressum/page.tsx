@@ -1,4 +1,5 @@
 import PageHeader from "@/src/components/PageHeader";
+import BrandWordmark from "@/src/components/BrandWordmark";
 import { Scale, Info, Mail, MapPin, UserCheck } from "lucide-react";
 
 export const metadata = {
@@ -27,7 +28,7 @@ export default function Impressum() {
                 <h2 className="font-heading decoration-primary/30 mb-6 flex items-center gap-3 text-2xl text-stone-900 underline underline-offset-8">
                   <Scale size={24} className="text-primary" /> Kontakt
                 </h2>
-                <p className="text-lg font-bold text-stone-800">Leine-Honig</p>
+                <BrandWordmark size="md" />
                 <p className="mt-2">
                   Jürgen Hochegger & Tjark Radewaldt
                   <br />

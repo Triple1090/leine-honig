@@ -1,75 +1,140 @@
 import Link from "next/link";
-import { Hexagon, Sprout, ShoppingBasket } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const cards = [
   {
-    icon: ShoppingBasket,
-    title: "Echter Honig",
-    text: "Direkt aus der Wabe ins Glas — ohne Umwege, ohne Zusätze. In 250g und 500g erhältlich.",
+    eyebrow: "Echter Honig",
+    title: "Direkt aus der Wabe ins Glas.",
+    text: "Ohne Umwege, ohne Zusätze. Sechs Sorten in 250 g und 500 g — kalt geschleudert, schonend abgefüllt.",
     href: "/honig",
-    cta: "Honig kaufen",
+    cta: "Sorten ansehen",
+    accent: true,
   },
   {
-    icon: Sprout,
-    title: "Bienen mieten",
-    text: "Du stellst den Platz, wir bringen das Leben. Ein professionell betreutes Volk für deinen Garten oder dein Unternehmen.",
+    eyebrow: "Bienenvermietung",
+    title: "Ihr eigenes Bienenvolk.",
+    text: "Du stellst den Platz, wir bringen das Leben. Ein professionell betreutes Volk für deinen Garten oder dein Firmengelände.",
     href: "/bienen-mieten",
     cta: "Mehr erfahren",
+    accent: false,
   },
   {
-    icon: Hexagon,
-    title: "Region Hannover",
-    text: "Alle unsere Bienenvölker stehen rund um Neustadt am Rübenberge — nah, regional und transparent.",
+    eyebrow: "Region Hannover",
+    title: "Aus Neustadt am Rübenberge.",
+    text: "Alle unsere Bienenvölker stehen rund um die Leine — nah, regional und transparent.",
     href: "/ueber-uns",
     cta: "Über uns",
+    accent: false,
   },
 ];
 
 export default function Welcome() {
   return (
-    <section className="px-6 py-24" style={{ background: "var(--color-bg)" }}>
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-14 text-center">
-          <p
-            className="mb-3 text-xs font-medium uppercase tracking-widest"
-            style={{ color: "var(--color-primary)", letterSpacing: "3px" }}
+    <section className="px-6 py-24" style={{ background: "var(--lh-paper)" }}>
+      <div className="lh-container">
+        <div className="mb-14 max-w-2xl">
+          <p className="lh-eyebrow">Was wir tun</p>
+          <h2
+            className="mt-4"
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(32px, 4.5vw, 56px)",
+              fontWeight: 500,
+              lineHeight: 1.1,
+              letterSpacing: "-0.01em",
+              color: "var(--lh-ink)",
+            }}
           >
-            Willkommen
-          </p>
-          <h2 className="font-heading text-4xl font-light md:text-5xl" style={{ color: "var(--color-ink)" }}>
-            Leine-<span className="italic" style={{ color: "var(--color-primary)" }}>Honig</span>
+            Drei Wege, mit der Imkerei <em style={{ color: "var(--lh-gold-deep)", fontStyle: "italic" }}>verbunden</em> zu sein.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base" style={{ color: "var(--color-ink-mute)", lineHeight: "1.65" }}>
-            Wir sind Jürgen & Tjark — zwei Imker aus Leidenschaft aus der Region Hannover.
-          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {cards.map((card) => (
-            <div
+          {cards.map((card, i) => (
+            <article
               key={card.title}
-              className="flex flex-col rounded-[2.5rem] p-8 transition-all duration-300 hover:-translate-y-1"
+              className="group flex flex-col transition-transform duration-300 hover:-translate-y-1"
               style={{
-                background: "var(--color-bg-soft)",
-                border: "1px solid var(--color-line)",
+                background: card.accent ? "var(--lh-cream)" : "var(--lh-paper-soft)",
+                border: card.accent
+                  ? "1px solid var(--lh-gold)"
+                  : "1px solid var(--color-line)",
+                borderRadius: 14,
+                padding: 28,
+                position: "relative",
+                overflow: "hidden",
+                boxShadow: "var(--shadow-sm)",
               }}
             >
-              <div
-                className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl"
-                style={{ background: "var(--color-primary-light)" }}
-              >
-                <card.icon size={24} style={{ color: "var(--color-primary)" }} />
+              {card.accent && (
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 3,
+                    background: "var(--lh-gold)",
+                  }}
+                />
+              )}
+              <div className="flex items-baseline justify-between">
+                <p className="lh-eyebrow">{card.eyebrow}</p>
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 11,
+                    color: "var(--lh-ink-3)",
+                    letterSpacing: "0.08em",
+                  }}
+                >
+                  0{i + 1}
+                </span>
               </div>
-              <h3 className="mb-3 font-heading text-xl" style={{ color: "var(--color-ink)" }}>{card.title}</h3>
-              <p className="flex-grow text-sm leading-relaxed" style={{ color: "var(--color-ink-mute)" }}>{card.text}</p>
+
+              <h3
+                className="mt-5"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  fontSize: 28,
+                  fontWeight: 500,
+                  lineHeight: 1.15,
+                  letterSpacing: "-0.005em",
+                  color: "var(--lh-ink)",
+                }}
+              >
+                {card.title}
+              </h3>
+              <p
+                className="mt-3 flex-grow"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: 15,
+                  lineHeight: 1.6,
+                  color: "var(--lh-ink-2)",
+                }}
+              >
+                {card.text}
+              </p>
               <Link
                 href={card.href}
-                className="mt-8 inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-200 hover:border-primary hover:text-primary"
-                style={{ borderColor: "var(--color-line)", color: "var(--color-ink-soft)" }}
+                className="mt-7 inline-flex items-center gap-2 transition-colors"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: "var(--lh-ink)",
+                  textDecoration: "underline",
+                  textDecorationColor: "var(--lh-gold)",
+                  textDecorationThickness: 2,
+                  textUnderlineOffset: 4,
+                }}
               >
-                {card.cta} →
+                {card.cta}
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
               </Link>
-            </div>
+            </article>
           ))}
         </div>
       </div>

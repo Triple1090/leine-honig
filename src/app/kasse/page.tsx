@@ -173,7 +173,7 @@ export default function KassePage() {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-6" style={{ background: "var(--color-bg)" }}>
         <p className="text-lg" style={{ color: "var(--color-ink-mute)" }}>Dein Warenkorb ist leer.</p>
-        <Link href="/honig" className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold" style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}>
+        <Link href="/honig" className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold" style={{ background: "var(--color-primary)", color: "var(--lh-ink)" }}>
           <ShoppingBasket size={18} /> Zum Shop
         </Link>
       </div>
@@ -300,7 +300,7 @@ export default function KassePage() {
                 )}
                 <p className="mb-6 mt-1 text-xs" style={{ color: "var(--color-ink-mute)" }}>Gemäß §19 UStG wird keine Mehrwertsteuer ausgewiesen.</p>
                 {submitError && (
-                  <p className="mb-4 rounded-2xl px-4 py-3 text-sm" style={{ background: "rgba(239,68,68,0.15)", color: "#fca5a5", border: "1px solid rgba(239,68,68,0.3)" }}>
+                  <p className="mb-4 rounded-2xl px-4 py-3 text-sm" style={{ background: "rgba(178,58,44,0.08)", color: "var(--color-error)", border: "1px solid rgba(178,58,44,0.25)" }}>
                     {submitError}
                   </p>
                 )}
@@ -308,7 +308,7 @@ export default function KassePage() {
                   type="submit"
                   disabled={submitting}
                   className="flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold shadow-md transition-all hover:opacity-90 active:scale-95 disabled:opacity-50"
-                  style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}
+                  style={{ background: "var(--color-primary)", color: "var(--lh-ink)" }}
                 >
                   {submitting ? <Loader2 size={18} className="animate-spin" /> : <ShoppingBasket size={18} />}
                   {submitting ? "Wird vorbereitet…" : paymentMethod === "stripe" ? "Weiter zur Zahlung" : "Jetzt bestellen"}

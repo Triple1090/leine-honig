@@ -51,7 +51,7 @@ export default function StripePaymentForm({ onSuccess }: Props) {
         type="submit"
         disabled={!stripe || submitting}
         className="flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold shadow-md transition-all hover:opacity-90 active:scale-95 disabled:opacity-50"
-        style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}
+        style={{ background: "var(--color-primary)", color: "var(--lh-ink)" }}
       >
         {submitting ? <Loader2 size={18} className="animate-spin" /> : <ShoppingBasket size={18} />}
         {submitting ? "Wird verarbeitet…" : "Jetzt bezahlen"}

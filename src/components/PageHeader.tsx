@@ -21,12 +21,12 @@ export default function PageHeader({
   badgeIcon,
   title,
   subtitle,
-  overlay = "bg-black/50",
+  overlay,
   creditName,
   creditUrl,
 }: Props) {
   return (
-    <section className="relative flex min-h-[40vh] items-end justify-center overflow-hidden pb-16 pt-32 text-center">
+    <section className="relative flex min-h-[44vh] items-end justify-start overflow-hidden pb-16 pt-32">
       <Image
         src={image}
         alt={imageAlt}
@@ -35,28 +35,64 @@ export default function PageHeader({
         priority
         quality={90}
       />
-      <div className={`absolute inset-0 ${overlay}`} />
+      {/* Cream-to-Ink Overlay für editorial-warmen Look */}
+      <div
+        className={`absolute inset-0 ${overlay ?? ""}`.trim()}
+        style={
+          overlay
+            ? undefined
+            : {
+                background:
+                  "linear-gradient(180deg, rgba(20,18,16,0.05) 0%, rgba(20,18,16,0.55) 70%, rgba(20,18,16,0.85) 100%)",
+              }
+        }
+      />
       {creditName && creditUrl && (
         <a
           href={creditUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute bottom-3 right-4 z-10 text-xs text-white/50 transition-colors hover:text-white/80"
+          className="absolute bottom-3 right-4 z-10 lh-meta"
+          style={{ color: "rgba(245,239,224,0.55)" }}
         >
           Foto: {creditName} / Pexels
         </a>
       )}
-      <div className="relative z-10 mx-auto max-w-4xl px-6">
+      <div className="lh-container relative z-10">
         {badge && badgeIcon && (
-          <div className="mb-6">
-            <Badge icon={badgeIcon}>{badge}</Badge>
+          <div className="mb-5">
+            <Badge icon={badgeIcon} variant="primary">
+              {badge}
+            </Badge>
           </div>
         )}
-        <h1 className="mb-4 text-4xl font-heading font-light text-white md:text-6xl">
+        <h1
+          style={{
+            fontFamily: "var(--font-heading)",
+            fontWeight: 500,
+            fontSize: "clamp(36px, 5vw, 60px)",
+            lineHeight: 1.05,
+            letterSpacing: "-0.01em",
+            color: "var(--lh-cream)",
+            maxWidth: 760,
+          }}
+        >
           {title}
         </h1>
         {subtitle && (
-          <p className="mx-auto max-w-xl text-lg text-white/80">{subtitle}</p>
+          <p
+            className="mt-4"
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontStyle: "italic",
+              fontSize: "var(--fs-20)",
+              lineHeight: 1.5,
+              color: "rgba(245,239,224,0.85)",
+              maxWidth: 580,
+            }}
+          >
+            {subtitle}
+          </p>
         )}
       </div>
     </section>

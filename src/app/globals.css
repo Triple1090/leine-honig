@@ -1,60 +1,158 @@
 @import "tailwindcss";
 
-@theme {
-  /* ── Surfaces (Nachtblau-Palette) ── */
-  --color-bg:        #2d3d5c;
-  --color-bg-elev:   #384a6c;
-  --color-bg-soft:   #45597c;
-  --color-bg-deep:   #141b2b;
+/* ==========================================================================
+   Leine-Honig Design-System v2 — Tokens
+   Cream + Ink + Honig-Gold, Spectral + Inter Tight.
+   Bestehende Variablen-Namen (--color-bg, --color-ink, --color-primary, ...)
+   sind erhalten und auf das neue Schema gemappt, damit Komponenten weiter laufen.
+   ========================================================================== */
 
-  /* ── Ink (Text) ── */
-  --color-ink:       #f5efde;
-  --color-ink-soft:  #e2d8bc;
-  --color-ink-mute:  #b8a98a;
+@theme {
+  /* ── Surfaces — Weiß + warme Akzent-Töne für Cards ── */
+  --color-bg:        #ffffff;          /* Body — weiß */
+  --color-bg-elev:   #faf7ee;          /* Cards / Panels — warmes Off-White */
+  --color-bg-soft:   #fdfbf4;          /* leichteste Card-Fläche */
+  --color-bg-deep:   #141210;          /* lh-ink — dunkle Sektionen (Footer) */
+
+  /* ── Ink (Text) — dunkle Tinte auf Cream ── */
+  --color-ink:       #141210;          /* primärer Text */
+  --color-ink-soft:  #2a2622;          /* sekundärer Text */
+  --color-ink-mute:  #57514a;          /* Meta */
 
   /* ── Honig-Gold ── */
-  --color-primary:       #e8b863;
-  --color-primary-dark:  #c69845;
-  --color-primary-light: rgba(232, 184, 99, 0.18);
+  --color-primary:       #e0a82e;
+  --color-primary-dark:  #b8861f;
+  --color-primary-light: rgba(224, 168, 46, 0.18);
 
   /* ── Akzent & Welle ── */
-  --color-accent:       #f0e4c8;
-  --color-accent-hover: #f5efde;
-  --color-river:        #8aa8c4;
-  --color-line:         rgba(245, 239, 222, 0.22);
+  --color-accent:       #141210;       /* dunkle Headlines (war früher cream) */
+  --color-accent-hover: #2a2622;
+  --color-river:        #2e66e0;       /* Leine-Blau (Links/Info) */
+  --color-line:         rgba(20, 18, 16, 0.16);
 
   /* ── Typografie ── */
-  --font-heading: 'Fraunces', Georgia, serif;
-  --font-sans:    'Outfit', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Spectral', Georgia, 'Times New Roman', serif;
+  --font-sans:    'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* ── Radii ── */
-  --radius-card:   2.5rem;
-  --radius-banner: 2rem;
+  --radius-card:   1rem;
+  --radius-banner: 0.875rem;
   --radius-pill:   999px;
 }
 
+/* ==========================================================================
+   Erweiterte Design-Token-Layer (lh-* Variablen) und Helfer-Klassen
+   aus dem Restyle-Paket (colors_and_type.css + components.css).
+   ========================================================================== */
+
 :root {
-  --background: #2d3d5c;
-  --foreground: #f5efde;
+  /* Brand-Farben */
+  --lh-gold:        #e0a82e;
+  --lh-gold-deep:   #b8861f;
+  --lh-gold-light:  #f1b43a;
+  --lh-gold-dark:   #9a6510;
+
+  --lh-ink:         #141210;
+  --lh-ink-2:       #2a2622;
+  --lh-ink-3:       #57514a;
+
+  --lh-cream:       #ffffff;          /* Body / „cream" → jetzt weiß */
+  --lh-paper:       #faf7ee;           /* Card-Surface — warmes Off-White */
+  --lh-paper-soft:  #fdfbf4;           /* leichteste Fläche */
+
+  --lh-leine:       #2e66e0;
+  --lh-leine-deep:  #1f4fb8;
+
+  /* Status */
+  --color-success: #4f7a3a;
+  --color-warning: #c97a1f;
+  --color-error:   #b23a2c;
+  --color-info:    var(--lh-leine);
+
+  /* Type-Tokens */
+  --fs-12: 12px;
+  --fs-14: 14px;
+  --fs-16: 16px;
+  --fs-18: 18px;
+  --fs-20: 20px;
+  --fs-24: 24px;
+  --fs-30: 30px;
+  --fs-36: 36px;
+  --fs-48: 48px;
+  --fs-60: 60px;
+  --fs-72: 72px;
+  --fs-96: 96px;
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+
+  --lh-tight: 1.1;
+  --lh-snug:  1.25;
+  --lh-base:  1.55;
+  --lh-loose: 1.75;
+
+  --tracking-tight:   -0.01em;
+  --tracking-normal:   0;
+  --tracking-wide:     0.04em;
+  --tracking-eyebrow:  0.2em;
+
+  /* Spacing 4px-Grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Shadows — Honig-warm, weich */
+  --shadow-sm: 0 1px 2px rgba(20,18,16,0.06), 0 1px 1px rgba(20,18,16,0.04);
+  --shadow-md: 0 4px 14px rgba(20,18,16,0.10), 0 1px 3px rgba(20,18,16,0.06);
+  --shadow-lg: 0 12px 32px rgba(20,18,16,0.14), 0 2px 6px rgba(20,18,16,0.06);
+  --shadow-xl: 0 24px 60px rgba(20,18,16,0.18), 0 6px 18px rgba(20,18,16,0.08);
+
+  --container: 1200px;
+  --container-narrow: 720px;
+
+  --background: #ffffff;
+  --foreground: #141210;
 }
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 
 html {
+  font-size: 16px;
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+}
+
+::selection {
+  background: var(--lh-gold);
+  color: var(--lh-ink);
 }
 
 @keyframes pagein {
@@ -64,4 +162,183 @@ html {
 
 main > * {
   animation: pagein 0.4s ease-out both;
+}
+
+/* ==========================================================================
+   Semantic Typography Helper-Klassen (aus dem Restyle-Paket)
+   ========================================================================== */
+.lh-display-1 {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--fs-60), 8vw, var(--fs-96));
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+}
+.lh-display-2 {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--fs-48), 6vw, var(--fs-72));
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+}
+.lh-h1 { font-family: var(--font-heading); font-size: var(--fs-48); font-weight: var(--fw-medium); line-height: var(--lh-snug); letter-spacing: var(--tracking-tight); }
+.lh-h2 { font-family: var(--font-heading); font-size: var(--fs-36); font-weight: var(--fw-medium); line-height: var(--lh-snug); }
+.lh-h3 { font-family: var(--font-heading); font-size: var(--fs-24); font-weight: var(--fw-medium); line-height: var(--lh-snug); }
+.lh-h4 { font-family: var(--font-sans); font-size: var(--fs-18); font-weight: var(--fw-semi); line-height: var(--lh-snug); }
+.lh-lede { font-family: var(--font-heading); font-style: italic; font-size: var(--fs-24); line-height: var(--lh-snug); }
+.lh-body    { font-family: var(--font-sans); font-size: var(--fs-16); line-height: var(--lh-base); }
+.lh-body-sm { font-family: var(--font-sans); font-size: var(--fs-14); line-height: var(--lh-base); }
+.lh-meta    { font-family: var(--font-sans); font-size: var(--fs-12); line-height: var(--lh-snug); color: var(--lh-ink-3); }
+.lh-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--lh-ink-3);
+}
+
+/* ==========================================================================
+   Komponenten-Klassen
+   ========================================================================== */
+.lh-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semi);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 140ms ease-out, border-color 140ms ease-out, color 140ms ease-out, box-shadow 140ms ease-out;
+  white-space: nowrap;
+  user-select: none;
+}
+.lh-btn:focus-visible { outline: 2px solid var(--lh-gold); outline-offset: 2px; }
+.lh-btn[disabled], .lh-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.lh-btn--primary { background: var(--lh-gold); color: var(--lh-ink); border-color: var(--lh-gold); }
+.lh-btn--primary:hover { background: var(--lh-gold-deep); border-color: var(--lh-gold-deep); }
+.lh-btn--secondary { background: transparent; color: var(--lh-ink); border-color: var(--lh-ink); }
+.lh-btn--secondary:hover { background: var(--lh-ink); color: var(--lh-cream); }
+.lh-btn--ghost { background: transparent; color: var(--lh-ink); border-color: transparent; }
+.lh-btn--ghost:hover { background: rgba(20,18,16,0.06); }
+.lh-btn--inverse { background: var(--lh-cream); color: var(--lh-ink); border-color: var(--lh-cream); }
+.lh-btn--inverse:hover { background: var(--lh-paper); }
+
+.lh-btn--sm { padding: 8px 14px; font-size: var(--fs-12); }
+.lh-btn--lg { padding: 16px 28px; font-size: var(--fs-16); }
+
+.lh-input,
+.lh-textarea,
+.lh-select {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--lh-paper-soft);
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-14);
+  color: var(--lh-ink);
+  line-height: 1.4;
+  box-sizing: border-box;
+  transition: border-color 140ms ease-out, background-color 140ms ease-out, box-shadow 140ms ease-out;
+}
+.lh-input::placeholder,
+.lh-textarea::placeholder { color: var(--lh-ink-3); }
+.lh-input:focus,
+.lh-textarea:focus,
+.lh-select:focus {
+  outline: none;
+  border-color: var(--lh-gold);
+  background: var(--lh-paper);
+  box-shadow: 0 0 0 3px rgba(224,168,46,0.20);
+}
+.lh-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-semi);
+  color: var(--lh-ink-2);
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: var(--space-2);
+}
+.lh-field { display: flex; flex-direction: column; gap: var(--space-2); }
+.lh-field__hint { font-size: var(--fs-12); color: var(--lh-ink-3); }
+.lh-field__error { font-size: var(--fs-12); color: var(--color-error); }
+
+.lh-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+.lh-section-header__rule {
+  flex: 1;
+  height: 1px;
+  background: var(--color-line);
+}
+
+.lh-card {
+  background: var(--lh-paper);
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: transform 220ms ease-out, box-shadow 220ms ease-out;
+}
+.lh-card--hoverable:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.lh-card--soft { background: var(--lh-paper-soft); border: none; box-shadow: var(--shadow-md); }
+.lh-card--ink  { background: var(--lh-ink); color: var(--lh-cream); border-color: rgba(245,239,224,0.10); }
+
+.lh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--tracking-wide);
+  background: var(--lh-cream);
+  color: var(--lh-ink);
+  border: 1px solid var(--color-line);
+  text-transform: uppercase;
+}
+.lh-badge--gold     { background: var(--lh-gold); border-color: var(--lh-gold); color: var(--lh-ink); }
+.lh-badge--ink      { background: var(--lh-ink); border-color: var(--lh-ink); color: var(--lh-cream); }
+.lh-badge--leine    { background: var(--lh-leine); border-color: var(--lh-leine); color: var(--lh-cream); }
+.lh-badge--seasonal { background: transparent; border-color: var(--lh-gold); color: var(--lh-ink); }
+
+.lh-divider {
+  border: 0;
+  height: 1px;
+  background: var(--color-line);
+  margin: var(--space-8) 0;
+}
+
+.lh-container { max-width: var(--container); margin: 0 auto; padding: 0 var(--space-6); }
+.lh-container--narrow { max-width: var(--container-narrow); }
+
+.lh-cluster { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+
+/* Honeycomb-Muster — dezente Gold-Akzent-Fläche */
+.lh-honeycomb {
+  --hc-color: var(--lh-gold);
+  --hc-opacity: 0.10;
+  --hc-size: 28px;
+  background-color: transparent;
+  background-image:
+    linear-gradient(120deg, transparent 25%, var(--hc-color) 25%, var(--hc-color) 26%, transparent 26%),
+    linear-gradient(60deg,  transparent 25%, var(--hc-color) 25%, var(--hc-color) 26%, transparent 26%);
+  background-size: var(--hc-size) calc(var(--hc-size) * 1.732);
+  opacity: var(--hc-opacity);
 }

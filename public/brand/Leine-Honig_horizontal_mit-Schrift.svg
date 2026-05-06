@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-220 -100 520 200">
+  
+  
+  <g transform="translate(-140, 0)">
+    <path d="M0.00,-80.00L69.28,-40.00L69.28,40.00L0.00,80.00L-69.28,40.00L-69.28,-40.00Z" fill="#E0A82E" stroke="#141210" stroke-width="5"></path>
+    
+    <g transform="scale(1.125)">
+      <ellipse cx="-22" cy="-6" rx="20" ry="11" fill="#F5EFE0" stroke="#141210" stroke-width="2.4" opacity="0.85"></ellipse>
+      <ellipse cx="22" cy="-6" rx="20" ry="11" fill="#F5EFE0" stroke="#141210" stroke-width="2.4" opacity="0.85"></ellipse>
+      <ellipse cx="0" cy="0" rx="14" ry="26" fill="#E0A82E" stroke="#141210" stroke-width="2.4"></ellipse>
+      <rect x="-13" y="-10" width="26" height="5" fill="#141210"></rect>
+      <rect x="-13" y="-1" width="26" height="5" fill="#141210"></rect>
+      <rect x="-13" y="8" width="26" height="5" fill="#141210"></rect>
+      <circle cx="0" cy="-22" r="6.5" fill="#141210"></circle>
+      <path d="M -3 -27 Q -7 -33 -10 -34" fill="none" stroke="#141210" stroke-width="1.6" stroke-linecap="round"></path>
+      <path d="M 3 -27 Q 7 -33 10 -34" fill="none" stroke="#141210" stroke-width="1.6" stroke-linecap="round"></path>
+      <circle cx="-10" cy="-34" r="1.6" fill="#141210"></circle>
+      <circle cx="10" cy="-34" r="1.6" fill="#141210"></circle>
+    </g>
+    <g transform="translate(-25, 45)">
+      <path d="M 0 0 Q 6.25 -2.5 12.5 0 T 25 0 T 37.5 0 T 50 0" fill="none" stroke="#2E66E0" stroke-width="2.2" stroke-linecap="round"></path><path d="M 0 5 Q 6.25 2.5 12.5 5 T 25 5 T 37.5 5 T 50 5" fill="none" stroke="#2E66E0" stroke-width="2.2" stroke-linecap="round"></path>
+    </g></g>
+  <text x="130" y="5" text-anchor="middle" class="wm" font-size="56" fill="#141210" letter-spacing="0.5" font-family="Spectral, Georgia, serif" font-weight="500">Leine-Honig</text>
+  <text x="105" y="38" text-anchor="middle" class="sub" font-size="16" fill="#141210" letter-spacing="3" font-family="&#39;Inter Tight&#39;, Inter, sans-serif" font-weight="600">NIEDERSACHSEN · EST. 2026</text>
+</svg>

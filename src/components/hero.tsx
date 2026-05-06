@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import LeineHonigLogo from "./LeineHonigLogo";
 
 interface HeroProps {
   minPrice?: number;
@@ -13,103 +12,119 @@ interface HeroProps {
 export default function Hero({ minPrice, minShipping }: HeroProps) {
   return (
     <section
-      className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 text-center"
-      style={{ background: "var(--color-bg)" }}
+      className="relative overflow-hidden px-6 pt-28 pb-24"
+      style={{ background: "var(--lh-cream)" }}
     >
-      {/* Dekoratives Waben-Muster */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.04]" aria-hidden="true">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="hex" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
-              <polygon points="30,2 58,17 58,47 30,62 2,47 2,17" fill="none" stroke="#e8b863" strokeWidth="0.8"/>
-              <polygon points="30,28 58,43 58,73 30,88 2,73 2,43" fill="none" stroke="#e8b863" strokeWidth="0.8"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hex)"/>
-        </svg>
-      </div>
-
-      {/* Gradient glow top */}
+      {/* Honigwabe-Pattern, dezent radial maskiert */}
       <div
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-96 w-[600px] rounded-full blur-[120px] opacity-20"
-        style={{ background: "var(--color-primary)" }}
+        className="lh-honeycomb pointer-events-none absolute"
+        style={{
+          inset: 0,
+          ["--hc-color" as string]: "var(--lh-gold)",
+          ["--hc-opacity" as string]: 0.09,
+          ["--hc-size" as string]: "48px",
+          maskImage: "radial-gradient(ellipse at 88% 25%, black 0%, transparent 55%)",
+          WebkitMaskImage: "radial-gradient(ellipse at 88% 25%, black 0%, transparent 55%)",
+        }}
         aria-hidden="true"
       />
 
-      <motion.div
-        initial={{ opacity: 0, y: 28 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 mx-auto max-w-3xl"
-      >
-        {/* Eyebrow Badge */}
-        <div className="mb-8 flex justify-center">
-          <span
-            className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-widest"
-            style={{
-              borderColor: "var(--color-primary)",
-              color: "var(--color-primary)",
-              background: "var(--color-primary-light)",
-              letterSpacing: "3px",
-            }}
-          >
-            <MapPin size={12} /> Region Hannover
-          </span>
-        </div>
+      {/* Goldene Vertical Rule, links — editorial frame */}
+      <div
+        className="pointer-events-none absolute hidden md:block"
+        style={{
+          left: "max(24px, calc((100% - 1200px) / 2 + 24px))",
+          top: 96,
+          bottom: 80,
+          width: 1,
+          background: "linear-gradient(to bottom, transparent 0%, var(--lh-gold) 30%, var(--lh-gold) 70%, transparent 100%)",
+          opacity: 0.3,
+        }}
+        aria-hidden="true"
+      />
 
-        {/* Logo */}
-        <div className="mb-8 flex justify-center">
-          <LeineHonigLogo size="lg" />
-        </div>
-
-        {/* Headline */}
-        <h1
-          className="font-heading mb-6 text-4xl font-light leading-tight md:text-6xl"
-          style={{ color: "var(--color-ink)" }}
+      <div className="lh-container relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.2, 0.65, 0.3, 1] }}
+          className="grid items-center gap-16 md:grid-cols-[1.2fr_1fr]"
         >
-          Ehrlicher Honig &{" "}
-          <span className="italic" style={{ color: "var(--color-primary)" }}>
-            Bienenvermietung
-          </span>
-        </h1>
+          <div className="md:pl-8">
+            <h1
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontWeight: 500,
+                fontSize: "clamp(44px, 6.5vw, 84px)",
+                lineHeight: 1.02,
+                letterSpacing: "-0.015em",
+                color: "var(--lh-ink)",
+              }}
+            >
+              Regionaler Honig &
+              <br />
+              <em
+                style={{
+                  color: "var(--lh-gold-deep)",
+                  fontStyle: "italic",
+                  fontWeight: 500,
+                }}
+              >
+                Bienenvermietung.
+              </em>
+            </h1>
 
-        {/* Subline */}
-        <p
-          className="mx-auto mb-10 max-w-lg text-base leading-relaxed md:text-lg"
-          style={{ color: "var(--color-ink-soft)", lineHeight: "1.65" }}
-        >
-          Honig direkt vom Imker kaufen oder ein Bienenvolk mieten — aus der Region Hannover, für Zuhause oder Ihr Unternehmen.
-        </p>
+            <p
+              className="mt-7 max-w-lg"
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontStyle: "italic",
+                fontSize: "var(--fs-20)",
+                lineHeight: 1.5,
+                color: "var(--lh-ink-2)",
+              }}
+            >
+              Honig direkt vom Imker kaufen oder ein Bienenvolk mieten — aus der Region Hannover, für zuhause oder dein Unternehmen.
+            </p>
 
-        {/* CTAs */}
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-            href="/honig"
-            className="inline-flex items-center rounded-full px-8 py-4 text-sm font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
-            style={{ background: "var(--color-primary)", color: "var(--color-bg)", borderRadius: "999px" }}
+            <div className="lh-cluster mt-9">
+              <Link href="/honig" className="lh-btn lh-btn--primary lh-btn--lg">
+                Honig kaufen
+                <span style={{ marginLeft: 4 }}>→</span>
+              </Link>
+              <Link href="/bienen-mieten" className="lh-btn lh-btn--secondary lh-btn--lg">
+                Bienen mieten
+              </Link>
+            </div>
+
+          </div>
+
+          {/* Vertikales Lockup als Markensiegel mit goldenem Glow */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.2, 0.65, 0.3, 1] }}
+            className="relative hidden md:flex justify-center"
           >
-            Honig kaufen
-          </Link>
-          <Link
-            href="/bienen-mieten"
-            className="inline-flex items-center rounded-full border px-8 py-4 text-sm font-semibold transition-all duration-200 hover:border-primary hover:text-primary active:scale-95"
-            style={{
-              borderColor: "var(--color-line)",
-              color: "var(--color-ink-soft)",
-              borderRadius: "999px",
-            }}
-          >
-            Bienen mieten
-          </Link>
-        </div>
-
-        <p className="mt-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>
-          {minPrice != null
-            ? `Gläser ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minPrice)} · `
-            : ""}
-          {`Versand ab ${new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(minShipping ?? 4.29)}`}
-        </p>
-      </motion.div>
+            <div
+              className="absolute inset-0 -z-10"
+              style={{
+                background: "radial-gradient(circle at center, rgba(224,168,46,0.18) 0%, transparent 65%)",
+                transform: "scale(1.4)",
+              }}
+              aria-hidden="true"
+            />
+            <Image
+              src="/brand/Leine-Honig_hero.svg"
+              alt="Leine-Honig"
+              width={305}
+              height={198}
+              priority
+              className="h-auto w-[320px] lg:w-[400px]"
+            />
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

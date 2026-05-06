@@ -4,7 +4,7 @@ import { Shield, Lock, Eye, FileText } from "lucide-react";
 export const metadata = {
   title: "Datenschutz | Leine-Honig",
   description:
-    "Informationen zum Schutz Ihrer persönlichen Daten bei Leine-Honig.",
+    "Informationen zum Schutz deiner persönlichen Daten bei Leine-Honig.",
 };
 
 export default function Datenschutz() {
@@ -16,7 +16,7 @@ export default function Datenschutz() {
         badgeIcon={Shield}
         badge="Sicherheit & Vertrauen"
         title="Datenschutzerklärung"
-        subtitle="Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst."
+        subtitle="Wir nehmen den Schutz deiner persönlichen Daten sehr ernst."
       />
 
       {/* Content */}
@@ -56,9 +56,9 @@ export default function Datenschutz() {
                 Unsere Website verwendet teilweise so genannte Cookies. Diese
                 dienen dazu, unser Angebot nutzerfreundlicher, effektiver und
                 sicherer zu machen. Cookies sind kleine Textdateien, die auf
-                Ihrem Rechner abgelegt werden und die Ihr Browser speichert. Die
+                deinem Rechner abgelegt werden und die dein Browser speichert. Die
                 meisten der von uns verwendeten Cookies sind so genannte
-                „Session-Cookies“, die nach Ende Ihres Besuchs automatisch
+                „Session-Cookies“, die nach Ende deines Besuchs automatisch
                 gelöscht werden.
               </p>
               <h3 className="mt-6 mb-2 font-bold text-stone-800">
@@ -66,7 +66,7 @@ export default function Datenschutz() {
               </h3>
               <p>
                 Der Provider der Seiten erhebt und speichert automatisch
-                Informationen in so genannten Server-Log-Dateien, die Ihr
+                Informationen in so genannten Server-Log-Dateien, die dein
                 Browser automatisch an uns übermittelt. Dies sind: Browsertyp,
                 Betriebssystem, Referrer URL, Hostname des zugreifenden
                 Rechners, Uhrzeit der Serveranfrage und IP-Adresse. Eine
@@ -82,33 +82,33 @@ export default function Datenschutz() {
                 Datenverarbeitung bei Bestellung & Miete
               </h2>
               <p>
-                Wenn Sie in unserem Shop Honig bestellen oder ein Bienenvolk
-                mieten, erfassen wir die für die Geschäftsabwicklung notwendigen
+                Wenn du in unserem Shop Honig bestellst oder ein Bienenvolk
+                mietest, erfassen wir die für die Geschäftsabwicklung notwendigen
                 Daten (Name, Anschrift, E-Mail, Zahlungsdaten). Die Verarbeitung
                 erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO zur
                 Vertragserfüllung.
               </p>
               <p className="mt-4">
-                Wir geben Ihre Daten nur an Dritte weiter, wenn dies zur
+                Wir geben deine Daten nur an Dritte weiter, wenn dies zur
                 Vertragsabwicklung notwendig ist (z. B. an das mit der Lieferung
                 beauftragte Versandunternehmen oder das mit der
                 Zahlungsabwicklung beauftragte Kreditinstitut).
               </p>
             </div>
 
-            {/* 4. Ihre Rechte */}
+            {/* 4. Deine Rechte */}
             <div className="rounded-2xl border border-stone-100 bg-stone-50 p-6">
               <h2 className="font-heading mb-4 text-2xl text-stone-900">
-                4. Ihre Rechte
+                4. Deine Rechte
               </h2>
-              <p>Sie haben jederzeit das Recht:</p>
+              <p>Du hast jederzeit das Recht:</p>
               <ul className="mt-4 list-disc space-y-2 pl-5">
                 <li>
-                  Auskunft über Ihre gespeicherten Daten zu erhalten (Art. 15
+                  Auskunft über deine gespeicherten Daten zu erhalten (Art. 15
                   DSGVO).
                 </li>
                 <li>
-                  Die Berichtigung oder Löschung Ihrer Daten zu verlangen (Art.
+                  Die Berichtigung oder Löschung deiner Daten zu verlangen (Art.
                   16 & 17 DSGVO).
                 </li>
                 <li>Die Verarbeitung einzuschränken (Art. 18 DSGVO).</li>

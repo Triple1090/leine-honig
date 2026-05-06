@@ -86,7 +86,7 @@ export default function WarenkorbPage() {
             <Link
               href="/honig"
               className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold shadow-md transition-all hover:opacity-90 active:scale-95"
-              style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}
+              style={{ background: "var(--color-primary)", color: "var(--lh-ink)" }}
             >
               <ShoppingBasket size={18} /> Zum Shop
             </Link>
@@ -173,7 +173,7 @@ export default function WarenkorbPage() {
               <Link
                 href="/kasse"
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold shadow-md transition-all hover:opacity-90 active:scale-95"
-                style={{ background: "var(--color-primary)", color: "var(--color-bg)" }}
+                style={{ background: "var(--color-primary)", color: "var(--lh-ink)" }}
               >
                 Zur Kasse <ArrowRight size={18} />
               </Link>

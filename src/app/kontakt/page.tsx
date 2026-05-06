@@ -12,71 +12,97 @@ export default function Kontakt() {
   const [state, action, pending] = useActionState(sendContactEmail, initialState);
 
   return (
-    <div className="min-h-screen" style={{ background: "var(--color-bg)" }}>
+    <div className="min-h-screen" style={{ background: "var(--lh-cream)" }}>
       <PageHeader
         image="/images/juergen/bienenstand2.jpeg"
         imageAlt="Bienenstand"
         badgeIcon={MessageSquare}
         badge="Kontakt"
-        title={<>Schreib dem <span className="text-primary">Schwarm</span></>}
-        subtitle="Ob Bienenmiete oder Honig-Bestellung – wir freuen uns auf deine Nachricht!"
+        title={<>Schreib dem <em style={{ color: "var(--lh-gold)", fontStyle: "italic" }}>Schwarm</em></>}
+        subtitle="Ob Bienenmiete oder Honig-Bestellung — wir freuen uns auf deine Nachricht."
       />
 
       <section className="px-6 py-16" id="kontakt">
         <div className="mx-auto max-w-3xl">
           {state.status === "success" ? (
-            <div className="flex flex-col items-center gap-4 rounded-[2.5rem] border border-green-100 bg-white p-12 text-center shadow-sm">
-              <CheckCircle className="text-green-500" size={48} />
-              <h2 className="font-heading text-2xl font-bold text-accent">Nachricht gesendet!</h2>
-              <p className="text-stone-600">Vielen Dank – wir melden uns so schnell wie möglich bei dir.</p>
+            <div
+              className="flex flex-col items-center gap-4 p-12 text-center"
+              style={{
+                background: "var(--lh-paper)",
+                border: "1px solid var(--color-line)",
+                borderRadius: 14,
+                boxShadow: "var(--shadow-sm)",
+              }}
+            >
+              <CheckCircle size={48} style={{ color: "var(--color-success)" }} />
+              <h2
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  fontSize: "var(--fs-30)",
+                  fontWeight: 500,
+                  color: "var(--lh-ink)",
+                }}
+              >
+                Nachricht gesendet.
+              </h2>
+              <p style={{ fontFamily: "var(--font-sans)", color: "var(--lh-ink-2)" }}>
+                Vielen Dank — wir melden uns so schnell wie möglich bei dir.
+              </p>
             </div>
           ) : (
             <form
               action={action}
-              className="space-y-6 rounded-[2.5rem] border border-stone-100 bg-white p-8 shadow-sm md:p-12"
+              className="space-y-6 p-8 md:p-10"
+              style={{
+                background: "var(--lh-paper)",
+                border: "1px solid var(--color-line)",
+                borderRadius: 14,
+                boxShadow: "var(--shadow-sm)",
+              }}
             >
               {state.status === "error" && (
-                <div className="flex items-center gap-3 rounded-2xl border border-red-100 bg-red-50 px-5 py-4 text-sm text-red-700">
+                <div
+                  className="flex items-center gap-3 px-5 py-4"
+                  style={{
+                    background: "rgba(178,58,44,0.08)",
+                    color: "var(--color-error)",
+                    border: "1px solid rgba(178,58,44,0.25)",
+                    borderRadius: 10,
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 14,
+                  }}
+                >
                   <AlertCircle size={16} className="shrink-0" />
                   {state.message}
                 </div>
               )}
 
               <div className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label className="ml-1 flex items-center gap-2 text-sm font-bold text-stone-700">
-                    <User size={14} /> Name
-                  </label>
+                <div className="lh-field">
+                  <label className="lh-label flex items-center gap-2"><User size={14} /> Name</label>
                   <input
                     type="text"
                     name="name"
                     required
                     placeholder="Dein Name"
-                    className="focus:border-primary focus:ring-primary/20 w-full rounded-2xl border border-stone-200 bg-stone-50 px-5 py-3 transition outline-none focus:ring-2"
+                    className="lh-input"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="ml-1 flex items-center gap-2 text-sm font-bold text-stone-700">
-                    <Mail size={14} /> E-Mail
-                  </label>
+                <div className="lh-field">
+                  <label className="lh-label flex items-center gap-2"><Mail size={14} /> E-Mail</label>
                   <input
                     type="email"
                     name="email"
                     required
                     placeholder="deine@email.de"
-                    className="focus:border-primary focus:ring-primary/20 w-full rounded-2xl border border-stone-200 bg-stone-50 px-5 py-3 transition outline-none focus:ring-2"
+                    className="lh-input"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="ml-1 flex items-center gap-2 text-sm font-bold text-stone-700">
-                  <Hexagon size={14} /> Anliegen
-                </label>
-                <select
-                  name="subject"
-                  className="focus:border-primary focus:ring-primary/20 w-full appearance-none rounded-2xl border border-stone-200 bg-stone-50 px-5 py-3 transition outline-none focus:ring-2"
-                >
+              <div className="lh-field">
+                <label className="lh-label flex items-center gap-2"><Hexagon size={14} /> Anliegen</label>
+                <select name="subject" className="lh-select">
                   <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
                   <option value="Bienen mieten">Bienen mieten</option>
                   <option value="Honig Bestellung">Honig Bestellung</option>
@@ -84,37 +110,43 @@ export default function Kontakt() {
                 </select>
               </div>
 
-              <div className="space-y-2">
-                <label className="ml-1 flex items-center gap-2 text-sm font-bold text-stone-700">
-                  <MessageSquare size={14} /> Deine Nachricht
-                </label>
+              <div className="lh-field">
+                <label className="lh-label flex items-center gap-2"><MessageSquare size={14} /> Deine Nachricht</label>
                 <textarea
                   name="message"
                   required
                   rows={5}
                   placeholder="Wie können wir dir helfen?"
-                  className="focus:border-primary focus:ring-primary/20 w-full rounded-2xl border border-stone-200 bg-stone-50 px-5 py-3 transition outline-none focus:ring-2"
+                  className="lh-textarea"
                 />
               </div>
 
-              <div className="flex items-start gap-3 rounded-2xl border border-stone-200 bg-stone-50 px-5 py-4">
+              <div
+                className="flex items-start gap-3 px-5 py-4"
+                style={{ background: "var(--lh-paper-soft)", border: "1px solid var(--color-line)", borderRadius: 10 }}
+              >
                 <input
                   type="checkbox"
                   id="privacy"
                   name="privacy_consent"
                   required
-                  className="accent-primary mt-0.5 h-4 w-4 shrink-0 cursor-pointer"
+                  className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer"
+                  style={{ accentColor: "var(--lh-gold)" }}
                 />
-                <label htmlFor="privacy" className="cursor-pointer text-sm text-stone-600">
+                <label
+                  htmlFor="privacy"
+                  className="cursor-pointer"
+                  style={{ fontFamily: "var(--font-sans)", fontSize: 14, color: "var(--lh-ink-2)" }}
+                >
                   Ich habe die{" "}
-                  <a href="/datenschutz" className="text-primary underline underline-offset-2 hover:text-primary-dark">
+                  <a href="/datenschutz" style={{ color: "var(--lh-ink)", textDecoration: "underline", textDecorationColor: "var(--lh-gold)" }}>
                     Datenschutzerklärung
                   </a>{" "}
                   gelesen und bin mit der Verarbeitung meiner Daten einverstanden.
                 </label>
               </div>
 
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-end">
                 <Button type="submit" icon={Send} disabled={pending}>
                   {pending ? "Wird gesendet…" : "Absenden"}
                 </Button>

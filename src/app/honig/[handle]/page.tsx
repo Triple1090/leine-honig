@@ -91,24 +91,38 @@ export default async function ProductPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen pb-24 pt-32" style={{ background: "var(--color-bg)" }}>
+    <div className="min-h-screen pb-24 pt-32" style={{ background: "var(--lh-cream)" }}>
       <Script
         id="product-jsonld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="mx-auto max-w-5xl px-6">
+      <div className="lh-container">
         <Link
           href="/honig"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary"
-          style={{ color: "var(--color-ink-mute)" }}
+          className="lh-btn lh-btn--ghost mb-8"
+          style={{ paddingLeft: 0 }}
         >
           <ArrowLeft size={16} /> Alle Sorten
         </Link>
 
-        <div className="grid gap-12 rounded-[2.5rem] p-8 md:grid-cols-2 md:p-12" style={{ background: "var(--color-bg-soft)", border: "1px solid var(--color-line)" }}>
+        <div
+          className="grid gap-12 p-8 md:grid-cols-2 md:p-12"
+          style={{
+            background: "var(--lh-paper)",
+            border: "1px solid var(--color-line)",
+            borderRadius: 14,
+            boxShadow: "var(--shadow-sm)",
+          }}
+        >
           {/* Image */}
-          <div className="flex items-center justify-center rounded-[2rem] p-8" style={{ background: "var(--color-bg-elev)" }}>
+          <div
+            className="flex items-center justify-center p-8"
+            style={{
+              background: "linear-gradient(160deg, #F5E6A8 0%, #C9A642 100%)",
+              borderRadius: 12,
+            }}
+          >
             {image ? (
               <Image
                 src={image}
@@ -118,35 +132,62 @@ export default async function ProductPage({ params }: Props) {
                 className="max-h-80 w-auto object-contain"
               />
             ) : (
-              <div className="flex h-64 w-64 items-center justify-center rounded-full bg-primary/10">
-                <Package size={80} className="text-primary/40" />
+              <div className="flex h-64 w-64 items-center justify-center rounded-full" style={{ background: "rgba(20,18,16,0.05)" }}>
+                <Package size={80} style={{ color: "var(--lh-ink-3)" }} />
               </div>
             )}
           </div>
 
           {/* Info */}
           <div className="flex flex-col justify-center">
-            <h1 className="mb-4 text-3xl font-heading font-light md:text-4xl" style={{ color: "var(--color-ink)" }}>
+            <p className="lh-eyebrow">Honig direkt vom Imker</p>
+            <h1
+              className="mt-3"
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontSize: "clamp(28px, 4vw, 48px)",
+                fontWeight: 500,
+                lineHeight: 1.1,
+                letterSpacing: "-0.01em",
+                color: "var(--lh-ink)",
+              }}
+            >
               {product.title}
             </h1>
 
             {(product as any).description && (
-              <p className="mb-8 text-base leading-relaxed" style={{ color: "var(--color-ink-mute)" }}>
+              <p
+                className="mt-5"
+                style={{ fontFamily: "var(--font-sans)", fontSize: 16, lineHeight: 1.6, color: "var(--lh-ink-2)" }}
+              >
                 {(product as any).description}
               </p>
             )}
 
-            <div className="space-y-3">
+            <div className="mt-8 space-y-3">
               {eurVariants?.map((variant: any) => (
                 <div
                   key={variant.id}
-                  className="flex items-center justify-between rounded-2xl px-5 py-3"
-                  style={{ background: "var(--color-bg-elev)", border: "1px solid var(--color-line)" }}
+                  className="flex items-center justify-between px-5 py-3"
+                  style={{
+                    background: "var(--lh-paper-soft)",
+                    border: "1px solid var(--color-line)",
+                    borderRadius: 10,
+                  }}
                 >
-                  <span className="font-medium" style={{ color: "var(--color-ink)" }}>{variant.title}</span>
+                  <span style={{ fontFamily: "var(--font-sans)", fontWeight: 600, color: "var(--lh-ink)" }}>
+                    {variant.title}
+                  </span>
                   <div className="flex items-center gap-4">
                     {variant.price && (
-                      <span className="font-heading text-xl font-semibold" style={{ color: "var(--color-primary)" }}>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-heading)",
+                          fontSize: 22,
+                          fontWeight: 500,
+                          color: "var(--lh-gold-deep)",
+                        }}
+                      >
                         {formatPrice(variant.price.amount)}
                       </span>
                     )}
@@ -156,7 +197,7 @@ export default async function ProductPage({ params }: Props) {
               ))}
             </div>
 
-            <p className="mt-6 text-xs" style={{ color: "var(--color-ink-mute)" }}>
+            <p className="mt-6 lh-meta">
               Versandkosten werden im Checkout berechnet.
             </p>
           </div>
