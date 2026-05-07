@@ -30,11 +30,11 @@ export default function Impressum() {
                 </h2>
                 <BrandWordmark size="md" />
                 <p className="mt-2">
-                  Jürgen Hochegger & Tjark Radewaldt
+                  Tjark Radewaldt
                   <br />
-                  OT Luttmersen
+                  Zum Schützenhaus 6
                   <br />
-                  31535 Neustadt am Rübenberge
+                  31535 Neustadt
                 </p>
               </div>
 

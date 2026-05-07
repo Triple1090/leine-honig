@@ -49,7 +49,7 @@ export default function DankePage() {
 
       {/* Kleine persönliche Note am Rand */}
       <p className="mt-16 flex items-center gap-2 text-sm" style={{ color: "var(--color-ink-mute)" }}>
-        Summende Grüße aus Luttmersen{" "}
+        Summende Grüße aus Neustadt{" "}
         <Heart size={14} className="fill-red-400 text-red-400" />
       </p>
     </div>

@@ -49,9 +49,9 @@ export default function Widerruf() {
               <div className="rounded-2xl border border-stone-100 bg-stone-50 p-6 italic">
                 <strong>Leine-Honig</strong>
                 <br />
-                Jürgen Hochegger & Tjark Radewaldt
+                Tjark Radewaldt
                 <br />
-                OT Luttmersen, 31535 Neustadt am Rübenberge
+                Zum Schützenhaus 6, 31535 Neustadt
                 <br />
                 E-Mail: info@leine-honig.de
               </div>

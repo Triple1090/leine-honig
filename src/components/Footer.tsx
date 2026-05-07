@@ -76,7 +76,8 @@ export default function Footer() {
                 <MapPin size={16} className="mt-0.5 shrink-0" style={{ color: "var(--lh-gold)" }} />
                 <span style={{ lineHeight: 1.4 }}>
                   Imkerei Leine-Honig<br />
-                  31535 Neustadt, OT Luttmersen
+                  Zum Schützenhaus 6<br />
+                  31535 Neustadt
                 </span>
               </li>
               <li className="flex items-center gap-3" style={{ color: "rgba(245,239,224,0.75)" }}>

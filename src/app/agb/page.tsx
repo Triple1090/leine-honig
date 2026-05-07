@@ -39,8 +39,8 @@ export default function AGB() {
                   Online-Shop unter <strong>shop.leine-honig.de</strong> / <strong>www.leine-honig.de</strong> aufgeben.
                 </p>
                 <p className="mt-3">
-                  Anbieter: Leine-Honig · Jürgen Hochegger &amp; Tjark Radewaldt ·
-                  OT Luttmersen, 31535 Neustadt am Rübenberge · info@leine-honig.de
+                  Anbieter: Leine-Honig · Tjark Radewaldt ·
+                  Zum Schützenhaus 6, 31535 Neustadt · info@leine-honig.de
                 </p>
               </div>
 
